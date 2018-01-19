@@ -6,4 +6,5 @@
 
     <color name="selector_item_color">#FF4081</color>
     <color name="white">#FFFFFF</color>
+    <color name="gray">#c6c6c6</color>
 </resources>

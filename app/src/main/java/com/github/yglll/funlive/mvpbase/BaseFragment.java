@@ -1,9 +1,10 @@
 package com.github.yglll.funlive.mvpbase;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -13,29 +14,30 @@ import butterknife.Unbinder;
  * 电话：13036804886
  * 邮箱：2369015621@qq.com
  * 版本号：1.0
- * 类描述：定义每一个Activity都应该有的行为：在初始化时绑定MVP，在销毁时解除绑定MVP
+ * 类描述：
  * 备注消息：
- * 创建时间：2018/01/10   22:33
+ * 创建时间：2018/01/19   23:24
  **/
-public abstract class BaseActivity<M extends BaseModel,P extends BasePresenter> extends AppCompatActivity {
-    //    定义Presenter
+public abstract class BaseFragment<M extends BaseModel,P extends BasePresenter> extends Fragment {
+
+    //定义Presenter
     protected P mPresenter;
     protected Unbinder unbinder;
 
     //在初始化时绑定MVP
     @Override
-    public void onCreate(Bundle s){
-        super.onCreate(s);
-        //设置布局资源文件
-        setContentView(getLayoutId());
+    public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle bundle){
+        View view =inflater.inflate(getLayoutId(),viewGroup,false);
         //注解绑定
-        unbinder = ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this,view);
         bindMVP();
+        onInitView(bundle);
+        return view;
     }
 
     //在销毁时解除绑定
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         if (unbinder != null) {
             unbinder.unbind();
@@ -47,21 +49,15 @@ public abstract class BaseActivity<M extends BaseModel,P extends BasePresenter> 
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        if(menuItem.getItemId()==android.R.id.home){
-            finish();
-        }
-        return true;
-    }
-
     //获取布局资源文件
     protected abstract int getLayoutId();
+
+    protected abstract void onInitView(Bundle bundle);
 
     private void bindMVP() {
         if (getPresenterClazz() != null) {
             mPresenter = getPresenterImpl();
-            mPresenter.mContext = this;
+            mPresenter.mContext = getActivity();
             bindVM();//Presenter绑定VM
         }
     }
@@ -69,7 +65,7 @@ public abstract class BaseActivity<M extends BaseModel,P extends BasePresenter> 
         if(mPresenter!=null&&!mPresenter.isViewBind()&&getModelClazz()!=null&&getViewImp()!=null) {
             ContractProxy.getInstance().bindModel(getModelClazz(),mPresenter);
             ContractProxy.getInstance().bindView(getViewImp(),mPresenter);
-            mPresenter.mContext=this;
+            mPresenter.mContext=getActivity();
         }
     }
 

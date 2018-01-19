@@ -175,5 +175,33 @@ public class ContractProxy {
         }
         return (V) view;
     }
+
+    // 解除绑定 移除map
+    public void unbindView(BaseView  view, BasePresenter presenter) {
+
+        if (view != presenter.getView()) {
+            if (presenter.getView() != null)
+                presenter.detachView();
+        }
+    }
+
+    // 解除绑定 移除map
+    public void unbindModel(Class clzz, BasePresenter presenter) {
+        if (m_objects.containsKey(clzz)) {
+            BaseModel model = null;
+            try {
+                model = ((BaseModel) clzz.newInstance());
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            if (model != presenter.getModel()) {
+                if (presenter.getModel() != null)
+                    presenter.detachModel();
+                m_objects.remove(clzz);
+            }
+        }
+    }
 }
 
