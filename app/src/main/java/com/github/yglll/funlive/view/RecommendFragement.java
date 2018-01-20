@@ -1,9 +1,11 @@
 package com.github.yglll.funlive.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +14,27 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.RecommendModel;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
+import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.RecommendPresenter;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
 import com.github.yglll.funlive.view.adapter.HomeCarouselAdapter;
+import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.bingoogolapple.bgabanner.BGABanner;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 /**
  * 作者：YGL
@@ -81,6 +92,7 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
         haderView = recommendAdapter.setCustomHeaderView(R.layout.item_home_recommend_banner,recyclerView);
         bgaBanner=(BGABanner) haderView.findViewById(R.id.recommed_banner);
         bgaBanner.setDelegate(this);
+        homeCarouselAdapter=new HomeCarouselAdapter();
         bgaBanner.setAdapter(homeCarouselAdapter);
 
         recyclerView.setAdapter(recommendAdapter);
@@ -100,7 +112,40 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
 
     @Override
     public void onBannerItemClick(BGABanner banner, SimpleDraweeView itemView, String model, int position) {
+        HomeCarousel homeCarousel=homeCarouselList.get(position);
+        String str="https://m.douyu.com/html5/live?roomId="+homeCarousel.getRoom().getRoom_id();
+        Request requestPost = new Request.Builder()
+                .url(str)
+                .get()
+                .build();
 
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .build();
+
+        client.newCall(requestPost).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+            }
+            @Override
+            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+                String json =response.body().string().toString();
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    if (jsonObject.getInt("error")==0) {
+                        Gson gson = new Gson();
+                        TempLiveVideoInfo mLiveVideoInfo = gson.fromJson(json, TempLiveVideoInfo.class);
+                        Intent intent=new Intent(getActivity(),VideoPlayer.class);
+                        intent.putExtra("URL",mLiveVideoInfo.getData().getHls_url());
+                        getActivity().startActivity(intent);
+                    } else {
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
