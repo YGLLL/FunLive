@@ -3,6 +3,7 @@ package com.github.yglll.funlive.presenter.impl;
 import android.util.Log;
 
 import com.github.yglll.funlive.model.logic.HomeCarousel;
+import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
 
 import java.util.List;
@@ -69,6 +70,26 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
                 }
                 mView.showString(value);
                 mView.showCarousel(list);
+            }
+        });
+    }
+
+    @Override
+    public void setHotColumn() {
+        mModel.getHotColumn().subscribe(new Observer<List<HomeHotColumn>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(List<HomeHotColumn> homeHotColumns) {
+                mView.showHotColumn(homeHotColumns);
             }
         });
     }

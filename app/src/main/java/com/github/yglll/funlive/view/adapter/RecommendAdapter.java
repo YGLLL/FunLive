@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.view;
+package com.github.yglll.funlive.view.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.utils.Utils;
 
 import java.util.List;
@@ -28,6 +29,7 @@ import java.util.List;
 public class RecommendAdapter extends RecyclerView.Adapter {
     private static final String TAG = "RecommendAdapter";
     private List<String> list;
+    private List<HomeHotColumn> homeHotColumns;
 
     protected View customHeaderView=null;
     protected View customLoadMoreView=null;
@@ -40,8 +42,8 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             textView =(TextView)view;
         }
     }
-    static class ViewHolder2 extends RecyclerView.ViewHolder{
-        public ViewHolder2(View view){
+    static class CustomViewHolder extends RecyclerView.ViewHolder{
+        public CustomViewHolder(View view){
             super(view);
         }
     }
@@ -54,7 +56,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType){
             case VIEW_TYPE.HEADER:
-                return new ViewHolder2(customHeaderView);
+                return new CustomViewHolder(customHeaderView);
             case VIEW_TYPE.CLASSIFY:
                 break;
             case VIEW_TYPE.FOOTER:
@@ -131,6 +133,10 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     }
     public void setClassifyView(View classifyView) {
         this.classifyView = classifyView;
+    }
+
+    public void setHomeHotColumns(List<HomeHotColumn> homeHotColumns) {
+        this.homeHotColumns = homeHotColumns;
     }
 
     protected class VIEW_TYPE{

@@ -1,6 +1,7 @@
 package com.github.yglll.funlive.presenter.interfaces;
 
 import com.github.yglll.funlive.model.logic.HomeCarousel;
+import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.mvpbase.BaseModel;
 import com.github.yglll.funlive.mvpbase.BasePresenter;
 import com.github.yglll.funlive.mvpbase.BaseView;
@@ -23,16 +24,19 @@ public interface RecommendPresenterInterfaces {
     interface View extends BaseView {
         void showString(String list);
         void showCarousel(List<HomeCarousel> list);
+        void showHotColumn(List<HomeHotColumn> list);
     }
 
     interface Model extends BaseModel {
         Observable<String> getString(String string, Map<String, Integer> map);
         Observable<List<String>> getGameString(Map<String, Integer> map);
         Observable<List<HomeCarousel>> getCarousel();
+        Observable<List<HomeHotColumn>> getHotColumn();
     }
 
     abstract class Presenter extends BasePresenter<View,Model> {
         public abstract void setString();
         public abstract void setCarousel();
+        public abstract void setHotColumn();
     }
 }

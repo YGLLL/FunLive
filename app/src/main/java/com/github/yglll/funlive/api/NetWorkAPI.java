@@ -25,6 +25,9 @@ public class NetWorkAPI {
     //获取所有游戏分类 /api/RoomApi/game
     public static final String game="api/RoomApi/game";
 
+    //*********************首页****************************
     //    首页轮播
     public static final String getCarousel = "api/v1/slide/6";
+    //首页    最热
+    public static final String getHomeHotColumn = "/api/v1/getbigDataRoom";
 }

@@ -1,13 +1,16 @@
 package com.github.yglll.funlive.model;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.github.yglll.funlive.api.Live;
 import com.github.yglll.funlive.api.NetWorkAPI;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
+import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.net.RetrofitClient;
 import com.github.yglll.funlive.net.transformer.DefaultTransformer;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
+import com.github.yglll.funlive.utils.ParamsMapUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -53,5 +56,14 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
                 .builder(Live.class)
                 .getCarousel()
                 .compose(new DefaultTransformer<List<HomeCarousel>>());//转换
+    }
+
+    @Override
+    public Observable<List<HomeHotColumn>> getHotColumn() {
+        return new RetrofitClient()
+                .setBaseUrl(NetWorkAPI.baseUrl_capi)
+                .builder(Live.class)
+                .getHotColumn(ParamsMapUtils.getDefaultParams())
+                .compose(new DefaultTransformer<List<HomeHotColumn>>());
     }
 }

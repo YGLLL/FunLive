@@ -5,21 +5,20 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.RecommendModel;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
+import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.RecommendPresenter;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
 import com.github.yglll.funlive.view.adapter.HomeCarouselAdapter;
+import com.github.yglll.funlive.view.adapter.RecommendAdapter;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -31,7 +30,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -55,6 +53,7 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
     private HomeCarouselAdapter homeCarouselAdapter;
     private List<HomeCarousel> homeCarouselList;
     private View haderView;
+    private RecommendAdapter recommendAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -66,7 +65,7 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+                refresh();
             }
         });
 
@@ -88,7 +87,7 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
         list.add("o");
         list.add("p");
         list.add("q");
-        RecommendAdapter recommendAdapter=new RecommendAdapter(list);
+        recommendAdapter=new RecommendAdapter(list);
         haderView = recommendAdapter.setCustomHeaderView(R.layout.item_home_recommend_banner,recyclerView);
         bgaBanner=(BGABanner) haderView.findViewById(R.id.recommed_banner);
         bgaBanner.setDelegate(this);
@@ -99,10 +98,14 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
+    private void refresh(){
+        mPresenter.setCarousel();
+    }
+
     @Override
     public void onStart() {
         super.onStart();
-        mPresenter.setCarousel();
+        refresh();
     }
 
     @Override
@@ -168,5 +171,10 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
         if (bgaBanner != null && pic_url.size() > 0) {
             bgaBanner.setData(R.layout.item_image_carousel, pic_url, null);
         }
+    }
+
+    @Override
+    public void showHotColumn(List<HomeHotColumn> list) {
+        recommendAdapter.setHomeHotColumns(list);
     }
 }
