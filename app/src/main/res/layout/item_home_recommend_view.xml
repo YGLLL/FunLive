@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5.0dp"
+    android:orientation="vertical">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/img_item_gridview"
+        android:layout_width="200.0dp"
+        android:layout_height="100.0dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10.0dp"
+        fresco:actualImageScaleType="centerCrop"
+        fresco:placeholderImage="@drawable/ic_launcher"
+        fresco:placeholderImageScaleType="centerCrop"
+        fresco:roundedCornerRadius="6dip" />
+
+    <TextView
+        android:id="@+id/tv_column_item_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_item_gridview"
+        android:width="200.0dp"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:shadowRadius="0.1"
+        android:singleLine="true"
+        android:textColor="#373737"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100.0dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_live_icon"
+                android:layout_width="60.0dp"
+                android:layout_height="18.0dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/ic_launcher"
+                android:gravity="center"></RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="55.0dp"
+                android:layout_height="18.0dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_launcher"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_online_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:text="9999"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+
+                <ImageView
+                    android:layout_width="10.0dp"
+                    android:layout_height="10.0dp"
+                    android:layout_marginRight="3.0dp"
+                    android:layout_marginTop="3.0dp"
+                    android:layout_toLeftOf="@id/tv_online_num"
+                    android:src="@drawable/ic_launcher" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/img_nickname"
+                android:layout_width="10.0dp"
+                android:layout_height="10.0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="6.0dp"
+                android:layout_marginLeft="5.0dp"
+                android:layout_marginRight="5.0dp"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5.0dp"
+                android:layout_toRightOf="@id/img_nickname"
+                android:ellipsize="end"
+                android:text="超人归来"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </FrameLayout>
+</RelativeLayout>

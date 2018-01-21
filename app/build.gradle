@@ -51,4 +51,7 @@ dependencies {
     implementation "com.android.support:design:26.1.0"
     //日志打印工具
     implementation 'com.orhanobut:logger:2.1.1'
+
+    //Recycler adapter
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.7.7'
 }

@@ -2,16 +2,21 @@ package com.github.yglll.funlive.view.adapter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
+import com.github.yglll.funlive.utils.FullyGridLayoutManager;
 import com.github.yglll.funlive.utils.Utils;
 
 import java.util.List;
@@ -34,6 +39,28 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     protected View customHeaderView=null;
     protected View customLoadMoreView=null;
     protected View classifyView=null;
+
+    public class NormalViewHolder extends RecyclerView.ViewHolder {
+        //栏目 Icon
+        public ImageView img_column_icon;
+        //栏目 名称
+        public TextView tv_column_name;
+        //加载更多
+        public RelativeLayout rl_column_more;
+        //栏目列表
+        public RecyclerView rv_column_list;
+
+        public LinearLayout item_home_recommed_girdview;
+
+        public NormalViewHolder(View itemView) {
+            super(itemView);
+            img_column_icon = (ImageView) itemView.findViewById(R.id.img_column_icon);
+            tv_column_name = (TextView) itemView.findViewById(R.id.tv_column_name);
+            rl_column_more = (RelativeLayout) itemView.findViewById(R.id.rl_column_more);
+            rv_column_list = (RecyclerView) itemView.findViewById(R.id.rv_column_list);
+            item_home_recommed_girdview = (LinearLayout) itemView.findViewById(R.id.item_home_recommed_girdview);
+        }
+    }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
@@ -62,11 +89,9 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             case VIEW_TYPE.FOOTER:
                 break;
             case VIEW_TYPE.NORMAL:
-                TextView textView=new TextView(parent.getContext());
-                return new ViewHolder(textView);
+                return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_recommend, parent, false));
         }
-        TextView textView=new TextView(parent.getContext());
-        return new ViewHolder(textView);
+        return null;
     }
 
     @Override
@@ -76,7 +101,12 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                 ((ViewHolder)holder).textView.append(list.get(--position));
             }
         }else {
-            ((ViewHolder)holder).textView.append(list.get(position));
+            NormalViewHolder normalViewHolder=(NormalViewHolder)holder;
+            normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
+            normalViewHolder.tv_column_name.setText("最热");
+            normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
+            mHotColumnAdapter = new HomeRecommendHotColumnAdapter(holder.rv_column_list.getContext(), mHomeHotColumn);
+            normalViewHolder.rv_column_list.setAdapter(mHotColumnAdapter);
         }
     }
 
