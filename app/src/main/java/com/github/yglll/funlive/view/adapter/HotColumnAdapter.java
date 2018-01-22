@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             bindHotColumun((HotColumnHolder) holder,position);
         }
     }
-    private void bindHotColumun(HotColumnHolder holder, int position) {
+    private void bindHotColumun(HotColumnHolder holder,final int position) {
         holder.img_item_gridview.setImageURI(Uri.parse(mHomeHotColumn.get(position).getVertical_src()));
         holder.tv_column_item_nickname.setText(mHomeHotColumn.get(position).getRoom_name());
         holder.tv_nickname.setText(mHomeHotColumn.get(position).getNickname());
@@ -60,6 +59,7 @@ public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 //                颜值栏目 竖屏播放
                 if(mHomeHotColumn.get(position).getCate_id().equals("201"))
                 {
@@ -76,6 +76,7 @@ public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
+                */
             }
         });
     }
@@ -83,7 +84,7 @@ public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemCount() {
         return mHomeHotColumn.size();
     }
-    public class HotColumnHolder extends  BaseViewHolder
+    public class HotColumnHolder extends RecyclerView.ViewHolder
     {
         //        图片
         public SimpleDraweeView img_item_gridview;

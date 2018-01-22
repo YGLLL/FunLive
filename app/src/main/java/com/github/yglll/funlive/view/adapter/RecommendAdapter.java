@@ -35,6 +35,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     private static final String TAG = "RecommendAdapter";
     private List<String> list;
     private List<HomeHotColumn> homeHotColumns;
+    private HotColumnAdapter hotColumnAdapter;
 
     protected View customHeaderView=null;
     protected View customLoadMoreView=null;
@@ -84,8 +85,6 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         switch (viewType){
             case VIEW_TYPE.HEADER:
                 return new CustomViewHolder(customHeaderView);
-            case VIEW_TYPE.CLASSIFY:
-                break;
             case VIEW_TYPE.FOOTER:
                 break;
             case VIEW_TYPE.NORMAL:
@@ -96,17 +95,25 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(isHaveHeader()>0){
-            if(position>=1){
-                ((ViewHolder)holder).textView.append(list.get(--position));
-            }
-        }else {
+        switch (position){
+            case 0:
+                if (isHaveHeader()==0&&isHaveFooter()==0)onBindNormalViewHolder(holder,position);
+                break;
+            case 1:
+                if (isHaveFooter()==0)onBindNormalViewHolder(holder,position);
+                break;
+            default:
+                //onBindNormalViewHolder(holder,position);
+        }
+    }
+    private void onBindNormalViewHolder(RecyclerView.ViewHolder holder, int position){
+        if(homeHotColumns!=null){
             NormalViewHolder normalViewHolder=(NormalViewHolder)holder;
             normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
             normalViewHolder.tv_column_name.setText("最热");
             normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
-            mHotColumnAdapter = new HomeRecommendHotColumnAdapter(holder.rv_column_list.getContext(), mHomeHotColumn);
-            normalViewHolder.rv_column_list.setAdapter(mHotColumnAdapter);
+            hotColumnAdapter = new HotColumnAdapter(normalViewHolder.rv_column_list.getContext(),homeHotColumns);
+            normalViewHolder.rv_column_list.setAdapter(hotColumnAdapter);
         }
     }
 
@@ -120,9 +127,6 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         switch (position){
             case 0:
                 if(isHaveHeader()>0)return VIEW_TYPE.HEADER;
-                break;
-            case 1:
-                if(isHaveClassify()>0)return VIEW_TYPE.CLASSIFY;
                 break;
             default:
                 if(position>=getItemCount()&&isHaveFooter()>0)return VIEW_TYPE.FOOTER;
@@ -167,12 +171,12 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     public void setHomeHotColumns(List<HomeHotColumn> homeHotColumns) {
         this.homeHotColumns = homeHotColumns;
+        notifyDataSetChanged();
     }
 
     protected class VIEW_TYPE{
         public static final int HEADER=-1;
         public static final int FOOTER=-2;
         public static final int NORMAL=-3;
-        public static final int CLASSIFY=-4;
     }
 }
