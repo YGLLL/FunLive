@@ -1,6 +1,7 @@
 package com.github.yglll.funlive.api;
 
 import com.github.yglll.funlive.model.logic.HomeCarousel;
+import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.net.Response.HttpResponse;
 
@@ -14,6 +15,7 @@ import rx.Observable;
 
 import static com.github.yglll.funlive.api.NetWorkAPI.game;
 import static com.github.yglll.funlive.api.NetWorkAPI.getCarousel;
+import static com.github.yglll.funlive.api.NetWorkAPI.getHomeFaceScoreColumn;
 import static com.github.yglll.funlive.api.NetWorkAPI.getHomeHotColumn;
 import static com.github.yglll.funlive.api.NetWorkAPI.roomList;
 
@@ -40,4 +42,8 @@ public interface Live {
     //首页    最热
     @GET(getHomeHotColumn)
     Observable<HttpResponse<List<HomeHotColumn>>> getHotColumn(@QueryMap Map<String, String> params);
+
+    //推荐---颜值
+    @GET(getHomeFaceScoreColumn)
+    Observable<HttpResponse<List<HomeFaceScoreColumn>>> getFaceScoreColumn(@QueryMap Map<String, String> params);
 }

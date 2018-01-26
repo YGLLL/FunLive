@@ -30,4 +30,6 @@ public class NetWorkAPI {
     public static final String getCarousel = "api/v1/slide/6";
     //首页    最热
     public static final String getHomeHotColumn = "/api/v1/getbigDataRoom";
+    //    首页---颜值栏目
+    public static final String getHomeFaceScoreColumn = "/api/v1/getVerticalRoom";
 }

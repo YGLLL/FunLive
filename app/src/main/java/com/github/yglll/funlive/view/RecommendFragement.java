@@ -11,6 +11,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.RecommendModel;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
+import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
@@ -69,25 +70,7 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
             }
         });
 
-        List<String> list=new ArrayList<>();
-        list.add("a");
-        list.add("b");
-        list.add("c");
-        list.add("d");
-        list.add("e");
-        list.add("f");
-        list.add("g");
-        list.add("h");
-        list.add("i");
-        list.add("j");
-        list.add("k");
-        list.add("l");
-        list.add("n");
-        list.add("m");
-        list.add("o");
-        list.add("p");
-        list.add("q");
-        recommendAdapter=new RecommendAdapter(list);
+        recommendAdapter=new RecommendAdapter(getActivity());
         haderView = recommendAdapter.setCustomHeaderView(R.layout.item_home_recommend_banner,recyclerView);
         bgaBanner=(BGABanner) haderView.findViewById(R.id.recommed_banner);
         bgaBanner.setDelegate(this);
@@ -100,6 +83,8 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
 
     private void refresh(){
         mPresenter.setCarousel();
+        mPresenter.setHotColumn();
+        mPresenter.setFaceScoreColumn(0,4);
     }
 
     @Override
@@ -176,5 +161,10 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
     @Override
     public void showHotColumn(List<HomeHotColumn> list) {
         recommendAdapter.setHomeHotColumns(list);
+    }
+
+    @Override
+    public void showFaceScoreColumn(List<HomeFaceScoreColumn> list) {
+        recommendAdapter.setHomeFaceScoreColumns(list);
     }
 }

@@ -15,10 +15,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.utils.FullyGridLayoutManager;
 import com.github.yglll.funlive.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,13 +35,21 @@ import java.util.List;
  **/
 public class RecommendAdapter extends RecyclerView.Adapter {
     private static final String TAG = "RecommendAdapter";
-    private List<String> list;
     private List<HomeHotColumn> homeHotColumns;
     private HotColumnAdapter hotColumnAdapter;
+    private List<HomeFaceScoreColumn> homeFaceScoreColumns;
+    private FaceScoreColumnAdapter faceScoreColumnAdapter;
+    private Context mContext;
 
     protected View customHeaderView=null;
     protected View customLoadMoreView=null;
     protected View classifyView=null;
+
+    public RecommendAdapter(Context context){
+        this.mContext=context;
+        homeHotColumns=new ArrayList<>();
+        homeFaceScoreColumns=new ArrayList<>();
+    }
 
     public class NormalViewHolder extends RecyclerView.ViewHolder {
         //栏目 Icon
@@ -76,10 +86,6 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public RecommendAdapter(List<String> list){
-        this.list=list;
-    }
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType){
@@ -95,31 +101,47 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        switch (position){
-            case 0:
-                if (isHaveHeader()==0&&isHaveFooter()==0)onBindNormalViewHolder(holder,position);
-                break;
-            case 1:
-                if (isHaveFooter()==0)onBindNormalViewHolder(holder,position);
-                break;
-            default:
-                //onBindNormalViewHolder(holder,position);
+        int start = isHaveHeader();
+        if (!isHeader(position) && !isFooter(position)) {
+            onBindNormalViewHolder(holder, position - start, true);
         }
     }
-    private void onBindNormalViewHolder(RecyclerView.ViewHolder holder, int position){
-        if(homeHotColumns!=null){
+    private void onBindNormalViewHolder(RecyclerView.ViewHolder holder, int position,Boolean isItem){
+        if(holder instanceof NormalViewHolder){
             NormalViewHolder normalViewHolder=(NormalViewHolder)holder;
-            normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
-            normalViewHolder.tv_column_name.setText("最热");
-            normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
-            hotColumnAdapter = new HotColumnAdapter(normalViewHolder.rv_column_list.getContext(),homeHotColumns);
-            normalViewHolder.rv_column_list.setAdapter(hotColumnAdapter);
+            switch (position){
+                case 0:
+                    normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
+                    normalViewHolder.tv_column_name.setText("最热");
+                    normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
+                    hotColumnAdapter = new HotColumnAdapter(normalViewHolder.rv_column_list.getContext(),homeHotColumns);
+                    normalViewHolder.rv_column_list.setAdapter(hotColumnAdapter);
+                    break;
+                case 1:
+                    normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
+                    normalViewHolder.tv_column_name.setText("颜值");
+                    normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
+                    faceScoreColumnAdapter=new FaceScoreColumnAdapter(normalViewHolder.rv_column_list.getContext());
+                    faceScoreColumnAdapter.setFaceScoreColumn(homeFaceScoreColumns);
+                    normalViewHolder.rv_column_list.setAdapter(faceScoreColumnAdapter);
+                    break;
+                default:
+            }
         }
+    }
+
+    public boolean isFooter(int position) {
+        int start = isHaveFooter();
+        return customLoadMoreView != null && position > getItemCount() + start;
+    }
+
+    public boolean isHeader(int position) {
+        return isHaveHeader() > 0 && position == 0;
     }
 
     @Override
     public int getItemCount() {
-        return list.size()+isHaveHeader()+isHaveClassify()+isHaveFooter();
+        return 3;
     }
 
     @Override
@@ -171,6 +193,11 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     public void setHomeHotColumns(List<HomeHotColumn> homeHotColumns) {
         this.homeHotColumns = homeHotColumns;
+        notifyDataSetChanged();
+    }
+
+    public void setHomeFaceScoreColumns(List<HomeFaceScoreColumn> homeFaceScoreColumns) {
+        this.homeFaceScoreColumns = homeFaceScoreColumns;
         notifyDataSetChanged();
     }
 

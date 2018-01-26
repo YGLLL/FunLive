@@ -6,6 +6,7 @@ import android.util.Log;
 import com.github.yglll.funlive.api.Live;
 import com.github.yglll.funlive.api.NetWorkAPI;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
+import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.net.RetrofitClient;
 import com.github.yglll.funlive.net.transformer.DefaultTransformer;
@@ -65,5 +66,14 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
                 .builder(Live.class)
                 .getHotColumn(ParamsMapUtils.getDefaultParams())
                 .compose(new DefaultTransformer<List<HomeHotColumn>>());
+    }
+
+    @Override
+    public Observable<List<HomeFaceScoreColumn>> getFaceScoreColumn(int offset, int limit) {
+        return new RetrofitClient()
+                .setBaseUrl(NetWorkAPI.baseUrl_capi)
+                .builder(Live.class)
+                .getFaceScoreColumn(ParamsMapUtils.getHomeFaceScoreColumn(offset,limit))
+                .compose(new DefaultTransformer<List<HomeFaceScoreColumn>>());
     }
 }

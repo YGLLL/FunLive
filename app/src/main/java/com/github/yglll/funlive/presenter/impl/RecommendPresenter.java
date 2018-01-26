@@ -3,8 +3,10 @@ package com.github.yglll.funlive.presenter.impl;
 import android.util.Log;
 
 import com.github.yglll.funlive.model.logic.HomeCarousel;
+import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -90,6 +92,26 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
             @Override
             public void onNext(List<HomeHotColumn> homeHotColumns) {
                 mView.showHotColumn(homeHotColumns);
+            }
+        });
+    }
+
+    @Override
+    public void setFaceScoreColumn(int offset,int limit) {
+        mModel.getFaceScoreColumn(offset,limit).subscribe(new Observer<List<HomeFaceScoreColumn>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(List<HomeFaceScoreColumn> list) {
+                mView.showFaceScoreColumn(list);
             }
         });
     }
