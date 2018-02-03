@@ -5,13 +5,16 @@ import android.util.Log;
 
 import com.github.yglll.funlive.api.Live;
 import com.github.yglll.funlive.api.NetWorkAPI;
+import com.github.yglll.funlive.model.logic.Category;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
 import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
+import com.github.yglll.funlive.model.logic.HomeRecommendHotCate;
 import com.github.yglll.funlive.net.RetrofitClient;
 import com.github.yglll.funlive.net.transformer.DefaultTransformer;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
 import com.github.yglll.funlive.utils.ParamsMapUtils;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 import java.util.Map;
@@ -32,6 +35,7 @@ import rx.schedulers.Schedulers;
 public class RecommendModel implements RecommendPresenterInterfaces.Model{
     @Override
     public Observable<String> getString(String string , Map<String,Integer> map){
+        Logger.i("Observable<String> getString");
         return new RetrofitClient()
                 .builder(Live.class)
                 .getLiveList(string,map)
@@ -41,11 +45,7 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
 
     @Override
     public Observable<List<String>> getGameString(Map<String, Integer> map) {
-        return new RetrofitClient()
-                .builder(Live.class)
-                .getGameString(map)
-                .subscribeOn(Schedulers.io())//在io线程发出事件
-                .observeOn(AndroidSchedulers.mainThread());
+        return null;
     }
 
 
@@ -75,5 +75,22 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
                 .builder(Live.class)
                 .getFaceScoreColumn(ParamsMapUtils.getHomeFaceScoreColumn(offset,limit))
                 .compose(new DefaultTransformer<List<HomeFaceScoreColumn>>());
+    }
+
+    @Override
+    public Observable<List<HomeRecommendHotCate>> getHotCate() {
+        return new RetrofitClient()
+                .setBaseUrl(NetWorkAPI.baseUrl_capi)
+                .builder(Live.class)
+                .getHotCate(ParamsMapUtils.getDefaultParams())
+                .compose(new DefaultTransformer<List<HomeRecommendHotCate>>());
+    }
+
+    @Override
+    public Observable<List<Category>> getNavigation() {
+        return new RetrofitClient()
+                .builder(Live.class)
+                .getCategory()
+                .compose(new DefaultTransformer<List<Category>>());
     }
 }

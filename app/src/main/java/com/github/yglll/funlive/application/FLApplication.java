@@ -3,6 +3,8 @@ package com.github.yglll.funlive.application;
 import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 /**
  * 作者：YGL
@@ -19,5 +21,6 @@ public class FLApplication extends Application {
         super.onCreate();
         //初始化图片加载框架
         Fresco.initialize(this);
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 }

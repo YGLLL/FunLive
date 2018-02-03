@@ -130,24 +130,18 @@ public abstract class BaseRecyclerAdapter<VH extends RecyclerView.ViewHolder> ex
     }
 
     private final RecyclerViewDataObserver observer = new RecyclerViewDataObserver();
-
     private View mParent;
-
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+        //施工中
     }
-
-    /**
-     * Using a custom LoadMoreView
-     *
-     * @param footerView the inflated view
-     */
     public void setCustomLoadMoreView(View footerView) {
         if (footerView instanceof IFooterCallBack) {
             customLoadMoreView = footerView;
             Utils.removeViewFromParent(customLoadMoreView);
             if (mParent != null ) {
+                //施工中
             }
             showFooter(customLoadMoreView, false);
             notifyDataSetChanged();

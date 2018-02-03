@@ -12,7 +12,6 @@ package com.github.yglll.funlive.api;
 public class NetWorkAPI {
     //base地址
     public static final String baseUrl="http://open.douyucdn.cn/";
-    public static final String baseUrl_capi = "http://capi.douyucdn.cn/";
 
     //获取直播房间列表
     //http://open.douyucdn.cn/api/RoomApi/live/{分类 ID 戒者分类别名}
@@ -22,14 +21,19 @@ public class NetWorkAPI {
     //获取直播房间详情信息/api/RoomApi/room/{房间 Id 或者房间别名}
     public static final String details="api/RoomApi/room/";
 
-    //获取所有游戏分类 /api/RoomApi/game
-    public static final String game="api/RoomApi/game";
+    //获取所有分类 /api/RoomApi/game
+    public static final String allCategory="api/RoomApi/game";
 
+    //****************************************************************
+    //旧base地址
+    public static final String baseUrl_capi = "http://capi.douyucdn.cn/";
     //*********************首页****************************
     //    首页轮播
     public static final String getCarousel = "api/v1/slide/6";
     //首页    最热
-    public static final String getHomeHotColumn = "/api/v1/getbigDataRoom";
+    public static final String getHomeHotColumn = "api/v1/getbigDataRoom";
     //    首页---颜值栏目
-    public static final String getHomeFaceScoreColumn = "/api/v1/getVerticalRoom";
+    public static final String getHomeFaceScoreColumn = "api/v1/getVerticalRoom";
+    //首页---其他热门 种类
+    public static final String getHomeRecommendHotCate = "api/v1/getHotCate";
 }

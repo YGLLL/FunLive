@@ -16,7 +16,7 @@
         android:src="@drawable/ic_launcher"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="10.0dp"
-       fresco:roundedCornerRadius="6dip"
+        fresco:roundedCornerRadius="6dip"
         android:layout_alignParentStart="true" />
     <ImageView
         android:id="@+id/img_nickname"

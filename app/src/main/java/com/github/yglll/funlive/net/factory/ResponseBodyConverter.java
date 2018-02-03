@@ -22,7 +22,6 @@ import retrofit2.Converter;
  * 创建时间：2017/12/23   23:43
  **/
 public class ResponseBodyConverter<T> implements Converter<ResponseBody,T> {
-    private static final String TAG = "ConverterFactory";
 
     private final Gson gson;
     private final Type type;

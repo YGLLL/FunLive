@@ -1,8 +1,10 @@
 package com.github.yglll.funlive.api;
 
+import com.github.yglll.funlive.model.logic.Category;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
 import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
+import com.github.yglll.funlive.model.logic.HomeRecommendHotCate;
 import com.github.yglll.funlive.net.Response.HttpResponse;
 
 import java.util.List;
@@ -13,10 +15,11 @@ import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
-import static com.github.yglll.funlive.api.NetWorkAPI.game;
+import static com.github.yglll.funlive.api.NetWorkAPI.allCategory;
 import static com.github.yglll.funlive.api.NetWorkAPI.getCarousel;
 import static com.github.yglll.funlive.api.NetWorkAPI.getHomeFaceScoreColumn;
 import static com.github.yglll.funlive.api.NetWorkAPI.getHomeHotColumn;
+import static com.github.yglll.funlive.api.NetWorkAPI.getHomeRecommendHotCate;
 import static com.github.yglll.funlive.api.NetWorkAPI.roomList;
 
 /**
@@ -32,9 +35,6 @@ public interface Live {
     @GET(roomList+"{id}")
     Observable<String> getLiveList(@Path("id") String id, @QueryMap Map<String, Integer> params);
 
-    @GET(game)
-    Observable<List<String>> getGameString(@QueryMap Map<String, Integer> params);
-
     //首页   推荐轮播图
     @GET(getCarousel)
     Observable<HttpResponse<List<HomeCarousel>>> getCarousel();
@@ -43,7 +43,15 @@ public interface Live {
     @GET(getHomeHotColumn)
     Observable<HttpResponse<List<HomeHotColumn>>> getHotColumn(@QueryMap Map<String, String> params);
 
-    //推荐---颜值
+    //首页---颜值
     @GET(getHomeFaceScoreColumn)
     Observable<HttpResponse<List<HomeFaceScoreColumn>>> getFaceScoreColumn(@QueryMap Map<String, String> params);
+
+    //首页---热门 种类
+    @GET(getHomeRecommendHotCate)
+    Observable<HttpResponse<List<HomeRecommendHotCate>>> getHotCate(@QueryMap Map<String, String> params);
+
+    //获取所有分类
+    @GET(allCategory)
+    Observable<HttpResponse<List<Category>>> getCategory();
 }

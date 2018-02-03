@@ -17,10 +17,8 @@ import retrofit2.Converter;
  * 创建时间：2017/12/24   0:12
  **/
 public class RequestBodyConverter<T> implements Converter<T, RequestBody> {
-    private static final String TAG = "ConverterFactory";
     @Override
     public RequestBody convert(T value) throws IOException {
-        Log.i(TAG,"public RequestBody convert(T value) throws IOException");
         return null;
     }
 }

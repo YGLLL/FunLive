@@ -3,22 +3,28 @@ package com.github.yglll.funlive.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.GridView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.RecommendModel;
+import com.github.yglll.funlive.model.logic.Category;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
 import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
+import com.github.yglll.funlive.model.logic.HomeRecommendHotCate;
 import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.RecommendPresenter;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
+import com.github.yglll.funlive.utils.FullyGridLayoutManager;
 import com.github.yglll.funlive.view.adapter.HomeCarouselAdapter;
+import com.github.yglll.funlive.view.adapter.NavigationAdapter;
 import com.github.yglll.funlive.view.adapter.RecommendAdapter;
 import com.google.gson.Gson;
 
@@ -55,6 +61,7 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
     private List<HomeCarousel> homeCarouselList;
     private View haderView;
     private RecommendAdapter recommendAdapter;
+    private NavigationAdapter navigationAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -76,6 +83,11 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
         bgaBanner.setDelegate(this);
         homeCarouselAdapter=new HomeCarouselAdapter();
         bgaBanner.setAdapter(homeCarouselAdapter);
+        View navigationView=recommendAdapter.setNavigationView(R.layout.recommend_navigation,recyclerView);
+        GridView gridView=navigationView.findViewById(R.id.grid_view);
+        navigationAdapter=new NavigationAdapter();
+        gridView.setAdapter(navigationAdapter);
+        //navigationRecyclerView.setLayoutManager(new FullyGridLayoutManager(navigationRecyclerView.getContext(), 2, GridLayoutManager.VERTICAL, false));
 
         recyclerView.setAdapter(recommendAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -85,6 +97,8 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
         mPresenter.setCarousel();
         mPresenter.setHotColumn();
         mPresenter.setFaceScoreColumn(0,4);
+        mPresenter.setHotCate();
+        mPresenter.setNavigation();
     }
 
     @Override
@@ -166,5 +180,15 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
     @Override
     public void showFaceScoreColumn(List<HomeFaceScoreColumn> list) {
         recommendAdapter.setHomeFaceScoreColumns(list);
+    }
+
+    @Override
+    public void showHotCate(List<HomeRecommendHotCate> list) {
+        recommendAdapter.setHomeRecommendHotCates(list);
+    }
+
+    @Override
+    public void showNavigation(List<Category> list) {
+        navigationAdapter.setData(list);
     }
 }

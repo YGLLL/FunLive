@@ -1,7 +1,9 @@
 package com.github.yglll.funlive.net.factory;
 
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
 
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -20,11 +22,9 @@ import retrofit2.Retrofit;
  * 创建时间：2017/12/23   23:38
  **/
 public class ConverterFactory extends Converter.Factory {
-    private static final String TAG = "ConverterFactory";
     private final Gson gson;
 
-    public  static ConverterFactory create()
-    {
+    public  static ConverterFactory create() {
         return create(new Gson());
     }
     public static ConverterFactory create(Gson gson) {
@@ -41,6 +41,14 @@ public class ConverterFactory extends Converter.Factory {
     }
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+        if (type.toString().contains("String")){
+            return new Converter<ResponseBody, String>() {
+                @Override
+                public String convert(ResponseBody value) throws IOException {
+                    return value.string();
+                }
+            };
+        }
         return new ResponseBodyConverter<>(gson,type);
     }
 }

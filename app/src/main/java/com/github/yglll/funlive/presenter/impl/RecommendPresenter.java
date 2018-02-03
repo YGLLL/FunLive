@@ -2,13 +2,18 @@ package com.github.yglll.funlive.presenter.impl;
 
 import android.util.Log;
 
+import com.github.yglll.funlive.model.logic.Category;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
 import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
+import com.github.yglll.funlive.model.logic.HomeRecommendHotCate;
+import com.github.yglll.funlive.net.Response.HttpResponse;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
 import com.orhanobut.logger.Logger;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Observer;
 
@@ -25,28 +30,25 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
     private static final String TAG = "RecommendPresenter";
     @Override
     public void setString() {
-        /*
         Map<String,Integer> map=new LinkedHashMap<>();
         map.put("offset",0);
-        map.put("limit",1);
-        model.getCarousel().subscribe(new Observer<HttpResponse<List<HomeCarousel>>>() {
+        map.put("limit",5);
+        mModel.getString("1",map).subscribe(new Observer<String>() {
             @Override
             public void onCompleted() {
-                Log.i(TAG,"public void onCompleted()");
+
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.i(TAG,"public void onError(Throwable e)");
+
             }
 
             @Override
-            public void onNext(HttpResponse<List<HomeCarousel>> httpResponse) {
-                List<HomeCarousel> list=httpResponse.getData();
-
+            public void onNext(String string) {
+                mView.showString(string);
             }
         });
-        */
     }
 
     @Override
@@ -112,6 +114,46 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
             @Override
             public void onNext(List<HomeFaceScoreColumn> list) {
                 mView.showFaceScoreColumn(list);
+            }
+        });
+    }
+
+    @Override
+    public void setHotCate() {
+        mModel.getHotCate().subscribe(new Observer<List<HomeRecommendHotCate>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(List<HomeRecommendHotCate> homeRecommendHotCates) {
+                mView.showHotCate(homeRecommendHotCates);
+            }
+        });
+    }
+
+    @Override
+    public void setNavigation() {
+        mModel.getNavigation().subscribe(new Observer<List<Category>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(List<Category> list) {
+                mView.showNavigation(list);
             }
         });
     }
