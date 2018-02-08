@@ -53,6 +53,10 @@ dependencies {
     implementation "com.android.support:design:26.1.0"
     //日志打印工具
     implementation 'com.orhanobut:logger:2.1.1'
-    //圆形图片
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    //TabLayout
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar'
+    //     适配
+    compile 'com.zhy:autolayout:1.4.5'
 }

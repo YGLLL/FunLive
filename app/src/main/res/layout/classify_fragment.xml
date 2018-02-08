@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/sliding_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/text"
-            android:text="ClassifyFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </ScrollView>
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="48dp"
+        android:background="#ffffff"
+        tl:tl_divider_padding="1dp"
+        tl:tl_divider_width="10dp"
+        tl:tl_indicator_color="@color/colorAccent"
+        tl:tl_indicator_height="3dp"
+        tl:tl_tab_padding="10dp"
+        tl:tl_tab_space_equal="true"
+        tl:tl_textBold="BOTH"
+        tl:tl_textSelectColor="@color/colorAccent"
+        tl:tl_textUnselectColor="#707070" />
+
+    <View
+        android:elevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#34707070"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

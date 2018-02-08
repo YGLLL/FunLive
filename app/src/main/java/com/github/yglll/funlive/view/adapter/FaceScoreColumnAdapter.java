@@ -24,12 +24,10 @@ import java.util.List;
  * 备注消息：
  * 创建时间：2018/01/25   15:52
  **/
-public class FaceScoreColumnAdapter extends BaseRecyclerAdapter<RecyclerView.ViewHolder> {
+public class FaceScoreColumnAdapter extends RecyclerView.Adapter<FaceScoreColumnAdapter.FaceScoreColumnHolder> {
     private List<HomeFaceScoreColumn> mHomeFaceScoreColumn;
-    private Context context;
 
-    public FaceScoreColumnAdapter(Context context) {
-        this.context = context;
+    public FaceScoreColumnAdapter() {
         this.mHomeFaceScoreColumn = new ArrayList<HomeFaceScoreColumn>();
     }
 
@@ -40,29 +38,18 @@ public class FaceScoreColumnAdapter extends BaseRecyclerAdapter<RecyclerView.Vie
     }
 
     public void setFaceScoreColumnLoadMore(List<HomeFaceScoreColumn> mHomeFaceScoreColumn) {
-//          this.mHomeFaceScoreColumn.clear();
         this.mHomeFaceScoreColumn.addAll(mHomeFaceScoreColumn);
         notifyDataSetChanged();
     }
 
     @Override
-    public RecyclerView.ViewHolder getViewHolder(View view) {
+    public FaceScoreColumnHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_recommend_facescore, parent, false);
         return new FaceScoreColumnHolder(view);
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType, boolean isItem) {
-        return new FaceScoreColumnHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_recommend_facescore, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, boolean isItem) {
-        if (holder instanceof FaceScoreColumnHolder) {
-            bindFaceScoreHolder((FaceScoreColumnHolder) holder, position);
-        }
-    }
-
-    private void bindFaceScoreHolder(FaceScoreColumnHolder holder, int position) {
+    public void onBindViewHolder(FaceScoreColumnHolder holder, int position) {
         holder.img_item_gridview.setImageURI(Uri.parse(mHomeFaceScoreColumn.get(position).getVertical_src()));
         holder.tv_column_item_nickname.setText(mHomeFaceScoreColumn.get(position).getNickname());
         holder.tv_online_num.setText(String.valueOf(mHomeFaceScoreColumn.get(position).getOnline()));
@@ -81,11 +68,10 @@ public class FaceScoreColumnAdapter extends BaseRecyclerAdapter<RecyclerView.Vie
                 */
             }
         });
-
     }
 
     @Override
-    public int getAdapterItemCount() {
+    public int getItemCount() {
         return mHomeFaceScoreColumn.size();
     }
 

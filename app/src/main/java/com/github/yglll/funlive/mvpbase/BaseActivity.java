@@ -31,7 +31,17 @@ public abstract class BaseActivity<M extends BaseModel,P extends BasePresenter> 
         //注解绑定
         unbinder = ButterKnife.bind(this);
         bindMVP();
+        initView(s);
+        //设置返回键和标题
+        ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(activityTitle());
+        }
     }
+
+    public abstract void initView(Bundle bundle);
+    public abstract String activityTitle();
 
     //在销毁时解除绑定
     @Override

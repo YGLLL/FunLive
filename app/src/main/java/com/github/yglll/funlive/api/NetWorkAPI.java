@@ -28,12 +28,17 @@ public class NetWorkAPI {
     //旧base地址
     public static final String baseUrl_capi = "http://capi.douyucdn.cn/";
     //*********************首页****************************
-    //    首页轮播
+    //栏目>类别>房间
+    //轮播图
     public static final String getCarousel = "api/v1/slide/6";
-    //首页    最热
+    //最热房间列表
     public static final String getHomeHotColumn = "api/v1/getbigDataRoom";
-    //    首页---颜值栏目
+    //颜值房间列表
     public static final String getHomeFaceScoreColumn = "api/v1/getVerticalRoom";
-    //首页---其他热门 种类
+    //热门类别列表
     public static final String getHomeRecommendHotCate = "api/v1/getHotCate";
+    //栏目列表
+    public static final String getCateList = "/api/v1/getColumnList";
+    //获取栏目中的类别列表
+    public static final String getCate = "/api/v1/getColumnDetail";
 }

@@ -1,9 +1,7 @@
 package com.github.yglll.funlive.view.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.model.logic.HomeRecommendHotCate;
+import com.github.yglll.funlive.model.logic.HomeCate;
 
 import java.util.List;
 
@@ -27,10 +25,10 @@ import java.util.List;
  * 创建时间：2018/01/26   22:55
  **/
 public class HomeRecommendAllColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<HomeRecommendHotCate.RoomListEntity> mRommListEntity;
+    private List<HomeCate.RoomListEntity> mRommListEntity;
     private Context context;
 
-    public HomeRecommendAllColumnAdapter(Context context, List<HomeRecommendHotCate.RoomListEntity> mRommListEntity) {
+    public HomeRecommendAllColumnAdapter(Context context, List<HomeCate.RoomListEntity> mRommListEntity) {
         this.context=context;
         this.mRommListEntity=mRommListEntity;
     }

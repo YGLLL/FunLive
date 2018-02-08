@@ -12,7 +12,7 @@ import java.util.List;
  * 备注消息：
  * 创建时间：2018/01/26   22:40
  **/
-public class HomeRecommendHotCate {
+public class HomeCate {
 
     private String push_vertical_screen;
     private String icon_url;

@@ -3,7 +3,6 @@ package com.github.yglll.funlive.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,13 +15,12 @@ import com.github.yglll.funlive.model.logic.Category;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
 import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeRecommendHotCate;
+import com.github.yglll.funlive.model.logic.HomeCate;
 import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.RecommendPresenter;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
-import com.github.yglll.funlive.utils.FullyGridLayoutManager;
 import com.github.yglll.funlive.view.adapter.HomeCarouselAdapter;
 import com.github.yglll.funlive.view.adapter.NavigationAdapter;
 import com.github.yglll.funlive.view.adapter.RecommendAdapter;
@@ -156,11 +154,6 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
     }
 
     @Override
-    public void showString(String list) {
-
-    }
-
-    @Override
     public void showCarousel(List<HomeCarousel> list) {
         homeCarouselList=list;
         ArrayList<String> pic_url = new ArrayList<String>();
@@ -183,8 +176,8 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
     }
 
     @Override
-    public void showHotCate(List<HomeRecommendHotCate> list) {
-        recommendAdapter.setHomeRecommendHotCates(list);
+    public void showHotCate(List<HomeCate> list) {
+        recommendAdapter.setHomeCates(list);
     }
 
     @Override

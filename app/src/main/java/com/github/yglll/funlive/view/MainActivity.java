@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bnve)
     BottomNavigationView mBottomNavigationView;
     private MenuItem menuItem;
+    private List<Fragment> fragmentList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        MyPagerAdapter myPagerAdapter=new MyPagerAdapter(getSupportFragmentManager(),getFragments());
+        fragmentList=getFragments();
+
+        //不摧毁Fragment
+        viewPager.setOffscreenPageLimit(fragmentList.size());
+        MyPagerAdapter myPagerAdapter=new MyPagerAdapter(getSupportFragmentManager(),fragmentList);
         viewPager.setAdapter(myPagerAdapter);
         viewPager.addOnPageChangeListener(mInternalPageChangeListener);
 
@@ -93,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         return fragments;
     }
 
-    private class MyPagerAdapter extends FragmentPagerAdapter{
+    private class MyPagerAdapter extends FragmentStatePagerAdapter {
         private List<Fragment> fragments;
         public MyPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
             super(fm);

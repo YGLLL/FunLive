@@ -1,10 +1,13 @@
 package com.github.yglll.funlive.api;
 
+import com.github.yglll.funlive.model.logic.CapiCategory;
+import com.github.yglll.funlive.model.logic.CateList;
 import com.github.yglll.funlive.model.logic.Category;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
 import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeRecommendHotCate;
+import com.github.yglll.funlive.model.logic.HomeCate;
+import com.github.yglll.funlive.model.logic.RoomInfo;
 import com.github.yglll.funlive.net.Response.HttpResponse;
 
 import java.util.List;
@@ -17,6 +20,8 @@ import rx.Observable;
 
 import static com.github.yglll.funlive.api.NetWorkAPI.allCategory;
 import static com.github.yglll.funlive.api.NetWorkAPI.getCarousel;
+import static com.github.yglll.funlive.api.NetWorkAPI.getCate;
+import static com.github.yglll.funlive.api.NetWorkAPI.getCateList;
 import static com.github.yglll.funlive.api.NetWorkAPI.getHomeFaceScoreColumn;
 import static com.github.yglll.funlive.api.NetWorkAPI.getHomeHotColumn;
 import static com.github.yglll.funlive.api.NetWorkAPI.getHomeRecommendHotCate;
@@ -33,7 +38,7 @@ import static com.github.yglll.funlive.api.NetWorkAPI.roomList;
  **/
 public interface Live {
     @GET(roomList+"{id}")
-    Observable<String> getLiveList(@Path("id") String id, @QueryMap Map<String, Integer> params);
+    Observable<HttpResponse<List<RoomInfo>>> getLiveList(@Path("id") String id, @QueryMap Map<String, Integer> params);
 
     //首页   推荐轮播图
     @GET(getCarousel)
@@ -47,11 +52,19 @@ public interface Live {
     @GET(getHomeFaceScoreColumn)
     Observable<HttpResponse<List<HomeFaceScoreColumn>>> getFaceScoreColumn(@QueryMap Map<String, String> params);
 
-    //首页---热门 种类
+    //首页---热门类别
     @GET(getHomeRecommendHotCate)
-    Observable<HttpResponse<List<HomeRecommendHotCate>>> getHotCate(@QueryMap Map<String, String> params);
+    Observable<HttpResponse<List<HomeCate>>> getHotCate(@QueryMap Map<String, String> params);
 
     //获取所有分类
     @GET(allCategory)
     Observable<HttpResponse<List<Category>>> getCategory();
+
+    //所有栏目
+    @GET(getCateList)
+    Observable<HttpResponse<List<CateList>>> getCateList(@QueryMap Map<String, String> params);
+
+    //获取一个栏目所有类别
+    @GET(getCate)
+    Observable<HttpResponse<List<CapiCategory>>> getCapiCategory(@QueryMap Map<String, String> params);
 }

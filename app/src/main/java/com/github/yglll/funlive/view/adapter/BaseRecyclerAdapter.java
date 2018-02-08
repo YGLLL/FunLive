@@ -23,7 +23,7 @@ import java.util.List;
  * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
- * 备注消息：
+ * 备注消息：弃用
  * 创建时间：2018/01/26   13:18
  **/
 public abstract class BaseRecyclerAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {

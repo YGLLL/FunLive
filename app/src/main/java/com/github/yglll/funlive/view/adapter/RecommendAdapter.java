@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import android.widget.TextView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeRecommendHotCate;
+import com.github.yglll.funlive.model.logic.HomeCate;
 import com.github.yglll.funlive.utils.FullyGridLayoutManager;
 import com.github.yglll.funlive.utils.Utils;
 
@@ -41,7 +40,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     private HotColumnAdapter hotColumnAdapter;
     private List<HomeFaceScoreColumn> homeFaceScoreColumns;
     private FaceScoreColumnAdapter faceScoreColumnAdapter;
-    private List<HomeRecommendHotCate> homeRecommendHotCates;
+    private List<HomeCate> homeCates;
     private HomeRecommendAllColumnAdapter homeRecommendAllColumnAdapter;
 
     private Context mContext;
@@ -54,7 +53,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         this.mContext=context;
         homeHotColumns=new ArrayList<>();
         homeFaceScoreColumns=new ArrayList<>();
-        homeRecommendHotCates=new ArrayList<>();
+        homeCates =new ArrayList<>();
     }
 
     public class NormalViewHolder extends RecyclerView.ViewHolder {
@@ -121,16 +120,16 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                     normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
                     normalViewHolder.tv_column_name.setText("颜值");
                     normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
-                    faceScoreColumnAdapter=new FaceScoreColumnAdapter(normalViewHolder.rv_column_list.getContext());
+                    faceScoreColumnAdapter=new FaceScoreColumnAdapter();
                     faceScoreColumnAdapter.setFaceScoreColumn(homeFaceScoreColumns);
                     normalViewHolder.rv_column_list.setAdapter(faceScoreColumnAdapter);
                     break;
                 default:
-                    if(homeRecommendHotCates.size()>0){
+                    if(homeCates.size()>0){
                         normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
-                        normalViewHolder.tv_column_name.setText(homeRecommendHotCates.get(position - 2).getTag_name());
+                        normalViewHolder.tv_column_name.setText(homeCates.get(position - 2).getTag_name());
                         normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
-                        homeRecommendAllColumnAdapter=new HomeRecommendAllColumnAdapter(normalViewHolder.rv_column_list.getContext(), homeRecommendHotCates.get(position - 2).getRoom_list());
+                        homeRecommendAllColumnAdapter=new HomeRecommendAllColumnAdapter(normalViewHolder.rv_column_list.getContext(), homeCates.get(position - 2).getRoom_list());
                         normalViewHolder.rv_column_list.setAdapter(homeRecommendAllColumnAdapter);
                     }
             }
@@ -217,8 +216,8 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void setHomeRecommendHotCates(List<HomeRecommendHotCate> homeRecommendHotCates) {
-        this.homeRecommendHotCates = homeRecommendHotCates;
+    public void setHomeCates(List<HomeCate> homeCates) {
+        this.homeCates = homeCates;
         notifyDataSetChanged();
     }
 

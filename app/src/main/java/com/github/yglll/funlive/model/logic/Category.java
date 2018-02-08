@@ -75,4 +75,16 @@ public class Category {
     }
 
     private String game_icon;
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "cate_id=" + cate_id +
+                ", game_name='" + game_name + '\'' +
+                ", short_name='" + short_name + '\'' +
+                ", game_url='" + game_url + '\'' +
+                ", game_src='" + game_src + '\'' +
+                ", game_icon='" + game_icon + '\'' +
+                '}';
+    }
 }

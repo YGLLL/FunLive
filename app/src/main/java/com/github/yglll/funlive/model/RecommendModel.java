@@ -1,6 +1,5 @@
 package com.github.yglll.funlive.model;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.github.yglll.funlive.api.Live;
@@ -9,7 +8,7 @@ import com.github.yglll.funlive.model.logic.Category;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
 import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeRecommendHotCate;
+import com.github.yglll.funlive.model.logic.HomeCate;
 import com.github.yglll.funlive.net.RetrofitClient;
 import com.github.yglll.funlive.net.transformer.DefaultTransformer;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
@@ -33,15 +32,6 @@ import rx.schedulers.Schedulers;
  * 创建时间：2018/01/19   18:59
  **/
 public class RecommendModel implements RecommendPresenterInterfaces.Model{
-    @Override
-    public Observable<String> getString(String string , Map<String,Integer> map){
-        Logger.i("Observable<String> getString");
-        return new RetrofitClient()
-                .builder(Live.class)
-                .getLiveList(string,map)
-                .subscribeOn(Schedulers.io())//在io线程发出事件
-                .observeOn(AndroidSchedulers.mainThread());//在ui线程订阅事件
-    }
 
     @Override
     public Observable<List<String>> getGameString(Map<String, Integer> map) {
@@ -78,12 +68,12 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
     }
 
     @Override
-    public Observable<List<HomeRecommendHotCate>> getHotCate() {
+    public Observable<List<HomeCate>> getHotCate() {
         return new RetrofitClient()
                 .setBaseUrl(NetWorkAPI.baseUrl_capi)
                 .builder(Live.class)
                 .getHotCate(ParamsMapUtils.getDefaultParams())
-                .compose(new DefaultTransformer<List<HomeRecommendHotCate>>());
+                .compose(new DefaultTransformer<List<HomeCate>>());
     }
 
     @Override

@@ -6,10 +6,8 @@ import com.github.yglll.funlive.model.logic.Category;
 import com.github.yglll.funlive.model.logic.HomeCarousel;
 import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeRecommendHotCate;
-import com.github.yglll.funlive.net.Response.HttpResponse;
+import com.github.yglll.funlive.model.logic.HomeCate;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
-import com.orhanobut.logger.Logger;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -28,32 +26,9 @@ import rx.Observer;
  **/
 public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
     private static final String TAG = "RecommendPresenter";
-    @Override
-    public void setString() {
-        Map<String,Integer> map=new LinkedHashMap<>();
-        map.put("offset",0);
-        map.put("limit",5);
-        mModel.getString("1",map).subscribe(new Observer<String>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(String string) {
-                mView.showString(string);
-            }
-        });
-    }
 
     @Override
     public void setCarousel() {
-        Log.i("xiancheng","id:"+android.os.Process.myTid());
         mModel.getCarousel().subscribe(new Observer<List<HomeCarousel>>() {
             @Override
             public void onCompleted() {
@@ -67,12 +42,6 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
 
             @Override
             public void onNext(List<HomeCarousel> list) {
-                Log.i("xiancheng","id:"+android.os.Process.myTid());
-                String value="";
-                for (HomeCarousel homeCarousel:list){
-                    value=value+"\n"+homeCarousel.getPic_url();
-                }
-                mView.showString(value);
                 mView.showCarousel(list);
             }
         });
@@ -120,7 +89,7 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
 
     @Override
     public void setHotCate() {
-        mModel.getHotCate().subscribe(new Observer<List<HomeRecommendHotCate>>() {
+        mModel.getHotCate().subscribe(new Observer<List<HomeCate>>() {
             @Override
             public void onCompleted() {
 
@@ -132,8 +101,8 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
             }
 
             @Override
-            public void onNext(List<HomeRecommendHotCate> homeRecommendHotCates) {
-                mView.showHotCate(homeRecommendHotCates);
+            public void onNext(List<HomeCate> homeCates) {
+                mView.showHotCate(homeCates);
             }
         });
     }

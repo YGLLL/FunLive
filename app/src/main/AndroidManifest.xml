@@ -20,5 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.VideoPlayer"></activity>
+        <activity android:name=".view.ClassifyCateActivity"></activity>
     </application>
 </manifest>
