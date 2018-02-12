@@ -2,6 +2,7 @@ package com.github.yglll.funlive.net.factory;
 
 import com.github.yglll.funlive.net.Response.HttpResponse;
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,20 +30,22 @@ public class ResponseBodyConverter<T> implements Converter<ResponseBody,T> {
     ResponseBodyConverter(Gson gson, Type type) {
         this.gson = gson;
         this.type = type;
+        Logger.i("ResponseBodyConverter(Gson gson, Type type)");
     }
 
     @Override
     public T convert(ResponseBody responseBody) throws IOException {
+        Logger.i("public T convert(ResponseBody responseBody) throws IOException");
         String value=responseBody.string();
 
         HttpResponse httpResponse=new HttpResponse();
         try {
             JSONObject response=new JSONObject(value);
             int error=response.getInt("error");
-            if(error!=0)
-            {
+            if(error!=0) {
                 httpResponse.setError(error);
                 httpResponse.setData(response.getString("data"));
+                //?
                 return (T)gson.fromJson(value,httpResponse.getClass());
             }
         } catch (JSONException e) {

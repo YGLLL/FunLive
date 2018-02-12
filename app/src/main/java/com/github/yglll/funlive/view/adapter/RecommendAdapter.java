@@ -33,6 +33,7 @@ import java.util.List;
  * 备注消息：
  * 创建时间：2018/01/18   18:40
  **/
+//todo 不用进一步封装,但需要优化代码
 public class RecommendAdapter extends RecyclerView.Adapter {
     private static final String TAG = "RecommendAdapter";
 

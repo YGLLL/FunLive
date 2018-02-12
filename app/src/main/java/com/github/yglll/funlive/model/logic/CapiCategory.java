@@ -318,4 +318,15 @@ public class CapiCategory implements Serializable {
                 ", is_childs=" + is_childs +
                 '}';
     }
+
+    public static CapiCategory valueOf(Category value){
+        CapiCategory capiCategory=new CapiCategory();
+        capiCategory.setTag_id(String.valueOf(value.getCate_id()));
+        capiCategory.setTag_name(value.getGame_name());
+        capiCategory.setShort_name(value.getShort_name());
+        capiCategory.setUrl(value.getGame_url());
+        capiCategory.setPic_url(value.getGame_src());
+        capiCategory.setIcon_url(value.getGame_icon());
+        return capiCategory;
+    }
 }

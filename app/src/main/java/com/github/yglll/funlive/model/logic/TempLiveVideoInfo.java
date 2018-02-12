@@ -10,32 +10,20 @@ package com.github.yglll.funlive.model.logic;
  * 创建时间：2018/01/20   22:27
  **/
 public class TempLiveVideoInfo {
-    private int error;
-    private Data data;
+    private String hls_url;
 
-    public int getError() {
-        return error;
+    public String getHls_url() {
+        return hls_url;
     }
 
-    public Data getData() {
-        return data;
+    public void setHls_url(String hls_url) {
+        this.hls_url = hls_url;
     }
 
-    public static class Data {
-        private int room_id;
-        private String hls_url;
-
-        public int getRoom_id() {
-            return room_id;
-        }
-
-        public String getHls_url() {
-            return hls_url;
-        }
-
-        @Override
-        public String toString() {
-            return "GsonDouyuRoom [room_id=" + room_id + ", hls_url" + hls_url + "]";
-        }
+    @Override
+    public String toString() {
+        return "TempLiveVideoInfo{" +
+                "hls_url='" + hls_url + '\'' +
+                '}';
     }
 }

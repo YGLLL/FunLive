@@ -8,13 +8,17 @@ import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.model.logic.HomeCate;
 import com.github.yglll.funlive.model.logic.RoomInfo;
+import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
 import com.github.yglll.funlive.net.Response.HttpResponse;
 
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -25,6 +29,7 @@ import static com.github.yglll.funlive.api.NetWorkAPI.getCateList;
 import static com.github.yglll.funlive.api.NetWorkAPI.getHomeFaceScoreColumn;
 import static com.github.yglll.funlive.api.NetWorkAPI.getHomeHotColumn;
 import static com.github.yglll.funlive.api.NetWorkAPI.getHomeRecommendHotCate;
+import static com.github.yglll.funlive.api.NetWorkAPI.getVideoUrl;
 import static com.github.yglll.funlive.api.NetWorkAPI.roomList;
 
 /**
@@ -67,4 +72,8 @@ public interface Live {
     //获取一个栏目所有类别
     @GET(getCate)
     Observable<HttpResponse<List<CapiCategory>>> getCapiCategory(@QueryMap Map<String, String> params);
+
+    //通过roomId获取视频播放地址
+    @GET(getVideoUrl)
+    Observable<HttpResponse<TempLiveVideoInfo>> getVideoUrl(@QueryMap Map<String, Integer> params);
 }

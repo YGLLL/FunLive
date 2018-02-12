@@ -41,4 +41,8 @@ public class NetWorkAPI {
     public static final String getCateList = "/api/v1/getColumnList";
     //获取栏目中的类别列表
     public static final String getCate = "/api/v1/getColumnDetail";
+
+    public static final String baseUrl_m="https://m.douyu.com/";
+    //通过roomId获取视频播放地址
+    public static final String getVideoUrl="html5/live";
 }

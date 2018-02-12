@@ -1,7 +1,9 @@
 package com.github.yglll.funlive.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.logic.HomeHotColumn;
 import com.github.yglll.funlive.model.logic.RoomInfo;
+import com.github.yglll.funlive.view.VideoPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,7 @@ import java.util.List;
 public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapter.Holder> {
     private List<RoomInfo> roomInfos;
     private Boolean isFaceScoreColumn;
+    private Context mContxt;
 
     public class Holder extends RecyclerView.ViewHolder {
         //        图片
@@ -52,19 +56,23 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
         }
     }
 
-    public ClassifyCateAdapter(){
+    public ClassifyCateAdapter(Context context){
+        mContxt=context;
         isFaceScoreColumn=false;
         roomInfos=new ArrayList<>();
     }
-    public ClassifyCateAdapter(Boolean bool){
+    public ClassifyCateAdapter(Context context,Boolean bool){
+        mContxt=context;
         roomInfos=new ArrayList<>();
         isFaceScoreColumn=bool;
     }
-    public ClassifyCateAdapter(List<RoomInfo> list) {
+    public ClassifyCateAdapter(Context context,List<RoomInfo> list) {
+        mContxt=context;
         isFaceScoreColumn=false;
         roomInfos=list;
     }
-    public ClassifyCateAdapter(List<RoomInfo> list,Boolean bool) {
+    public ClassifyCateAdapter(Context context,List<RoomInfo> list,Boolean bool) {
+        mContxt=context;
         roomInfos=list;
         isFaceScoreColumn=bool;
     }
@@ -74,7 +82,7 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
         return new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_recommend_view,parent,false));
     }
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
+    public void onBindViewHolder(Holder holder,final int position) {
         holder.img_item_gridview.setImageURI(Uri.parse(roomInfos.get(position).getRoom_src()));
         holder.tv_column_item_nickname.setText(roomInfos.get(position).getRoom_name());
         holder.tv_nickname.setText(roomInfos.get(position).getNickname());
@@ -85,24 +93,18 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                //                颜值栏目 竖屏播放
-                if(mHomeHotColumn.get(position).getCate_id().equals("201"))
+                //颜值栏目 竖屏播放
+                if(isFaceScoreColumn)
                 {
-                    Intent intent = new Intent(context, PhoneLiveVideoActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Room_id",mHomeHotColumn.get(position).getRoom_id());
-                    bundle.putString("Img_Path", mHomeHotColumn.get(position).getVertical_src());
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
+                    Intent intent = new Intent(mContxt, VideoPlayer.class);
+                    //bundle.putString("Img_Path", mHomeHotColumn.get(position).getVertical_src());
+                    intent.putExtra("roomId",roomInfos.get(position).getRoom_id());
+                    mContxt.startActivity(intent);
                 }else {
-                    Intent intent = new Intent(context, PcLiveVideoActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Room_id", mHomeHotColumn.get(position).getRoom_id());
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
+                    Intent intent = new Intent(mContxt, VideoPlayer.class);
+                    intent.putExtra("roomId",roomInfos.get(position).getRoom_id());
+                    mContxt.startActivity(intent);
                 }
-                */
             }
         });
     }

@@ -20,7 +20,6 @@ import rx.schedulers.Schedulers;
 public class DefaultTransformer<T>  implements Observable.Transformer<HttpResponse<T>,T>{
     @Override
     public Observable<T> call(Observable<HttpResponse<T>> httpResponseObservable) {
-        Log.i("xiancheng","DefaultTransformer id:"+android.os.Process.myTid());
         return httpResponseObservable. subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
                 .compose(ErrorTransformer.<T>getInstance())

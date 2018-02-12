@@ -113,39 +113,10 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
     @Override
     public void onBannerItemClick(BGABanner banner, SimpleDraweeView itemView, String model, int position) {
         HomeCarousel homeCarousel=homeCarouselList.get(position);
-        String str="https://m.douyu.com/html5/live?roomId="+homeCarousel.getRoom().getRoom_id();
-        Request requestPost = new Request.Builder()
-                .url(str)
-                .get()
-                .build();
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
-                .build();
-
-        client.newCall(requestPost).enqueue(new okhttp3.Callback() {
-            @Override
-            public void onFailure(okhttp3.Call call, IOException e) {
-            }
-            @Override
-            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-                String json =response.body().string().toString();
-                try {
-                    JSONObject jsonObject = new JSONObject(json);
-                    if (jsonObject.getInt("error")==0) {
-                        Gson gson = new Gson();
-                        TempLiveVideoInfo mLiveVideoInfo = gson.fromJson(json, TempLiveVideoInfo.class);
-                        Intent intent=new Intent(getActivity(),VideoPlayer.class);
-                        intent.putExtra("URL",mLiveVideoInfo.getData().getHls_url());
-                        getActivity().startActivity(intent);
-                    } else {
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        int roomId=homeCarousel.getRoom().getRoom_id();
+        Intent intent=new Intent(getActivity(),VideoPlayer.class);
+        intent.putExtra("roomId",roomId);
+        getActivity().startActivity(intent);
     }
 
     @Override

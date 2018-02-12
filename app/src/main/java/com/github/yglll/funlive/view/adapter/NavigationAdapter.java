@@ -1,5 +1,7 @@
 package com.github.yglll.funlive.view.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +11,12 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.model.logic.CapiCategory;
 import com.github.yglll.funlive.model.logic.Category;
+import com.github.yglll.funlive.view.ClassifyCateActivity;
+import com.github.yglll.funlive.view.EventBus.SelectPageViewEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,17 +53,35 @@ public class NavigationAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        View mView= LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_category,viewGroup,false);
+    public View getView(int i, View view,ViewGroup viewGroup) {
+        final Context context=viewGroup.getContext();
+        View mView= LayoutInflater.from(context).inflate(R.layout.item_category,viewGroup,false);
         SimpleDraweeView simpleDraweeView=mView.findViewById(R.id.img_item_gridview);
         TextView name=mView.findViewById(R.id.category_name);
         if(data.size()>0){
+            final Category category=data.get(i);
             if(i==7){
                 simpleDraweeView.setImageURI(Uri.parse("res://mipmap/"+R.mipmap.ic_launcher));
-                name.setText(viewGroup.getContext().getText(R.string.more));
+                name.setText(context.getText(R.string.more));
+                simpleDraweeView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SelectPageViewEvent selectPageViewEvent=new SelectPageViewEvent();
+                        selectPageViewEvent.setPageNum(1);
+                        EventBus.getDefault().post(selectPageViewEvent);
+                    }
+                });
             }else {
-                simpleDraweeView.setImageURI(Uri.parse(data.get(i).getGame_icon()));
-                name.setText(data.get(i).getGame_name());
+                simpleDraweeView.setImageURI(Uri.parse(category.getGame_icon()));
+                name.setText(category.getGame_name());
+                simpleDraweeView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent=new Intent(context, ClassifyCateActivity.class);
+                        intent.putExtra("cate", CapiCategory.valueOf(category));
+                        context.startActivity(intent);
+                    }
+                });
             }
         }
         return mView;

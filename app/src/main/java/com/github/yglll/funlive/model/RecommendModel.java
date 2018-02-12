@@ -41,7 +41,6 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
 
     @Override
     public Observable<List<HomeCarousel>> getCarousel() {
-        Log.i("xiancheng","Model id:"+android.os.Process.myTid());
         return new RetrofitClient()
                 .setBaseUrl(NetWorkAPI.baseUrl_capi)
                 .builder(Live.class)

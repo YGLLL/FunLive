@@ -48,14 +48,14 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
 
     @Override
     public void initView(Bundle bundle) {
-        capiCategory=(CapiCategory) getIntent().getSerializableExtra(ClassifyGridAdapter.CATE);
+        capiCategory=(CapiCategory) getIntent().getSerializableExtra("cate");
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refresh();
             }
         });
-        classifyCateAdapter=new ClassifyCateAdapter();
+        classifyCateAdapter=new ClassifyCateAdapter(this);
         recyclerView.setAdapter(classifyCateAdapter);
         recyclerView.setLayoutManager(new FullyGridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
     }

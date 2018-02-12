@@ -25,6 +25,7 @@ public class Category {
     private String short_name;
     private String game_url;
     private String game_src;
+    private String game_icon;
 
     public int getCate_id() {
         return cate_id;
@@ -73,8 +74,6 @@ public class Category {
     public void setGame_icon(String game_icon) {
         this.game_icon = game_icon;
     }
-
-    private String game_icon;
 
     @Override
     public String toString() {

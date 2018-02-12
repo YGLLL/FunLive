@@ -32,7 +32,6 @@ import java.util.List;
 public class ClassifyGridAdapter extends BaseAdapter {
 
     private List<CapiCategory> data;
-    public static final String CATE="cate";
 
     public ClassifyGridAdapter(){
         data=new ArrayList<>();
@@ -70,7 +69,7 @@ public class ClassifyGridAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(mContext, ClassifyCateActivity.class);
-                intent.putExtra(CATE,capiCategory);
+                intent.putExtra("cate",capiCategory);
                 mContext.startActivity(intent);
             }
         });
