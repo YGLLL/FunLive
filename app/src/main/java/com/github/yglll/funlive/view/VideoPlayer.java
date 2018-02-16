@@ -25,7 +25,7 @@ import io.vov.vitamio.widget.VideoView;
  * 创建时间：2018/01/20   22:24
  **/
 public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresenter> implements VideoPlayerInterfaces.View {
-
+    //todo 横屏+弹幕
     @BindView(R.id.vm_videoview)
     VideoView vmVideoview;
 
