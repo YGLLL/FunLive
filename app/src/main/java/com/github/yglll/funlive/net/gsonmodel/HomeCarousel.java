@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.model.logic;
+package com.github.yglll.funlive.net.gsonmodel;
 
 import java.util.List;
 

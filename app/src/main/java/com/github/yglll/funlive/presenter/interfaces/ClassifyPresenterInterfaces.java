@@ -1,9 +1,7 @@
 package com.github.yglll.funlive.presenter.interfaces;
 
-import com.github.yglll.funlive.model.logic.CapiCategory;
-import com.github.yglll.funlive.model.logic.HomeCate;
-import com.github.yglll.funlive.model.logic.Category;
-import com.github.yglll.funlive.model.logic.CateList;
+import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
+import com.github.yglll.funlive.net.gsonmodel.CateList;
 import com.github.yglll.funlive.mvpbase.BaseModel;
 import com.github.yglll.funlive.mvpbase.BasePresenter;
 import com.github.yglll.funlive.mvpbase.BaseView;

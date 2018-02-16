@@ -3,7 +3,6 @@ package com.github.yglll.funlive.view.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.model.logic.CapiCategory;
-import com.github.yglll.funlive.model.logic.HomeCate;
+import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
 import com.github.yglll.funlive.view.ClassifyCateActivity;
 import com.orhanobut.logger.Logger;
 

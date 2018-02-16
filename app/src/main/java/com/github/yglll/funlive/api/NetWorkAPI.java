@@ -5,7 +5,7 @@ package com.github.yglll.funlive.api;
  * 电话：13036804886
  * 邮箱：2369015621@qq.com
  * 版本号：1.0
- * 类描述：
+ * 类描述：API地址
  * 备注消息：
  * 创建时间：2017/12/13   7:15
  **/
@@ -41,7 +41,7 @@ public class NetWorkAPI {
     public static final String getCateList = "/api/v1/getColumnList";
     //获取栏目中的类别列表
     public static final String getCate = "/api/v1/getColumnDetail";
-
+    //**********************************************************
     public static final String baseUrl_m="https://m.douyu.com/";
     //通过roomId获取视频播放地址
     public static final String getVideoUrl="html5/live";

@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.net.Response;
+package com.github.yglll.funlive.net.response;
 
 /**
  * 作者：YGL

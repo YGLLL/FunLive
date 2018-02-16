@@ -1,6 +1,4 @@
-package com.github.yglll.funlive.net.factory;
-
-import android.util.Log;
+package com.github.yglll.funlive.net.retrofitfactory;
 
 import java.io.IOException;
 

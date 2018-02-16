@@ -1,12 +1,12 @@
 package com.github.yglll.funlive.presenter.interfaces;
 
-import com.github.yglll.funlive.model.logic.RoomInfo;
+import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
 import com.github.yglll.funlive.mvpbase.BaseModel;
 import com.github.yglll.funlive.mvpbase.BasePresenter;
 import com.github.yglll.funlive.mvpbase.BaseView;
-import com.github.yglll.funlive.net.Response.HttpResponse;
 
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 
@@ -22,13 +22,15 @@ import rx.Observable;
 public interface ClassifyCateActivityInterfaces {
     interface View extends BaseView {
         void showLiveList(List<RoomInfo> list);
+        void LoadMoreLive(List<RoomInfo> list);
     }
 
     interface Model extends BaseModel {
-        Observable<List<RoomInfo>> getLiveList(String string);
+        Observable<List<RoomInfo>> getLiveList(String string, Map<String,Integer> map);
     }
 
     abstract class Presenter extends BasePresenter<View,Model> {
         abstract public void setLiveList(String string);
+        abstract public void setMoreLive();
     }
 }

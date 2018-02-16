@@ -1,10 +1,9 @@
 package com.github.yglll.funlive.net;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.github.yglll.funlive.api.NetWorkAPI;
-import com.github.yglll.funlive.net.factory.ConverterFactory;
+import com.github.yglll.funlive.net.retrofitfactory.ConverterFactory;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -44,7 +43,8 @@ public class RetrofitClient {
 
         retrofit=new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addConverterFactory(ConverterFactory.create())//替换成<HttpResponse<>>
+                //抛出服务器约定异常
+                .addConverterFactory(ConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         return retrofit.create(service);

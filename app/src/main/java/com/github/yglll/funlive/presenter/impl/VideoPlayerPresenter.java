@@ -1,6 +1,6 @@
 package com.github.yglll.funlive.presenter.impl;
 
-import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
+import com.github.yglll.funlive.net.gsonmodel.TempLiveVideoInfo;
 import com.github.yglll.funlive.presenter.interfaces.VideoPlayerInterfaces;
 import com.orhanobut.logger.Logger;
 

@@ -4,4 +4,18 @@
     <string name="classify">分类</string>
     <string name="user">用户</string>
     <string name="more">更多</string>
+    <string name="load">正在加载</string>
+    <!--错误-->
+    <string name="error">出现错误:</string>
+    <string name="unauthorized">未授权</string>
+    <string name="forbidden">禁止访问</string>
+    <string name="not_found">服务器找不到给定的资源</string>
+    <string name="request_timeout">请求超时</string>
+    <string name="internal_server_error">服务器内部错误</string>
+    <string name="bad_gateway">错误网关</string>
+    <string name="service_unavailable">无法获得服务</string>
+    <string name="gateway_timeout">网关超时</string>
+
+    <!--提示-->
+    <string name="no_more">没有更多了哟</string>
 </resources>

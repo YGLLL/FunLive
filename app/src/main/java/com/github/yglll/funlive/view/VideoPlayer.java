@@ -1,33 +1,19 @@
 package com.github.yglll.funlive.view;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.VideoPlayerModel;
-import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
 import com.github.yglll.funlive.mvpbase.BaseActivity;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.VideoPlayerPresenter;
 import com.github.yglll.funlive.presenter.interfaces.VideoPlayerInterfaces;
-import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.vov.vitamio.MediaPlayer;
-import io.vov.vitamio.utils.Log;
 import io.vov.vitamio.widget.VideoView;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 
 /**
  * 作者：YGL

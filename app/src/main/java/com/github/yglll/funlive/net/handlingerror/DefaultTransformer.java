@@ -1,8 +1,6 @@
-package com.github.yglll.funlive.net.transformer;
+package com.github.yglll.funlive.net.handlingerror;
 
-import android.util.Log;
-
-import com.github.yglll.funlive.net.Response.HttpResponse;
+import com.github.yglll.funlive.net.response.HttpResponse;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -13,7 +11,7 @@ import rx.schedulers.Schedulers;
  * 电话：13036804886
  * 邮箱：2369015621@qq.com
  * 版本号：1.0
- * 类描述：
+ * 类描述：在新线程中拦截并处理错误
  * 备注消息：
  * 创建时间：2018/01/03   21:24
  **/

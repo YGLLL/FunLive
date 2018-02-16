@@ -1,10 +1,10 @@
 package com.github.yglll.funlive.presenter.interfaces;
 
-import com.github.yglll.funlive.model.logic.Category;
-import com.github.yglll.funlive.model.logic.HomeCarousel;
-import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
-import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeCate;
+import com.github.yglll.funlive.net.gsonmodel.Category;
+import com.github.yglll.funlive.net.gsonmodel.HomeCarousel;
+import com.github.yglll.funlive.net.gsonmodel.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeCate;
 import com.github.yglll.funlive.mvpbase.BaseModel;
 import com.github.yglll.funlive.mvpbase.BasePresenter;
 import com.github.yglll.funlive.mvpbase.BaseView;

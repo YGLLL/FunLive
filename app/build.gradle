@@ -61,4 +61,9 @@ dependencies {
     implementation 'com.zhy:autolayout:1.4.5'
     //消息
     implementation 'org.greenrobot:eventbus:3.1.1'
+    //刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
+    //Toast
+    implementation 'com.github.GrenderG:Toasty:1.2.8'
 }

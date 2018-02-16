@@ -1,6 +1,6 @@
 package com.github.yglll.funlive.presenter.interfaces;
 
-import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
+import com.github.yglll.funlive.net.gsonmodel.TempLiveVideoInfo;
 import com.github.yglll.funlive.mvpbase.BaseModel;
 import com.github.yglll.funlive.mvpbase.BasePresenter;
 import com.github.yglll.funlive.mvpbase.BaseView;

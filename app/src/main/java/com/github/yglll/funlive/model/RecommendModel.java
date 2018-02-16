@@ -1,26 +1,21 @@
 package com.github.yglll.funlive.model;
 
-import android.util.Log;
-
 import com.github.yglll.funlive.api.Live;
 import com.github.yglll.funlive.api.NetWorkAPI;
-import com.github.yglll.funlive.model.logic.Category;
-import com.github.yglll.funlive.model.logic.HomeCarousel;
-import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
-import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeCate;
+import com.github.yglll.funlive.net.gsonmodel.Category;
+import com.github.yglll.funlive.net.gsonmodel.HomeCarousel;
+import com.github.yglll.funlive.net.gsonmodel.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeCate;
 import com.github.yglll.funlive.net.RetrofitClient;
-import com.github.yglll.funlive.net.transformer.DefaultTransformer;
+import com.github.yglll.funlive.net.handlingerror.DefaultTransformer;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
 import com.github.yglll.funlive.utils.ParamsMapUtils;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * 作者：YGL
@@ -45,6 +40,7 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
                 .setBaseUrl(NetWorkAPI.baseUrl_capi)
                 .builder(Live.class)
                 .getCarousel()
+                //拦截并处理错误
                 .compose(new DefaultTransformer<List<HomeCarousel>>());//转换
     }
 
@@ -54,6 +50,7 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
                 .setBaseUrl(NetWorkAPI.baseUrl_capi)
                 .builder(Live.class)
                 .getHotColumn(ParamsMapUtils.getDefaultParams())
+                //拦截并处理错误
                 .compose(new DefaultTransformer<List<HomeHotColumn>>());
     }
 
@@ -63,6 +60,7 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
                 .setBaseUrl(NetWorkAPI.baseUrl_capi)
                 .builder(Live.class)
                 .getFaceScoreColumn(ParamsMapUtils.getHomeFaceScoreColumn(offset,limit))
+                //拦截并处理错误
                 .compose(new DefaultTransformer<List<HomeFaceScoreColumn>>());
     }
 
@@ -72,6 +70,7 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
                 .setBaseUrl(NetWorkAPI.baseUrl_capi)
                 .builder(Live.class)
                 .getHotCate(ParamsMapUtils.getDefaultParams())
+                //拦截并处理错误
                 .compose(new DefaultTransformer<List<HomeCate>>());
     }
 
@@ -80,6 +79,7 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
         return new RetrofitClient()
                 .builder(Live.class)
                 .getCategory()
+                //拦截并处理错误
                 .compose(new DefaultTransformer<List<Category>>());
     }
 }

@@ -2,12 +2,10 @@ package com.github.yglll.funlive.model;
 
 import com.github.yglll.funlive.api.Live;
 import com.github.yglll.funlive.api.NetWorkAPI;
-import com.github.yglll.funlive.model.logic.CapiCategory;
-import com.github.yglll.funlive.model.logic.HomeCate;
-import com.github.yglll.funlive.model.logic.CateList;
-import com.github.yglll.funlive.model.logic.Category;
+import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
+import com.github.yglll.funlive.net.gsonmodel.CateList;
 import com.github.yglll.funlive.net.RetrofitClient;
-import com.github.yglll.funlive.net.transformer.DefaultTransformer;
+import com.github.yglll.funlive.net.handlingerror.DefaultTransformer;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyPresenterInterfaces;
 import com.github.yglll.funlive.utils.ParamsMapUtils;
 
@@ -31,6 +29,7 @@ public class ClassifyModel implements ClassifyPresenterInterfaces.Model {
                 .setBaseUrl(NetWorkAPI.baseUrl_capi)
                 .builder(Live.class)
                 .getCateList(ParamsMapUtils.getDefaultParams())
+                //拦截并处理错误
                 .compose(new DefaultTransformer<List<CateList>>());
     }
 
@@ -40,6 +39,7 @@ public class ClassifyModel implements ClassifyPresenterInterfaces.Model {
                 .setBaseUrl(NetWorkAPI.baseUrl_capi)
                 .builder(Live.class)
                 .getCapiCategory(ParamsMapUtils.getLiveOtherTwoColumn(mCloumnName))
+                //拦截并处理错误
                 .compose(new DefaultTransformer<List<CapiCategory>>());
     }
 }

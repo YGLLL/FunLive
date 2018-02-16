@@ -1,8 +1,6 @@
-package com.github.yglll.funlive.net.transformer;
+package com.github.yglll.funlive.net.handlingerror;
 
-import android.util.Log;
-
-import com.github.yglll.funlive.net.Response.HttpResponse;
+import com.github.yglll.funlive.net.response.HttpResponse;
 
 import rx.Observable;
 import rx.functions.Func1;
@@ -12,7 +10,7 @@ import rx.functions.Func1;
  * 电话：13036804886
  * 邮箱：2369015621@qq.com
  * 版本号：1.0
- * 类描述：
+ * 类描述：拦截并处理错误
  * 备注消息：
  * 创建时间：2018/01/03   21:25
  **/
@@ -57,9 +55,9 @@ public class ErrorTransformer<T> implements Observable.Transformer<HttpResponse<
         }).onErrorResumeNext(new Func1<Throwable, Observable<? extends T>>() {
             @Override
             public Observable<? extends T> call(Throwable throwable) {
-                throwable.printStackTrace();
-                //return Observable.error(ExceptionHandle.handleException(throwable));
-                return null;
+                //throwable.printStackTrace();
+                //return null;
+                return Observable.error(ExceptionEngine.handleException(throwable));
             }
         });
     }

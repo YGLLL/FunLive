@@ -1,6 +1,8 @@
 package com.github.yglll.funlive.utils;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,6 +18,37 @@ import java.util.UUID;
 public class ParamsMapUtils extends BaseParamsMapUtil {
 
     private static Map<String, String> mapparam;
+
+    //默认baseApi参数
+    public static Map<String, Integer> getBaseApiDefaultParams() {
+        return getBaseApiDefaultParams(0,12);
+    }
+    public static Map<String, Integer> getBaseApiDefaultParams(int offset,int limit) {
+        Map<String, Integer> map = new LinkedHashMap<>();
+        map.put("offset", offset);
+        map.put("limit", limit);
+        return map;
+    }
+    //默认baseApi加载更多参数
+    public static Map<String, Integer> getBaseApiLoadMoreParams(Map<String, Integer> map) {
+        int offsetVal=0;
+        int limitVal=0;
+        Iterator iter = map.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
+            String key =(String) entry.getKey();
+            if (key.equals("offset")){
+                offsetVal=(int) entry.getValue();
+            }
+            if (key.equals("limit")){
+                limitVal=(int) entry.getValue();
+            }
+        }
+        Map<String, Integer> mMap = new LinkedHashMap<>();
+        map.put("offset", (offsetVal+limitVal));
+        map.put("limit", limitVal);
+        return mMap;
+    }
 
     //默认参数
     public static Map<String, String> getDefaultParams() {

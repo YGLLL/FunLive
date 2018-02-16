@@ -2,16 +2,14 @@ package com.github.yglll.funlive.presenter.impl;
 
 import android.util.Log;
 
-import com.github.yglll.funlive.model.logic.Category;
-import com.github.yglll.funlive.model.logic.HomeCarousel;
-import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
-import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeCate;
+import com.github.yglll.funlive.net.gsonmodel.Category;
+import com.github.yglll.funlive.net.gsonmodel.HomeCarousel;
+import com.github.yglll.funlive.net.gsonmodel.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeCate;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import rx.Observer;
 

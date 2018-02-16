@@ -14,9 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
-import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeCate;
+import com.github.yglll.funlive.net.gsonmodel.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeCate;
 import com.github.yglll.funlive.utils.FullyGridLayoutManager;
 import com.github.yglll.funlive.utils.Utils;
 

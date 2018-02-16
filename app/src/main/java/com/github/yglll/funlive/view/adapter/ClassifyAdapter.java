@@ -5,9 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.github.yglll.funlive.model.logic.CateList;
+import com.github.yglll.funlive.net.gsonmodel.CateList;
 import com.github.yglll.funlive.view.ClassifyChildrenFragment;
-import com.github.yglll.funlive.view.UserFragment;
 
 import java.util.ArrayList;
 import java.util.List;

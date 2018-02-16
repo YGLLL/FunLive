@@ -1,24 +1,21 @@
 package com.github.yglll.funlive.api;
 
-import com.github.yglll.funlive.model.logic.CapiCategory;
-import com.github.yglll.funlive.model.logic.CateList;
-import com.github.yglll.funlive.model.logic.Category;
-import com.github.yglll.funlive.model.logic.HomeCarousel;
-import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
-import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeCate;
-import com.github.yglll.funlive.model.logic.RoomInfo;
-import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
-import com.github.yglll.funlive.net.Response.HttpResponse;
+import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
+import com.github.yglll.funlive.net.gsonmodel.CateList;
+import com.github.yglll.funlive.net.gsonmodel.Category;
+import com.github.yglll.funlive.net.gsonmodel.HomeCarousel;
+import com.github.yglll.funlive.net.gsonmodel.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeCate;
+import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
+import com.github.yglll.funlive.net.gsonmodel.TempLiveVideoInfo;
+import com.github.yglll.funlive.net.response.HttpResponse;
 
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
@@ -37,7 +34,7 @@ import static com.github.yglll.funlive.api.NetWorkAPI.roomList;
  * 电话：13036804886
  * 邮箱：2369015621@qq.com
  * 版本号：1.0
- * 类描述：
+ * 类描述：供retrofit2使用
  * 备注消息：
  * 创建时间：2017/12/21   13:47
  **/

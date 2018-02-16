@@ -1,8 +1,11 @@
-package com.github.yglll.funlive.net.factory;
+package com.github.yglll.funlive.net.retrofitfactory;
 
-import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
+import com.github.yglll.funlive.net.response.HttpResponse;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -12,7 +15,6 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import com.github.yglll.funlive.net.Response.HttpResponse;
 
 /**
  * 作者：YGL
@@ -42,7 +44,7 @@ public class ConverterFactory extends Converter.Factory {
         return new RequestBodyConverter<>();
     }
     @Override
-    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+    public Converter<ResponseBody, ?> responseBodyConverter(final Type type, Annotation[] annotations, Retrofit retrofit) {
         //com.github.yglll.funlive.net.Response.HttpResponse<java.util.List<com.github.yglll.funlive.model.logic.HomeCarousel>>
         return new ResponseBodyConverter<>(gson,type);
     }

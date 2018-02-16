@@ -1,29 +1,16 @@
 package com.github.yglll.funlive.model;
 
 import com.github.yglll.funlive.api.Live;
-import com.github.yglll.funlive.api.NetWorkAPI;
-import com.github.yglll.funlive.model.logic.HomeCarousel;
-import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
-import com.github.yglll.funlive.net.Response.HttpResponse;
+import com.github.yglll.funlive.net.gsonmodel.TempLiveVideoInfo;
 import com.github.yglll.funlive.net.RetrofitClient;
-import com.github.yglll.funlive.net.transformer.DefaultTransformer;
+import com.github.yglll.funlive.net.handlingerror.DefaultTransformer;
 import com.github.yglll.funlive.presenter.interfaces.VideoPlayerInterfaces;
-import com.orhanobut.logger.Logger;
 
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 import rx.Observable;
-import rx.Observer;
 
-import static com.github.yglll.funlive.api.NetWorkAPI.baseUrl_capi;
 import static com.github.yglll.funlive.api.NetWorkAPI.baseUrl_m;
 
 /**
@@ -45,6 +32,7 @@ public class VideoPlayerModel implements VideoPlayerInterfaces.Model {
                 .builder(Live.class)
                 .getVideoUrl(map)
                 //必须compose，不然会出现线程错误
+                //拦截并处理错误
                 .compose(new DefaultTransformer<TempLiveVideoInfo>());
     }
 }

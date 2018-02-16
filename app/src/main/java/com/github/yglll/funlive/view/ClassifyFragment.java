@@ -6,14 +6,13 @@ import android.support.v4.view.ViewPager;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.ClassifyModel;
-import com.github.yglll.funlive.model.logic.CapiCategory;
-import com.github.yglll.funlive.model.logic.CateList;
+import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
+import com.github.yglll.funlive.net.gsonmodel.CateList;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.ClassifyPresenter;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyPresenterInterfaces;
 import com.github.yglll.funlive.view.adapter.ClassifyAdapter;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 

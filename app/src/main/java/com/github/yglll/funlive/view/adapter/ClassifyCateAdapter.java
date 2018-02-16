@@ -13,8 +13,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.RoomInfo;
+import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
 import com.github.yglll.funlive.view.VideoPlayer;
 
 import java.util.ArrayList;
@@ -116,6 +115,11 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
 
     public void setRoomInfos(List<RoomInfo> roomInfos) {
         this.roomInfos = roomInfos;
+        notifyDataSetChanged();
+    }
+
+    public void setLoadMoreData(List<RoomInfo> roomInfos){
+        this.roomInfos.addAll(roomInfos);
         notifyDataSetChanged();
     }
 }

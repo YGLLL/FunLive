@@ -1,6 +1,5 @@
 package com.github.yglll.funlive.view.adapter;
 
-import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +9,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeFaceScoreColumn;
 
 import java.util.ArrayList;
 import java.util.List;

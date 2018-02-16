@@ -1,9 +1,7 @@
 package com.github.yglll.funlive.view.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.model.logic.HomeHotColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
 
 import java.util.List;
 

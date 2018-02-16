@@ -5,22 +5,28 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.ClassifyCateActivityModel;
-import com.github.yglll.funlive.model.logic.CapiCategory;
-import com.github.yglll.funlive.model.logic.RoomInfo;
 import com.github.yglll.funlive.mvpbase.BaseActivity;
 import com.github.yglll.funlive.mvpbase.BaseView;
+import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
+import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.ClassifyCateActivityPresenter;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyCateActivityInterfaces;
 import com.github.yglll.funlive.utils.FullyGridLayoutManager;
 import com.github.yglll.funlive.view.adapter.ClassifyCateAdapter;
 import com.github.yglll.funlive.view.adapter.ClassifyGridAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
 import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
 
 /**
  * 作者：YGL
@@ -33,8 +39,8 @@ import butterknife.BindView;
  **/
 public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel,ClassifyCateActivityPresenter> implements ClassifyCateActivityInterfaces.View {
 
-    @BindView(R.id.swipe_refresh_layout)
-    SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.refresh_layout)
+    SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -43,18 +49,30 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
 
     @Override
     public void showErrorWithStatus(String msg) {
-
+        smartRefreshLayout.finishLoadMore();
+        smartRefreshLayout.finishRefresh();
+        Toasty.info(this,msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void initView(Bundle bundle) {
         capiCategory=(CapiCategory) getIntent().getSerializableExtra("cate");
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(RefreshLayout refreshlayout) {
                 refresh();
+                //refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
             }
         });
+        smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                mPresenter.setMoreLive();
+                //refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+            }
+        });
+
         classifyCateAdapter=new ClassifyCateAdapter(this);
         recyclerView.setAdapter(classifyCateAdapter);
         recyclerView.setLayoutManager(new FullyGridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
@@ -87,6 +105,13 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
 
     @Override
     public void showLiveList(List<RoomInfo> list) {
+        smartRefreshLayout.finishRefresh();
         classifyCateAdapter.setRoomInfos(list);
+    }
+
+    @Override
+    public void LoadMoreLive(List<RoomInfo> list) {
+        smartRefreshLayout.finishLoadMore();
+        classifyCateAdapter.setLoadMoreData(list);
     }
 }

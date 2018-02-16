@@ -11,12 +11,11 @@ import android.widget.GridView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.RecommendModel;
-import com.github.yglll.funlive.model.logic.Category;
-import com.github.yglll.funlive.model.logic.HomeCarousel;
-import com.github.yglll.funlive.model.logic.HomeFaceScoreColumn;
-import com.github.yglll.funlive.model.logic.HomeHotColumn;
-import com.github.yglll.funlive.model.logic.HomeCate;
-import com.github.yglll.funlive.model.logic.TempLiveVideoInfo;
+import com.github.yglll.funlive.net.gsonmodel.Category;
+import com.github.yglll.funlive.net.gsonmodel.HomeCarousel;
+import com.github.yglll.funlive.net.gsonmodel.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
+import com.github.yglll.funlive.net.gsonmodel.HomeCate;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.RecommendPresenter;
@@ -24,20 +23,12 @@ import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterface
 import com.github.yglll.funlive.view.adapter.HomeCarouselAdapter;
 import com.github.yglll.funlive.view.adapter.NavigationAdapter;
 import com.github.yglll.funlive.view.adapter.RecommendAdapter;
-import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import cn.bingoogolapple.bgabanner.BGABanner;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 
 /**
  * 作者：YGL

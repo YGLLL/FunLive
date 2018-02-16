@@ -1,25 +1,19 @@
 package com.github.yglll.funlive.view;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.ClassifyModel;
-import com.github.yglll.funlive.model.logic.CapiCategory;
-import com.github.yglll.funlive.model.logic.CateList;
+import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
+import com.github.yglll.funlive.net.gsonmodel.CateList;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.ClassifyPresenter;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyPresenterInterfaces;
 import com.github.yglll.funlive.view.adapter.ClassifyAdapter;
 import com.github.yglll.funlive.view.adapter.ClassifyGridAdapter;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
