@@ -3,14 +3,14 @@
     <item
         android:id="@+id/recommend"
         android:checked="true"
-        android:icon="@mipmap/home_selected"
+        android:icon="@drawable/vector_drawable_recommend"
         android:title="@string/recommend" />
     <item
         android:id="@+id/classify"
-        android:icon="@mipmap/follow_selected"
+        android:icon="@drawable/vector_drawable_classify"
         android:title="@string/classify" />
     <item
         android:id="@+id/user"
-        android:icon="@mipmap/user_selected"
+        android:icon="@drawable/vector_drawable_user"
         android:title="@string/user" />
 </menu>

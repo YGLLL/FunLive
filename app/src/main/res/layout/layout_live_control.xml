@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--顶部控制栏-->
+    <RelativeLayout
+        android:id="@+id/control_top"
+        android:layout_width="match_parent"
+        android:layout_height="45.0dp"
+        android:background="@color/grayDark">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20.0dp"
+            android:layout_height="20.0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8.0dp"
+            android:src="@drawable/vector_drawable_back" />
+
+        <TextView
+            android:id="@+id/tv_live_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10.0dp"
+            android:layout_toRightOf="@id/iv_back"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/iv_live_share"
+            android:layout_width="20.0dp"
+            android:layout_height="20.0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25.0dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/vector_drawable_share" />
+
+        <ImageView
+            android:id="@+id/iv_live_follow"
+            android:layout_width="20.0dp"
+            android:layout_height="20.0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25.0dp"
+            android:layout_toLeftOf="@id/iv_live_share"
+            android:src="@drawable/vector_drawable_follow" />
+
+
+    </RelativeLayout>
+
+    <!--底部控制栏-->
+    <RelativeLayout
+        android:id="@+id/control_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="45.0dp"
+        android:layout_gravity="bottom"
+        android:background="@color/grayDark">
+
+        <ImageView
+            android:id="@+id/iv_live_play"
+            android:layout_width="30.0dp"
+            android:layout_height="30.0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15.0dp"
+            android:src="@drawable/vector_drawable_play" />
+
+        <ImageView
+            android:id="@+id/iv_live_refresh"
+            android:layout_width="30.0dp"
+            android:layout_height="30.0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15.0dp"
+            android:layout_toRightOf="@id/iv_live_play"
+            android:src="@drawable/vector_drawable_refresh" />
+
+        <ImageView
+            android:id="@+id/im_danmu_control"
+            android:layout_width="30.0dp"
+            android:layout_height="30.0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15.0dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/vector_drawable_danmu" />
+
+    </RelativeLayout>
+
+    <!--loading-->
+    <FrameLayout
+        android:id="@+id/fl_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#e0000000">
+            <ImageView
+                android:id="@+id/im_logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/vector_drawable_logo"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:layout_alignLeft="@+id/im_logo"
+                android:layout_below="@+id/im_logo"
+                android:id="@+id/tv_loading_buffer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35.0dp"
+                android:layout_marginTop="13.0dp"
+                android:text="直播视频连接中..."
+                android:textColor="#ffffff"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </FrameLayout>
+    <!--中部控制 亮度 声音-->
+    <RelativeLayout
+        android:id="@+id/control_center"
+        android:layout_width="110.0dp"
+        android:layout_height="110.0dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_launcher"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_control_img"
+            android:layout_width="40.0dp"
+            android:layout_height="40.0dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/vector_drawable_light" />
+
+        <TextView
+            android:id="@+id/tv_control_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/iv_control_img"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="7.0dp"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_control_img"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:text="12%"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</FrameLayout>

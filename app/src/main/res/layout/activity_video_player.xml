@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,10 +7,17 @@
     android:layout_height="match_parent">
     <io.vov.vitamio.widget.VideoView
         android:id="@+id/vm_videoview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"/>
-</android.support.constraint.ConstraintLayout>
+    <!--弹幕-->
+    <master.flame.danmaku.ui.widget.DanmakuView
+        android:id="@+id/danmakuView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!--控制层-->
+    <include layout="@layout/layout_live_control" />
+</FrameLayout>

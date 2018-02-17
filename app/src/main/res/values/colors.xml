@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/green500</color>
+    <color name="colorPrimaryDark">@color/greenDark</color>
+    <color name="colorAccent">@color/orangeA200</color>
 
     <color name="selector_item_color">#FF4081</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#c6c6c6</color>
+    <color name="gray2">#888888</color>
+    <color name="grayDark">#333333</color>
+
+    <!--主题色-->
+    <color name="green500">#4CAF50</color>
+    <color name="greenDark">#087f23</color>
+    <color name="greenLight">#80e27e</color>
+    <color name="orangeA200">#FFAB40</color>
 </resources>

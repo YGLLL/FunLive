@@ -34,7 +34,7 @@ dependencies {
     implementation 'io.reactivex:rxjava:1.2.0'
     implementation 'io.reactivex:rxandroid:1.2.1'
 
-    //    轮播图
+    //轮播图
     implementation 'cn.bingoogolapple:bga-banner:2.1.5@aar'
     implementation 'com.android.support:support-v4:26.1.0'
 
@@ -57,7 +57,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     //TabLayout
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar'
-    //     适配
+    //适配
     implementation 'com.zhy:autolayout:1.4.5'
     //消息
     implementation 'org.greenrobot:eventbus:3.1.1'
@@ -66,4 +66,6 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
     //Toast
     implementation 'com.github.GrenderG:Toasty:1.2.8'
+    //弹幕
+    implementation 'com.github.ctiao:DanmakuFlameMaster:0.9.21'
 }
