@@ -18,6 +18,7 @@ import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
 import com.github.yglll.funlive.net.gsonmodel.HomeCate;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
+import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.RecommendPresenter;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
 import com.github.yglll.funlive.view.adapter.HomeCarouselAdapter;
@@ -104,10 +105,16 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
     @Override
     public void onBannerItemClick(BGABanner banner, SimpleDraweeView itemView, String model, int position) {
         HomeCarousel homeCarousel=homeCarouselList.get(position);
-        int roomId=homeCarousel.getRoom().getRoom_id();
         Intent intent=new Intent(getActivity(),VideoPlayer.class);
-        intent.putExtra("roomId",roomId);
-        getActivity().startActivity(intent);
+        intent.putExtra("roomInfo", RoomInfo.valueOf(homeCarousel.getRoom()));
+        if(homeCarousel.getRoom().getCate_id().equals("201")){
+            //竖屏播放
+            intent.putExtra("screenMode",true);
+            getActivity().startActivity(intent);
+        }else {
+            //横屏播放
+            getActivity().startActivity(intent);
+        }
     }
 
     @Override

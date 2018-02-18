@@ -34,7 +34,7 @@ import static com.github.yglll.funlive.api.NetWorkAPI.roomList;
  * 电话：13036804886
  * 邮箱：2369015621@qq.com
  * 版本号：1.0
- * 类描述：供retrofit2使用
+ * 类描述：使用retrofit2访问API
  * 备注消息：
  * 创建时间：2017/12/21   13:47
  **/

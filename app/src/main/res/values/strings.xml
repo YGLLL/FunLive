@@ -5,6 +5,7 @@
     <string name="user">用户</string>
     <string name="more">更多</string>
     <string name="load">正在加载</string>
+    <string name="video_player_share">我正在看这个直播，看起来不错：\n</string>
     <!--错误-->
     <string name="error">出现错误:</string>
     <string name="unauthorized">未授权</string>
@@ -18,4 +19,7 @@
 
     <!--提示-->
     <string name="no_more">没有更多了哟</string>
+    <string name="video_player_wait">连接中...</string>
+    <string name="buffer1">正在缓冲...</string>
+    <string name="buffer2">%</string>
 </resources>

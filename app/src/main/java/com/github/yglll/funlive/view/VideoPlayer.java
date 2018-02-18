@@ -1,6 +1,9 @@
 package com.github.yglll.funlive.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,9 +26,9 @@ import com.github.yglll.funlive.danmu.utils.DanmuProcess;
 import com.github.yglll.funlive.model.VideoPlayerModel;
 import com.github.yglll.funlive.mvpbase.BaseActivity;
 import com.github.yglll.funlive.mvpbase.BaseView;
+import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.VideoPlayerPresenter;
 import com.github.yglll.funlive.presenter.interfaces.VideoPlayerInterfaces;
-import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,7 +44,7 @@ import master.flame.danmaku.ui.widget.DanmakuView;
  * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
- * 备注消息：
+ * 备注消息：使用SharedPreferences保持亮度
  * 创建时间：2018/01/20   22:24
  **/
 public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresenter> implements VideoPlayerInterfaces.View, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnErrorListener {
@@ -50,10 +53,6 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     VideoView vmVideoview;
     @BindView(R.id.danmakuView)
     DanmakuView danmakuView;
-
-    private DanmuProcess mDanmuProcess;
-    private int roomId;
-
     @BindView(R.id.fl_loading)
     FrameLayout flLoading;
     @BindView(R.id.iv_back)
@@ -86,6 +85,9 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     ImageView imDanmuControl;
     @BindView(R.id.tv_loading_buffer)
     TextView tvLoadingBuffer;
+
+    private DanmuProcess mDanmuProcess;
+    private RoomInfo roomInfo;
     private int mScreenWidth = 0;//屏幕宽度
     private boolean mIsFullScreen = true;//是否为全屏
     private int mShowVolume;//声音
@@ -94,13 +96,10 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     private AudioManager mAudioManager;
     private GestureDetector mGestureDetector;
     private GestureDetector.SimpleOnGestureListener mSimpleOnGestureListener;
-    /**
-     * 声音
-     */
+
+    //声音
     public final static int ADD_FLAG = 1;
-    /**
-     * 亮度
-     */
+    //亮度
     public final static int SUB_FLAG = -1;
 
     public static final int HIDE_CONTROL_BAR = 0x02;//隐藏控制条
@@ -110,6 +109,11 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
 
     //    弹幕控制开关 默认打开状态
     private boolean mDanmuControlFalg = true;
+
+    //屏幕状态横屏or竖屏
+    private boolean screenMode=false;
+    //亮度键
+    private static final String LIGHTKEY="lightKey";
 
     private Handler mHandler = new Handler() {
         @Override
@@ -135,6 +139,15 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
 
     @Override
     protected int getLayoutId() {
+        screenMode=getIntent().getBooleanExtra("screenMode",false);
+        //横屏or竖屏
+        if(screenMode){
+            //竖屏
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }else {
+            //横屏
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
         requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
@@ -144,15 +157,21 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
 
     @Override
     public void initView(Bundle bundle) {
-        //getSupportActionBar().hide();
-        roomId=getIntent().getIntExtra("roomId",-1);
+        roomInfo=(RoomInfo) getIntent().getSerializableExtra("roomInfo");
+        if(roomInfo==null){
+            return;
+        }
+
+        tvLiveNickname.setText(roomInfo.getRoom_name());
 
         vmVideoview.setKeepScreenOn(true);
-        mPresenter.setVideoUrl(roomId);
+        mPresenter.setVideoUrl(roomInfo.getRoom_id());
+
         //获取屏幕宽度
         Pair<Integer, Integer> screenPair = ScreenResolution.getResolution(this);
         mScreenWidth = screenPair.first;
-        initDanMu(roomId);
+
+        initDanMu(roomInfo.getRoom_id());
         initVolumeWithLight();
         addTouchListener();
         vmVideoview.setVideoLayout(VideoView.VIDEO_LAYOUT_STRETCH, 0);
@@ -166,6 +185,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     }
 
     private void initDanMu(int room_id) {
+        imDanmuControl.setImageResource(R.drawable.vector_drawable_danmu_light);
         mDanmuProcess = new DanmuProcess(this, danmakuView, room_id);
         mDanmuProcess.start();
     }
@@ -177,12 +197,11 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mMaxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         mShowVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC) * 100 / mMaxVolume;
-        mShowLightness = getScreenBrightness();
+        mShowLightness=getLightForSP();
+        setLightness(mShowLightness);
     }
 
-    /**
-     * 获得当前屏幕亮度值 0--255
-     */
+    //获得当前屏幕亮度值 0--255
     private int getScreenBrightness() {
         int screenBrightness = 255;
         try {
@@ -281,7 +300,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
             mShowVolume = 0;
         }
         tvControlName.setText("音量");
-        ivControlImg.setImageResource(R.drawable.ic_launcher);
+        ivControlImg.setImageResource(R.drawable.vector_drawable_volume);
         tvControl.setText(mShowVolume + "%");
         int tagVolume = mShowVolume * mMaxVolume / 100;
         //tagVolume:音量绝对值
@@ -302,7 +321,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
             mShowLightness = 0;
         }
         tvControlName.setText("亮度");
-        ivControlImg.setImageResource(R.drawable.ic_launcher);
+        ivControlImg.setImageResource(R.drawable.vector_drawable_light);
         tvControl.setText(mShowLightness * 100 / 255 + "%");
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.screenBrightness = mShowLightness / 255f;
@@ -311,6 +330,17 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
         mHandler.removeMessages(SHOW_CENTER_CONTROL);
         controlCenter.setVisibility(View.VISIBLE);
         mHandler.sendEmptyMessageDelayed(SHOW_CENTER_CONTROL, SHOW_CONTROL_TIME);
+    }
+    //设置亮度
+    private void setLightness(int flag) {
+        if (mShowLightness > 255) {
+            mShowLightness = 255;
+        } else if (mShowLightness <= 0) {
+            mShowLightness = 0;
+        }
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.screenBrightness = flag / 255f;
+        getWindow().setAttributes(lp);
     }
 
     /**
@@ -363,8 +393,9 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
                 public void onPrepared(MediaPlayer mediaPlayer) {
                     // optional need Vitamio 4.0
                     mediaPlayer.setPlaybackSpeed(1.0f);
-                    vmVideoview.start();
-
+                    flLoading.setVisibility(View.GONE);
+                    ivLivePlay.setImageResource(R.drawable.vector_drawable_suspended);
+                    mHandler.sendEmptyMessageDelayed(HIDE_CONTROL_BAR, HIDE_TIME);
                 }
             });
         }
@@ -379,7 +410,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
             if (vmVideoview.isPlaying())
                 vmVideoview.pause();
             if (tvLoadingBuffer != null) {
-                tvLoadingBuffer.setText("直播已缓冲" + percent + "%...");
+                tvLoadingBuffer.setText(getResources().getString(R.string.buffer1) + percent + getResources().getString(R.string.buffer2));
             }
         }
     }
@@ -399,16 +430,16 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
                 if (vmVideoview.isPlaying()) {
                     vmVideoview.pause();
                 }
-                ivLivePlay.setImageResource(R.drawable.ic_launcher);
+                ivLivePlay.setImageResource(R.drawable.vector_drawable_play);
                 mHandler.removeMessages(HIDE_CONTROL_BAR);
                 showControlBar();
                 break;
-//            完成缓冲
+            //完成缓冲
             case MediaPlayer.MEDIA_INFO_BUFFERING_END:
                 flLoading.setVisibility(View.GONE);
                 if (!vmVideoview.isPlaying())
                     vmVideoview.start();
-                ivLivePlay.setImageResource(R.drawable.ic_launcher);
+                ivLivePlay.setImageResource(R.drawable.vector_drawable_suspended);
                 mHandler.sendEmptyMessageDelayed(HIDE_CONTROL_BAR, HIDE_TIME);
                 break;
             case MediaPlayer.MEDIA_INFO_DOWNLOAD_RATE_CHANGED:
@@ -433,49 +464,52 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     public void ivLivePlay() {
         if (vmVideoview.isPlaying()) {
             vmVideoview.pause();
-            ivLivePlay.setImageResource(R.drawable.ic_launcher);
+            ivLivePlay.setImageResource(R.drawable.vector_drawable_play);
             mHandler.removeMessages(HIDE_CONTROL_BAR);
             showControlBar();
         } else {
             vmVideoview.start();
-            ivLivePlay.setImageResource(R.drawable.ic_launcher);
+            ivLivePlay.setImageResource(R.drawable.vector_drawable_suspended);
             mHandler.sendEmptyMessageDelayed(HIDE_CONTROL_BAR, HIDE_TIME);
         }
     }
 
-    /**
-     * 控制弹幕 开关
-     */
+    //控制弹幕开关
     @OnClick(R.id.im_danmu_control)
     public void danMuControl() {
         if (mDanmuControlFalg) {
-            /**
-             *  隐藏弹幕
-             *
-             */
+            //隐藏弹幕
             danmakuView.hide();
-            imDanmuControl.setImageResource(R.drawable.ic_launcher);
+            imDanmuControl.setImageResource(R.drawable.vector_drawable_danmu);
             mDanmuControlFalg = false;
         } else {
-//          开启弹幕
+            //开启弹幕
             danmakuView.show();
-            imDanmuControl.setImageResource(R.drawable.ic_launcher);
+            imDanmuControl.setImageResource(R.drawable.vector_drawable_danmu_light);
             mDanmuControlFalg = true;
         }
     }
 
-    /**
-     * 刷新
-     */
+    //刷新
     @OnClick(R.id.iv_live_refresh)
     public void ivLiveRefresh() {
-        mPresenter.setVideoUrl(roomId);
+        mPresenter.setVideoUrl(roomInfo.getRoom_id());
+    }
+
+    //分享
+    @OnClick(R.id.iv_live_share)
+    public void share(){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT,getResources().getString(R.string.video_player_share)+roomInfo.getUrl());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//为Activity新建一个任务栈
+        startActivity(intent);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        mPresenter.setVideoUrl(roomId);
+        mPresenter.setVideoUrl(roomInfo.getRoom_id());
         if (vmVideoview != null) {
             vmVideoview.start();
 
@@ -499,8 +533,10 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
 
     @Override
     protected void onDestroy() {
+        //保存亮度
+        setLightForSP(mShowLightness);
         if (vmVideoview != null) {
-            //        释放资源
+            //释放资源
             vmVideoview.stopPlayback();
         }
         mDanmuProcess.finish();
@@ -510,5 +546,16 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
             danmakuView.clear();
         }
         super.onDestroy();
+    }
+
+    private int getLightForSP(){
+        SharedPreferences sharedPreferences=getPreferences(Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(LIGHTKEY,-1);
+    }
+    private void setLightForSP(int light){
+        SharedPreferences sharedPreferences=getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putInt(LIGHTKEY,light);
+        editor.apply();
     }
 }

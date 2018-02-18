@@ -57,6 +57,9 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
     @Override
     public void initView(Bundle bundle) {
         capiCategory=(CapiCategory) getIntent().getSerializableExtra("cate");
+        if (capiCategory==null){
+            return;
+        }
 
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -73,7 +76,12 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
             }
         });
 
-        classifyCateAdapter=new ClassifyCateAdapter(this);
+        if(capiCategory.getTag_id().equals("201")){
+            //颜值栏目
+            classifyCateAdapter=new ClassifyCateAdapter(this,true);
+        }else {
+            classifyCateAdapter=new ClassifyCateAdapter(this);
+        }
         recyclerView.setAdapter(classifyCateAdapter);
         recyclerView.setLayoutManager(new FullyGridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
     }

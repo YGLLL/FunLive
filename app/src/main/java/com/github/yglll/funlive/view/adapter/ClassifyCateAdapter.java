@@ -92,16 +92,13 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //颜值栏目 竖屏播放
-                if(isFaceScoreColumn)
-                {
-                    Intent intent = new Intent(mContxt, VideoPlayer.class);
-                    //bundle.putString("Img_Path", mHomeHotColumn.get(position).getVertical_src());
-                    intent.putExtra("roomId",roomInfos.get(position).getRoom_id());
+                Intent intent = new Intent(mContxt, VideoPlayer.class);
+                intent.putExtra("roomInfo",roomInfos.get(position));
+                if(isFaceScoreColumn) {
+                    //颜值栏目 竖屏播放
+                    intent.putExtra("screenMode",true);
                     mContxt.startActivity(intent);
                 }else {
-                    Intent intent = new Intent(mContxt, VideoPlayer.class);
-                    intent.putExtra("roomId",roomInfos.get(position).getRoom_id());
                     mContxt.startActivity(intent);
                 }
             }

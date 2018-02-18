@@ -1,5 +1,7 @@
 package com.github.yglll.funlive.net.gsonmodel;
 
+import java.io.Serializable;
+
 /**
  * 作者：YGL
  * 电话：13036804886
@@ -9,7 +11,7 @@ package com.github.yglll.funlive.net.gsonmodel;
  * 备注消息：
  * 创建时间：2018/02/08   22:59
  **/
-public class RoomInfo {
+public class RoomInfo implements Serializable {
     /*
     * "room_id": 300401,
       "room_src": "https://rpic.douyucdn.cn/amrpic-180208/300401_2255.jpg",
@@ -105,5 +107,18 @@ public class RoomInfo {
                 ", nickname='" + nickname + '\'' +
                 ", url='" + url + '\'' +
                 '}';
+    }
+
+    public static RoomInfo valueOf(HomeCarousel.TheRoom theRoom){
+        RoomInfo roomInfo=new RoomInfo();
+        roomInfo.setRoom_id(theRoom.getRoom_id());
+        roomInfo.setRoom_src(theRoom.getRoom_src());
+        roomInfo.setRoom_name(theRoom.getRoom_name());
+        roomInfo.setOwner_uid(theRoom.getOwner_uid());
+        roomInfo.setOnline(theRoom.getOnline());
+        roomInfo.setHn(theRoom.getOnline());
+        roomInfo.setNickname(theRoom.getNickname());
+        roomInfo.setUrl("http://www.douyu.com"+theRoom.getUrl());
+        return roomInfo;
     }
 }
