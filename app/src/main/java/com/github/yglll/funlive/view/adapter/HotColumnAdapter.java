@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
+import com.github.yglll.funlive.net.bean.HomeHotColumn;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.github.yglll.funlive.presenter.interfaces;
 
-import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
-import com.github.yglll.funlive.net.gsonmodel.CateList;
+import com.github.yglll.funlive.net.bean.CapiCategory;
+import com.github.yglll.funlive.net.bean.CateList;
 import com.github.yglll.funlive.mvpbase.BaseModel;
 import com.github.yglll.funlive.mvpbase.BasePresenter;
 import com.github.yglll.funlive.mvpbase.BaseView;

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.net.gsonmodel.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.bean.HomeFaceScoreColumn;
 
 import java.util.ArrayList;
 import java.util.List;

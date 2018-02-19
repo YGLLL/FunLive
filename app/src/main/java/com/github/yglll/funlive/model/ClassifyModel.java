@@ -2,8 +2,8 @@ package com.github.yglll.funlive.model;
 
 import com.github.yglll.funlive.api.Live;
 import com.github.yglll.funlive.api.NetWorkAPI;
-import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
-import com.github.yglll.funlive.net.gsonmodel.CateList;
+import com.github.yglll.funlive.net.bean.CapiCategory;
+import com.github.yglll.funlive.net.bean.CateList;
 import com.github.yglll.funlive.net.RetrofitClient;
 import com.github.yglll.funlive.net.handlingerror.DefaultTransformer;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyPresenterInterfaces;

@@ -6,8 +6,8 @@ import android.widget.GridView;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.ClassifyModel;
-import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
-import com.github.yglll.funlive.net.gsonmodel.CateList;
+import com.github.yglll.funlive.net.bean.CapiCategory;
+import com.github.yglll.funlive.net.bean.CateList;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.ClassifyPresenter;

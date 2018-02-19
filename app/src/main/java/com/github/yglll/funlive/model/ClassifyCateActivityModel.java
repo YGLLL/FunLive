@@ -1,7 +1,7 @@
 package com.github.yglll.funlive.model;
 
 import com.github.yglll.funlive.api.Live;
-import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
+import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.net.RetrofitClient;
 import com.github.yglll.funlive.net.handlingerror.DefaultTransformer;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyCateActivityInterfaces;
