@@ -68,7 +68,7 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
         });
 
         recommendAdapter=new RecommendAdapter(getActivity());
-        haderView = recommendAdapter.setCustomHeaderView(R.layout.item_home_recommend_banner,recyclerView);
+        haderView = recommendAdapter.setCustomHeaderView(R.layout.home_recommend_banner,recyclerView);
         bgaBanner=(BGABanner) haderView.findViewById(R.id.recommed_banner);
         bgaBanner.setDelegate(this);
         homeCarouselAdapter=new HomeCarouselAdapter();
