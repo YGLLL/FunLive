@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
-import com.github.yglll.funlive.net.gsonmodel.Category;
+import com.github.yglll.funlive.net.bean.CapiCategory;
+import com.github.yglll.funlive.net.bean.Category;
 import com.github.yglll.funlive.view.ClassifyCateActivity;
 import com.github.yglll.funlive.view.EventBus.SelectPageViewEvent;
 

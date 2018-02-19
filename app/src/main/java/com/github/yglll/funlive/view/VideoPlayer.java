@@ -26,7 +26,7 @@ import com.github.yglll.funlive.danmu.utils.DanmuProcess;
 import com.github.yglll.funlive.model.VideoPlayerModel;
 import com.github.yglll.funlive.mvpbase.BaseActivity;
 import com.github.yglll.funlive.mvpbase.BaseView;
-import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
+import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.VideoPlayerPresenter;
 import com.github.yglll.funlive.presenter.interfaces.VideoPlayerInterfaces;
 

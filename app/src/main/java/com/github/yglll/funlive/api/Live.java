@@ -1,14 +1,14 @@
 package com.github.yglll.funlive.api;
 
-import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
-import com.github.yglll.funlive.net.gsonmodel.CateList;
-import com.github.yglll.funlive.net.gsonmodel.Category;
-import com.github.yglll.funlive.net.gsonmodel.HomeCarousel;
-import com.github.yglll.funlive.net.gsonmodel.HomeFaceScoreColumn;
-import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
-import com.github.yglll.funlive.net.gsonmodel.HomeCate;
-import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
-import com.github.yglll.funlive.net.gsonmodel.TempLiveVideoInfo;
+import com.github.yglll.funlive.net.bean.CapiCategory;
+import com.github.yglll.funlive.net.bean.CateList;
+import com.github.yglll.funlive.net.bean.Category;
+import com.github.yglll.funlive.net.bean.HomeCarousel;
+import com.github.yglll.funlive.net.bean.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.bean.HomeHotColumn;
+import com.github.yglll.funlive.net.bean.HomeCate;
+import com.github.yglll.funlive.net.bean.RoomInfo;
+import com.github.yglll.funlive.net.bean.TempLiveVideoInfo;
 import com.github.yglll.funlive.net.response.HttpResponse;
 
 import java.util.List;

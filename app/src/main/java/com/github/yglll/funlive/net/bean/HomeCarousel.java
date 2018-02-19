@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.net.gsonmodel;
+package com.github.yglll.funlive.net.bean;
 
 import java.util.List;
 

@@ -1,17 +1,14 @@
 package com.github.yglll.funlive.presenter.impl;
 
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
+import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.net.handlingerror.ApiException;
 import com.github.yglll.funlive.net.handlingerror.ExceptionEngine;
 import com.github.yglll.funlive.net.handlingerror.subscriber.ErrorSubscriber;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyCateActivityInterfaces;
 import com.github.yglll.funlive.utils.ParamsMapUtils;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
-
-import rx.Observer;
 
 /**
  * 作者：YGL

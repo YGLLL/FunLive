@@ -1,23 +1,20 @@
 package com.github.yglll.funlive.view;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.ClassifyCateActivityModel;
 import com.github.yglll.funlive.mvpbase.BaseActivity;
 import com.github.yglll.funlive.mvpbase.BaseView;
-import com.github.yglll.funlive.net.gsonmodel.CapiCategory;
-import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
+import com.github.yglll.funlive.net.bean.CapiCategory;
+import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.ClassifyCateActivityPresenter;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyCateActivityInterfaces;
 import com.github.yglll.funlive.utils.FullyGridLayoutManager;
 import com.github.yglll.funlive.view.adapter.ClassifyCateAdapter;
-import com.github.yglll.funlive.view.adapter.ClassifyGridAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;

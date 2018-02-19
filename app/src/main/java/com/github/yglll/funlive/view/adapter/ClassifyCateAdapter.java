@@ -3,7 +3,6 @@ package com.github.yglll.funlive.view.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.net.gsonmodel.RoomInfo;
+import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.view.VideoPlayer;
 
 import java.util.ArrayList;
@@ -89,9 +88,10 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
         if(isFaceScoreColumn) {
             //holder.rl_live_icon.setBackgroundResource(R.drawable.search_header_live_type_mobile);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new RoomClickListener(mContxt,roomInfos.get(position)){
             @Override
             public void onClick(View view) {
+                super.onClick(view);
                 Intent intent = new Intent(mContxt, VideoPlayer.class);
                 intent.putExtra("roomInfo",roomInfos.get(position));
                 if(isFaceScoreColumn) {

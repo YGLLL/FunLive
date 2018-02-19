@@ -2,11 +2,11 @@ package com.github.yglll.funlive.model;
 
 import com.github.yglll.funlive.api.Live;
 import com.github.yglll.funlive.api.NetWorkAPI;
-import com.github.yglll.funlive.net.gsonmodel.Category;
-import com.github.yglll.funlive.net.gsonmodel.HomeCarousel;
-import com.github.yglll.funlive.net.gsonmodel.HomeFaceScoreColumn;
-import com.github.yglll.funlive.net.gsonmodel.HomeHotColumn;
-import com.github.yglll.funlive.net.gsonmodel.HomeCate;
+import com.github.yglll.funlive.net.bean.Category;
+import com.github.yglll.funlive.net.bean.HomeCarousel;
+import com.github.yglll.funlive.net.bean.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.bean.HomeHotColumn;
+import com.github.yglll.funlive.net.bean.HomeCate;
 import com.github.yglll.funlive.net.RetrofitClient;
 import com.github.yglll.funlive.net.handlingerror.DefaultTransformer;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
