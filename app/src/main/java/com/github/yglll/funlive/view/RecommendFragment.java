@@ -21,9 +21,9 @@ import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.RecommendPresenter;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
-import com.github.yglll.funlive.view.adapter.HomeCarouselAdapter;
-import com.github.yglll.funlive.view.adapter.NavigationAdapter;
-import com.github.yglll.funlive.view.adapter.RecommendAdapter;
+import com.github.yglll.funlive.view.adapter.recommend.HomeCarouselAdapter;
+import com.github.yglll.funlive.view.adapter.recommend.NavigationAdapter;
+import com.github.yglll.funlive.view.adapter.recommend.RecommendAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ import cn.bingoogolapple.bgabanner.BGABanner;
  * 备注消息：
  * 创建时间：2018/01/14   17:36
  **/
-public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPresenter> implements RecommendPresenterInterfaces.View, BGABanner.Delegate<SimpleDraweeView, String> {
+public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPresenter> implements RecommendPresenterInterfaces.View, BGABanner.Delegate<SimpleDraweeView, String> {
 
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -55,7 +55,7 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
 
     @Override
     protected int getLayoutId() {
-        return R.layout.recommend_fragement;
+        return R.layout.fragement_recommend;
     }
 
     @Override
@@ -68,16 +68,18 @@ public class RecommendFragement extends BaseFragment<RecommendModel,RecommendPre
         });
 
         recommendAdapter=new RecommendAdapter(getActivity());
+
         haderView = recommendAdapter.setCustomHeaderView(R.layout.home_recommend_banner,recyclerView);
         bgaBanner=(BGABanner) haderView.findViewById(R.id.recommed_banner);
         bgaBanner.setDelegate(this);
         homeCarouselAdapter=new HomeCarouselAdapter();
         bgaBanner.setAdapter(homeCarouselAdapter);
+
         View navigationView=recommendAdapter.setNavigationView(R.layout.recommend_navigation,recyclerView);
+        //todo 使navigationView风格与其他item保持一致
         GridView gridView=navigationView.findViewById(R.id.grid_view);
         navigationAdapter=new NavigationAdapter();
         gridView.setAdapter(navigationAdapter);
-        //navigationRecyclerView.setLayoutManager(new FullyGridLayoutManager(navigationRecyclerView.getContext(), 2, GridLayoutManager.VERTICAL, false));
 
         recyclerView.setAdapter(recommendAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

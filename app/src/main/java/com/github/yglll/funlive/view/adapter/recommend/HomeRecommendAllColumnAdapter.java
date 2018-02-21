@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.view.adapter;
+package com.github.yglll.funlive.view.adapter.recommend;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.net.bean.HomeHotColumn;
+import com.github.yglll.funlive.net.bean.HomeCate;
 
 import java.util.List;
 
@@ -22,16 +22,15 @@ import java.util.List;
  * 版本号：1.0
  * 类描述：
  * 备注消息：
- * 创建时间：2018/01/21   22:36
+ * 创建时间：2018/01/26   22:55
  **/
-public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<HomeHotColumn> mHomeHotColumn;
+public class HomeRecommendAllColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<HomeCate.RoomListEntity> mRommListEntity;
     private Context context;
 
-    public HotColumnAdapter(Context context, List<HomeHotColumn> mHomeHotColumn)
-    {
+    public HomeRecommendAllColumnAdapter(Context context, List<HomeCate.RoomListEntity> mRommListEntity) {
         this.context=context;
-        this.mHomeHotColumn=mHomeHotColumn;
+        this.mRommListEntity=mRommListEntity;
     }
 
     @Override
@@ -40,37 +39,37 @@ public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof HotColumnHolder)
-        {
+        if(holder instanceof HotColumnHolder) {
             bindHotColumun((HotColumnHolder) holder,position);
         }
     }
-    private void bindHotColumun(HotColumnHolder holder,final int position) {
-        holder.img_item_gridview.setImageURI(Uri.parse(mHomeHotColumn.get(position).getVertical_src()));
-        holder.tv_column_item_nickname.setText(mHomeHotColumn.get(position).getRoom_name());
-        holder.tv_nickname.setText(mHomeHotColumn.get(position).getNickname());
-        holder.tv_online_num.setText(String.valueOf(mHomeHotColumn.get(position).getOnline()));
-        if(mHomeHotColumn.get(position).getCate_id().equals("201"))
+    private void bindHotColumun(HotColumnHolder holder, int position) {
+        holder.img_item_gridview.setImageURI(Uri.parse(mRommListEntity.get(position).getVertical_src()));
+        holder.tv_column_item_nickname.setText(mRommListEntity.get(position).getRoom_name());
+        holder.tv_nickname.setText(mRommListEntity.get(position).getNickname());
+        holder.tv_online_num.setText(String.valueOf(mRommListEntity.get(position).getOnline()));
+        if(mRommListEntity.get(position).getCate_id().equals("201"))
         {
-            //holder.rl_live_icon.setBackgroundResource(R.drawable.search_header_live_type_mobile);
+            holder.rl_live_icon.setBackgroundResource(R.drawable.ic_launcher);
         }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /*
-                //                颜值栏目 竖屏播放
-                if(mHomeHotColumn.get(position).getCate_id().equals("201"))
+//                颜值栏目 竖屏播放
+                if(mRommListEntity.get(position).getCate_id().equals("201"))
                 {
                     Intent intent = new Intent(context, PhoneLiveVideoActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("Room_id",mHomeHotColumn.get(position).getRoom_id());
-                    bundle.putString("Img_Path", mHomeHotColumn.get(position).getVertical_src());
+                    bundle.putString("Room_id",mRommListEntity.get(position).getRoom_id());
+                    bundle.putString("Img_Path", mRommListEntity.get(position).getVertical_src());
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }else {
                     Intent intent = new Intent(context, PcLiveVideoActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putString("Room_id", mHomeHotColumn.get(position).getRoom_id());
+                    bundle.putString("Room_id", mRommListEntity.get(position).getRoom_id());
                     intent.putExtras(bundle);
                     context.startActivity(intent);
                 }
@@ -80,10 +79,9 @@ public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
     @Override
     public int getItemCount() {
-        return mHomeHotColumn.size();
+        return mRommListEntity.size();
     }
-    public class HotColumnHolder extends RecyclerView.ViewHolder
-    {
+    public class HotColumnHolder extends RecyclerView.ViewHolder {
         //        图片
         public SimpleDraweeView img_item_gridview;
         //        房间名称

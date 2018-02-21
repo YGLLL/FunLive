@@ -252,7 +252,7 @@ public class DyBulletScreenClient {
                 //结束心跳和获取弹幕线程
                 this.readyFlag = false;
             }
-            /***@TODO 根据业务需求来处理获取到的所有弹幕及礼物信息***********/
+            //根据业务需求来处理获取到的所有弹幕及礼物信息
 
             //判断消息类型
             if (msg.get("type").equals("chatmsg")) {//弹幕消息
@@ -262,7 +262,7 @@ public class DyBulletScreenClient {
                     }
                 }
             }
-            //@TODO 其他业务信息根据需要进行添加
+            //其他业务信息根据需要进行添加
 
             /*************************************************************/
         }

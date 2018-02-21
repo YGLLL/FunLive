@@ -17,6 +17,7 @@ import android.view.View;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.view.EventBus.SelectPageViewEvent;
+import com.github.yglll.funlive.view.adapter.MainActivityPagerAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Logger;
@@ -30,13 +31,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
     @BindView(R.id.view_pager)
     ViewPager viewPager;
     @BindView(R.id.bnve)
     BottomNavigationView mBottomNavigationView;
     private MenuItem menuItem;
-    private List<Fragment> fragmentList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,12 +43,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        fragmentList=getFragments();
-
+        MainActivityPagerAdapter mPagerAdapter=new MainActivityPagerAdapter(getSupportFragmentManager());
         //不摧毁Fragment
-        viewPager.setOffscreenPageLimit(fragmentList.size());
-        MyPagerAdapter myPagerAdapter=new MyPagerAdapter(getSupportFragmentManager(),fragmentList);
-        viewPager.setAdapter(myPagerAdapter);
+        viewPager.setOffscreenPageLimit(mPagerAdapter.getCount());
+        viewPager.setAdapter(mPagerAdapter);
         viewPager.addOnPageChangeListener(mInternalPageChangeListener);
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -75,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //使用EventBus接收来自NavigationAdapter的消息
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSelectPage(SelectPageViewEvent event) {
         int i=event.getPageNum();
@@ -116,30 +114,4 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
-
-    private List<Fragment> getFragments(){
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new RecommendFragement());
-        fragments.add(new ClassifyFragment());
-        fragments.add(new UserFragment());
-        return fragments;
-    }
-
-    private class MyPagerAdapter extends FragmentStatePagerAdapter {
-        private List<Fragment> fragments;
-        public MyPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
-            super(fm);
-            this.fragments=fragments;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-    }
 }

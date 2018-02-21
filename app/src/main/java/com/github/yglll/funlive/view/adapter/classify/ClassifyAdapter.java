@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.view.adapter;
+package com.github.yglll.funlive.view.adapter.classify;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +17,7 @@ import java.util.List;
  * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
- * 备注消息：
+ * 备注消息：使用了FragmentStatePagerAdapter，可以在切换Fragment时不销毁Fragment
  * 创建时间：2018/02/04   11:04
  **/
 public class ClassifyAdapter extends FragmentStatePagerAdapter {

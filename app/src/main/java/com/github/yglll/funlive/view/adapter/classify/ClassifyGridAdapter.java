@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.view.adapter;
+package com.github.yglll.funlive.view.adapter.classify;
 
 import android.content.Context;
 import android.content.Intent;

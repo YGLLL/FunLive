@@ -12,8 +12,8 @@ import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.ClassifyPresenter;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyPresenterInterfaces;
-import com.github.yglll.funlive.view.adapter.ClassifyAdapter;
-import com.github.yglll.funlive.view.adapter.ClassifyGridAdapter;
+import com.github.yglll.funlive.view.adapter.classify.ClassifyAdapter;
+import com.github.yglll.funlive.view.adapter.classify.ClassifyGridAdapter;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class ClassifyChildrenFragment extends BaseFragment<ClassifyModel,Classif
 
     @Override
     protected int getLayoutId() {
-        return R.layout.item_classify;
+        return R.layout.fragment_item_classify;
     }
 
     @Override

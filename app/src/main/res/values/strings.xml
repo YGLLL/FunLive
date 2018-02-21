@@ -6,6 +6,8 @@
     <string name="more">更多</string>
     <string name="load">正在加载</string>
     <string name="video_player_share">我正在看这个直播，看起来不错：\n</string>
+    <string name="follow">收藏</string>
+    <string name="history">历史</string>
     <!--错误-->
     <string name="error">出现错误:</string>
     <string name="unauthorized">未授权</string>

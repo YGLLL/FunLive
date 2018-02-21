@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.sql;
+package com.github.yglll.funlive.db;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

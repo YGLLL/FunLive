@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.view.adapter;
+package com.github.yglll.funlive.view.adapter.recommend;
 
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;

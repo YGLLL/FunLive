@@ -1,9 +1,12 @@
 package com.github.yglll.funlive.view;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,12 +26,14 @@ import android.widget.TextView;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.danmu.utils.DanmuProcess;
+import com.github.yglll.funlive.db.FunLiveDB;
 import com.github.yglll.funlive.model.VideoPlayerModel;
 import com.github.yglll.funlive.mvpbase.BaseActivity;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.VideoPlayerPresenter;
 import com.github.yglll.funlive.presenter.interfaces.VideoPlayerInterfaces;
+import com.github.yglll.funlive.db.FunLiveDbHelper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -115,6 +120,8 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     //亮度键
     private static final String LIGHTKEY="lightKey";
 
+    private FunLiveDB funLiveDB;
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -176,6 +183,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
         addTouchListener();
         vmVideoview.setVideoLayout(VideoView.VIDEO_LAYOUT_STRETCH, 0);
         onEvent();
+        funLiveDB=FunLiveDB.getInstance(this);
     }
 
     private void onEvent() {
@@ -394,6 +402,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
                     // optional need Vitamio 4.0
                     mediaPlayer.setPlaybackSpeed(1.0f);
                     flLoading.setVisibility(View.GONE);
+                    showControlBar();
                     ivLivePlay.setImageResource(R.drawable.vector_drawable_suspended);
                     mHandler.sendEmptyMessageDelayed(HIDE_CONTROL_BAR, HIDE_TIME);
                 }
@@ -405,6 +414,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
         if (flLoading != null) {
             flLoading.setVisibility(View.VISIBLE);
+            hideControlBar();
         }
         if (vmVideoview != null) {
             if (vmVideoview.isPlaying())
@@ -504,6 +514,38 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
         intent.putExtra(Intent.EXTRA_TEXT,getResources().getString(R.string.video_player_share)+roomInfo.getUrl());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//为Activity新建一个任务栈
         startActivity(intent);
+    }
+
+    @OnClick(R.id.iv_live_follow)
+    public void liveFollow(){
+        //查询收藏数据表是否有此房间
+        if(queryRoomForSQL(roomInfo.getRoom_id())){
+            //删除
+            deleteRoomForSQL(roomInfo.getRoom_id());
+            //控制View
+            ivLiveFollow.setImageResource(R.drawable.vector_drawable_follow);
+        }else {
+            //添加当前房间到数据库
+            addRoomForSQL(this.roomInfo);
+            //控制View
+            ivLiveFollow.setImageResource(R.drawable.vector_drawable_follow_light);
+        }
+
+    }
+
+    private Boolean queryRoomForSQL(int roomId){
+        Cursor cursor= funLiveDB.getSqLiteDatabase().query(FunLiveDbHelper.userCollectionTableName,new String[]{"room_id"},"room_id=?",new String[]{String.valueOf(roomId)},null,null,null);
+        if (cursor.moveToFirst()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    private void deleteRoomForSQL(int roomId){
+        funLiveDB.deleteRoom(roomId,FunLiveDbHelper.userCollectionTableName);
+    }
+    private void addRoomForSQL(RoomInfo roomInfo){
+        funLiveDB.setRoomInfo(roomInfo,FunLiveDbHelper.userCollectionTableName);
     }
 
     @Override

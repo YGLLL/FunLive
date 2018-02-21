@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.view.adapter;
+package com.github.yglll.funlive.view.adapter.classify;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.view.VideoPlayer;
+import com.github.yglll.funlive.view.clickListener.RoomClickListener;
 
 import java.util.ArrayList;
 import java.util.List;

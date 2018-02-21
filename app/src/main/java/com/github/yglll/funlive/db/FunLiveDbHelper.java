@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.sql;
+package com.github.yglll.funlive.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,10 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class FunLiveDbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 0;
-    static final String DATABASE_NAME = "live.db";
+    private static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "live.db";
+    public static final String userCollectionTableName="UserCollection";
+    public static final String userHistoryTableName="UserHistory";
 
-    public static final String SQL_CREATE_USER_COLLECTION_TABLE="create table UserCollection(" +
+    public static final String SQL_CREATE_USER_COLLECTION_TABLE="create table "+userCollectionTableName+"(" +
             "id integer primary key autoincrement," +
             "room_id integer," +
             "room_src text," +
@@ -22,7 +24,7 @@ public class FunLiveDbHelper extends SQLiteOpenHelper {
             "hn integer," +
             "nickname text," +
             "url text);";
-    public static final String SQL_CREATE_USER_HISTORY_TABLE="create table UserHistory(" +
+    public static final String SQL_CREATE_USER_HISTORY_TABLE="create table "+userHistoryTableName+"(" +
             "id integer primary key autoincrement," +
             "room_id integer," +
             "room_src text," +
