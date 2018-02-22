@@ -21,7 +21,7 @@ import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.RecommendPresenter;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
-import com.github.yglll.funlive.view.adapter.recommend.HomeCarouselAdapter;
+import com.github.yglll.funlive.view.adapter.recommend.CarouselAdapter;
 import com.github.yglll.funlive.view.adapter.recommend.NavigationAdapter;
 import com.github.yglll.funlive.view.adapter.recommend.RecommendAdapter;
 
@@ -47,7 +47,7 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     private BGABanner bgaBanner;
-    private HomeCarouselAdapter homeCarouselAdapter;
+    private CarouselAdapter carouselAdapter;
     private List<HomeCarousel> homeCarouselList;
     private View haderView;
     private RecommendAdapter recommendAdapter;
@@ -69,11 +69,11 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
 
         recommendAdapter=new RecommendAdapter(getActivity());
 
-        haderView = recommendAdapter.setCustomHeaderView(R.layout.home_recommend_banner,recyclerView);
+        haderView = recommendAdapter.setCustomHeaderView(R.layout.recommend_carousel,recyclerView);
         bgaBanner=(BGABanner) haderView.findViewById(R.id.recommed_banner);
         bgaBanner.setDelegate(this);
-        homeCarouselAdapter=new HomeCarouselAdapter();
-        bgaBanner.setAdapter(homeCarouselAdapter);
+        carouselAdapter =new CarouselAdapter();
+        bgaBanner.setAdapter(carouselAdapter);
 
         View navigationView=recommendAdapter.setNavigationView(R.layout.recommend_navigation,recyclerView);
         //todo 使navigationView风格与其他item保持一致
@@ -132,7 +132,7 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
             pic_url.add(homeCarousel.getPic_url());
         }
         if (bgaBanner != null && pic_url.size() > 0) {
-            bgaBanner.setData(R.layout.item_image_carousel, pic_url, null);
+            bgaBanner.setData(R.layout.item_carousel, pic_url, null);
         }
     }
 

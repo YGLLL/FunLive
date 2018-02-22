@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.github.yglll.funlive.net.bean.RoomInfo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 作者：YGL
  * 电话：13036804886
@@ -45,11 +48,20 @@ public class FunLiveDB {
         return sqLiteDatabase;
     }
 
-    public RoomInfo getRoomInfo(int roomId, String tableName) {
-        RoomInfo roomInfo=new RoomInfo();
-        Cursor cursor=sqLiteDatabase.query(tableName,null,"room_id=?",new String[]{String.valueOf(roomId)},null,null,null);
+    public List<RoomInfo> getAllRoomInfo(String tableName){
+        return getRoomInfo(-1,tableName);
+    }
+    public List<RoomInfo> getRoomInfo(int roomId, String tableName) {
+        List<RoomInfo> roomInfoList=new ArrayList<>();
+        Cursor cursor;
+        if(roomId==-1){
+            cursor=sqLiteDatabase.query(tableName,null,null,null,null,null,null);
+        }else {
+            cursor=sqLiteDatabase.query(tableName,null,"room_id=?",new String[]{String.valueOf(roomId)},null,null,null);
+        }
         if(cursor.moveToFirst()){
             do {
+                RoomInfo roomInfo=new RoomInfo();
                 roomInfo.setHn(cursor.getInt(cursor.getColumnIndex("hn")));
                 roomInfo.setNickname(cursor.getString(cursor.getColumnIndex("nickname")));
                 roomInfo.setOnline(cursor.getInt(cursor.getColumnIndex("online")));
@@ -58,12 +70,19 @@ public class FunLiveDB {
                 roomInfo.setRoom_name(cursor.getString(cursor.getColumnIndex("room_name")));
                 roomInfo.setRoom_src(cursor.getString(cursor.getColumnIndex("room_src")));
                 roomInfo.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+                roomInfoList.add(roomInfo);
             }while (cursor.moveToNext());
+            cursor.close();
         }
-        return roomInfo;
+        return roomInfoList;
     }
 
     public void setRoomInfo(RoomInfo roomInfo,String tableName) {
+        //限制最大写入数据
+        //int limit=10;
+        //while (getTableSize(tableName)>limit){
+        //    deleteRoomFromId(0,tableName);
+        //}
         ContentValues contentValues=new ContentValues();
         contentValues.put("room_id",roomInfo.getRoom_id());
         contentValues.put("room_src",roomInfo.getRoom_src());
@@ -74,9 +93,25 @@ public class FunLiveDB {
         contentValues.put("nickname",roomInfo.getNickname());
         contentValues.put("url",roomInfo.getUrl());
         sqLiteDatabase.insert(tableName,null,contentValues);
+        contentValues.clear();
+    }
+
+    public int getTableSize(String tableName){
+        int size=0;
+        Cursor cursor=sqLiteDatabase.query(tableName,null,null,null,null,null,null);
+        if(cursor.moveToFirst()){
+            do {
+                size++;
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return size;
     }
 
     public void deleteRoom(int roomId,String tableName){
         sqLiteDatabase.delete(tableName,"room_id=?",new String[]{String.valueOf(roomId)});
+    }
+    public void deleteRoomFromId(int id,String tableName){
+        sqLiteDatabase.delete(tableName,"id=?",new String[]{String.valueOf(id)});
     }
 }

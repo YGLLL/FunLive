@@ -24,4 +24,6 @@
     <string name="video_player_wait">连接中...</string>
     <string name="buffer1">正在缓冲...</string>
     <string name="buffer2">%</string>
+    <string name="followed">已收藏</string>
+    <string name="no_data">暂无记录</string>
 </resources>

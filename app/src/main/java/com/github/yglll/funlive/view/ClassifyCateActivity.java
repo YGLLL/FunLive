@@ -13,7 +13,7 @@ import com.github.yglll.funlive.net.bean.CapiCategory;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.ClassifyCateActivityPresenter;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyCateActivityInterfaces;
-import com.github.yglll.funlive.utils.FullyGridLayoutManager;
+import com.github.yglll.funlive.view.manager.FullyGridLayoutManager;
 import com.github.yglll.funlive.view.adapter.classify.ClassifyCateAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -112,7 +112,7 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
     @Override
     public void showLiveList(List<RoomInfo> list) {
         smartRefreshLayout.finishRefresh();
-        classifyCateAdapter.setRoomInfos(list);
+        classifyCateAdapter.setData(list);
     }
 
     @Override

@@ -23,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.danmu.utils.DanmuProcess;
@@ -37,6 +38,7 @@ import com.github.yglll.funlive.db.FunLiveDbHelper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.utils.ScreenResolution;
@@ -183,7 +185,14 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
         addTouchListener();
         vmVideoview.setVideoLayout(VideoView.VIDEO_LAYOUT_STRETCH, 0);
         onEvent();
+
         funLiveDB=FunLiveDB.getInstance(this);
+        //查询是否为收藏房间
+        if(queryRoomForSQL(roomInfo.getRoom_id())){
+            ivLiveFollow.setImageResource(R.drawable.vector_drawable_follow_light);
+        }
+        //记录历史纪录
+        funLiveDB.setRoomInfo(roomInfo,FunLiveDbHelper.userHistoryTableName);
     }
 
     private void onEvent() {
@@ -402,7 +411,6 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
                     // optional need Vitamio 4.0
                     mediaPlayer.setPlaybackSpeed(1.0f);
                     flLoading.setVisibility(View.GONE);
-                    showControlBar();
                     ivLivePlay.setImageResource(R.drawable.vector_drawable_suspended);
                     mHandler.sendEmptyMessageDelayed(HIDE_CONTROL_BAR, HIDE_TIME);
                 }
@@ -414,7 +422,6 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
         if (flLoading != null) {
             flLoading.setVisibility(View.VISIBLE);
-            hideControlBar();
         }
         if (vmVideoview != null) {
             if (vmVideoview.isPlaying())
@@ -516,6 +523,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
         startActivity(intent);
     }
 
+    //收藏
     @OnClick(R.id.iv_live_follow)
     public void liveFollow(){
         //查询收藏数据表是否有此房间
@@ -529,6 +537,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
             addRoomForSQL(this.roomInfo);
             //控制View
             ivLiveFollow.setImageResource(R.drawable.vector_drawable_follow_light);
+            Toasty.info(this,getString(R.string.followed), Toast.LENGTH_SHORT).show();
         }
 
     }

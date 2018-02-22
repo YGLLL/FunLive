@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginBottom="10.0dp"
         fresco:actualImageScaleType="centerCrop"
-        fresco:placeholderImage="@drawable/ic_launcher"
+        fresco:placeholderImage="@drawable/vector_drawable_load_pictrue"
         fresco:placeholderImageScaleType="centerCrop"
         fresco:roundedCornerRadius="6dip" />
 
@@ -42,18 +42,10 @@
             android:layout_height="100.0dp">
 
             <RelativeLayout
-                android:id="@+id/rl_live_icon"
-                android:layout_width="60.0dp"
-                android:layout_height="18.0dp"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/ic_launcher"
-                android:gravity="center"></RelativeLayout>
-
-            <RelativeLayout
                 android:layout_width="55.0dp"
                 android:layout_height="18.0dp"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/ic_launcher"
+                android:background="@drawable/item_live_info_shape"
                 android:gravity="center">
 
                 <TextView
@@ -71,7 +63,7 @@
                     android:layout_marginRight="3.0dp"
                     android:layout_marginTop="3.0dp"
                     android:layout_toLeftOf="@id/tv_online_num"
-                    android:src="@drawable/ic_launcher" />
+                    android:src="@drawable/vector_drawable_line" />
             </RelativeLayout>
 
             <ImageView
@@ -82,7 +74,7 @@
                 android:layout_marginBottom="6.0dp"
                 android:layout_marginLeft="5.0dp"
                 android:layout_marginRight="5.0dp"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/vector_drawable_user" />
 
             <TextView
                 android:id="@+id/tv_nickname"

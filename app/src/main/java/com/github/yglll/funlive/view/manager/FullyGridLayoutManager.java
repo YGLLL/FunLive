@@ -1,4 +1,4 @@
-package com.github.yglll.funlive.utils;
+package com.github.yglll.funlive.view.manager;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;

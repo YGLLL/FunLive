@@ -17,7 +17,7 @@ import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.HomeFaceScoreColumn;
 import com.github.yglll.funlive.net.bean.HomeHotColumn;
 import com.github.yglll.funlive.net.bean.HomeCate;
-import com.github.yglll.funlive.utils.FullyGridLayoutManager;
+import com.github.yglll.funlive.view.manager.FullyGridLayoutManager;
 import com.github.yglll.funlive.utils.Utils;
 
 import java.util.ArrayList;
@@ -35,14 +35,13 @@ import java.util.List;
  **/
 //todo 不用进一步封装,但需要优化代码
 public class RecommendAdapter extends RecyclerView.Adapter {
-    private static final String TAG = "RecommendAdapter";
 
     private List<HomeHotColumn> homeHotColumns;
     private HotColumnAdapter hotColumnAdapter;
     private List<HomeFaceScoreColumn> homeFaceScoreColumns;
     private FaceScoreColumnAdapter faceScoreColumnAdapter;
     private List<HomeCate> homeCates;
-    private HomeRecommendAllColumnAdapter homeRecommendAllColumnAdapter;
+    private RecommendAllColumnAdapter recommendAllColumnAdapter;
 
     private Context mContext;
 
@@ -92,7 +91,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             case VIEW_TYPE.FOOTER:
                 break;
             case VIEW_TYPE.NORMAL:
-                return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_recommend, parent, false));
+                return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_live_info, parent, false));
             case VIEW_TYPE.NAVIGATION:
                 return new CustomViewHolder(navigationView);
         }
@@ -130,8 +129,8 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                         normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
                         normalViewHolder.tv_column_name.setText(homeCates.get(position - 2).getTag_name());
                         normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
-                        homeRecommendAllColumnAdapter=new HomeRecommendAllColumnAdapter(normalViewHolder.rv_column_list.getContext(), homeCates.get(position - 2).getRoom_list());
-                        normalViewHolder.rv_column_list.setAdapter(homeRecommendAllColumnAdapter);
+                        recommendAllColumnAdapter =new RecommendAllColumnAdapter(normalViewHolder.rv_column_list.getContext(), homeCates.get(position - 2).getRoom_list());
+                        normalViewHolder.rv_column_list.setAdapter(recommendAllColumnAdapter);
                     }
             }
         }

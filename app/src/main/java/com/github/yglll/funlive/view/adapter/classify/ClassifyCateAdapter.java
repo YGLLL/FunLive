@@ -1,8 +1,10 @@
 package com.github.yglll.funlive.view.adapter.classify;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Vibrator;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.view.VideoPlayer;
-import com.github.yglll.funlive.view.clickListener.RoomClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +43,6 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
         public TextView tv_online_num;
         //        昵称
         public TextView tv_nickname;
-        //        Icon
-        public RelativeLayout rl_live_icon;
 
         public Holder(View view) {
             super(view);
@@ -51,7 +50,6 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
             tv_column_item_nickname=(TextView)view.findViewById(R.id.tv_column_item_nickname);
             tv_online_num=(TextView)view.findViewById(R.id.tv_online_num);
             tv_nickname=(TextView)view.findViewById(R.id.tv_nickname);
-            rl_live_icon=(RelativeLayout)view.findViewById(R.id.rl_live_icon);
         }
     }
 
@@ -78,7 +76,7 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_recommend_view,parent,false));
+        return new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_live_info,parent,false));
     }
     @Override
     public void onBindViewHolder(Holder holder,final int position) {
@@ -86,13 +84,20 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
         holder.tv_column_item_nickname.setText(roomInfos.get(position).getRoom_name());
         holder.tv_nickname.setText(roomInfos.get(position).getNickname());
         holder.tv_online_num.setText(String.valueOf(roomInfos.get(position).getOnline()));
-        if(isFaceScoreColumn) {
-            //holder.rl_live_icon.setBackgroundResource(R.drawable.search_header_live_type_mobile);
-        }
-        holder.itemView.setOnClickListener(new RoomClickListener(mContxt,roomInfos.get(position)){
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                //震动
+                Vibrator vibrator=(Vibrator)mContxt.getSystemService(Service.VIBRATOR_SERVICE);
+                vibrator.vibrate(200);
+                //显示itemControl
+
+                return true;
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                super.onClick(view);
                 Intent intent = new Intent(mContxt, VideoPlayer.class);
                 intent.putExtra("roomInfo",roomInfos.get(position));
                 if(isFaceScoreColumn) {
@@ -111,7 +116,7 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
         return roomInfos.size();
     }
 
-    public void setRoomInfos(List<RoomInfo> roomInfos) {
+    public void setData(List<RoomInfo> roomInfos) {
         this.roomInfos = roomInfos;
         notifyDataSetChanged();
     }

@@ -36,7 +36,7 @@ public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new HotColumnHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_recommend_view,parent,false));
+        return new HotColumnHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_live_info,parent,false));
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -92,8 +92,6 @@ public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public TextView tv_online_num;
         //        昵称
         public TextView tv_nickname;
-        //        Icon
-        public RelativeLayout rl_live_icon;
 
         public HotColumnHolder(View view) {
             super(view);
@@ -101,7 +99,6 @@ public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             tv_column_item_nickname=(TextView)view.findViewById(R.id.tv_column_item_nickname);
             tv_online_num=(TextView)view.findViewById(R.id.tv_online_num);
             tv_nickname=(TextView)view.findViewById(R.id.tv_nickname);
-            rl_live_icon=(RelativeLayout)view.findViewById(R.id.rl_live_icon);
         }
     }
 }

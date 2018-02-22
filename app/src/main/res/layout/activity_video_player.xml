@@ -19,5 +19,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <!--控制层-->
-    <include layout="@layout/layout_live_control" />
+    <include layout="@layout/video_player_control" />
 </FrameLayout>

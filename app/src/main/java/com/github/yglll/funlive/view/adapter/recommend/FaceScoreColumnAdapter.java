@@ -43,7 +43,7 @@ public class FaceScoreColumnAdapter extends RecyclerView.Adapter<FaceScoreColumn
 
     @Override
     public FaceScoreColumnHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_recommend_facescore, parent, false);
+        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.item_live_info_facescore, parent, false);
         return new FaceScoreColumnHolder(view);
     }
 

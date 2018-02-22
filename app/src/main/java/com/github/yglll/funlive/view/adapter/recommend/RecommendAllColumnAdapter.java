@@ -24,18 +24,18 @@ import java.util.List;
  * 备注消息：
  * 创建时间：2018/01/26   22:55
  **/
-public class HomeRecommendAllColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecommendAllColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<HomeCate.RoomListEntity> mRommListEntity;
     private Context context;
 
-    public HomeRecommendAllColumnAdapter(Context context, List<HomeCate.RoomListEntity> mRommListEntity) {
+    public RecommendAllColumnAdapter(Context context, List<HomeCate.RoomListEntity> mRommListEntity) {
         this.context=context;
         this.mRommListEntity=mRommListEntity;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new HotColumnHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_recommend_view,parent,false));
+        return new HotColumnHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_live_info,parent,false));
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -48,10 +48,6 @@ public class HomeRecommendAllColumnAdapter extends RecyclerView.Adapter<Recycler
         holder.tv_column_item_nickname.setText(mRommListEntity.get(position).getRoom_name());
         holder.tv_nickname.setText(mRommListEntity.get(position).getNickname());
         holder.tv_online_num.setText(String.valueOf(mRommListEntity.get(position).getOnline()));
-        if(mRommListEntity.get(position).getCate_id().equals("201"))
-        {
-            holder.rl_live_icon.setBackgroundResource(R.drawable.ic_launcher);
-        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +86,6 @@ public class HomeRecommendAllColumnAdapter extends RecyclerView.Adapter<Recycler
         public TextView tv_online_num;
         //        昵称
         public TextView tv_nickname;
-        //        Icon
-        public RelativeLayout rl_live_icon;
 
         public HotColumnHolder(View view) {
             super(view);
@@ -99,7 +93,6 @@ public class HomeRecommendAllColumnAdapter extends RecyclerView.Adapter<Recycler
             tv_column_item_nickname=(TextView)view.findViewById(R.id.tv_column_item_nickname);
             tv_online_num=(TextView)view.findViewById(R.id.tv_online_num);
             tv_nickname=(TextView)view.findViewById(R.id.tv_nickname);
-            rl_live_icon=(RelativeLayout)view.findViewById(R.id.rl_live_icon);
         }
     }
 }

@@ -17,6 +17,7 @@ import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.db.FunLiveDbHelper;
 import com.github.yglll.funlive.view.adapter.user.UserAdapter;
 
 import java.util.ArrayList;
@@ -102,8 +103,8 @@ public class UserFragment extends Fragment{
 
     private List<Fragment> getFragments(){
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new UserRoomListFragment());
-        fragments.add(new UserRoomListFragment());
+        fragments.add(UserRoomListFragment.getInstance(FunLiveDbHelper.userCollectionTableName));
+        fragments.add(UserRoomListFragment.getInstance(FunLiveDbHelper.userHistoryTableName));
         return fragments;
     }
 }
