@@ -91,7 +91,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             case VIEW_TYPE.FOOTER:
                 break;
             case VIEW_TYPE.NORMAL:
-                return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_live_info, parent, false));
+                return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recommend, parent, false));
             case VIEW_TYPE.NAVIGATION:
                 return new CustomViewHolder(navigationView);
         }

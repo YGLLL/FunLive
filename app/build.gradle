@@ -39,7 +39,7 @@ dependencies {
     implementation 'com.android.support:support-v4:26.1.0'
 
     //图片框架
-    implementation 'com.facebook.fresco:fresco:1.7.1'
+    implementation 'com.facebook.fresco:fresco:1.8.0'
     //implementation 'com.facebook.fresco:imagepipeline-okhttp3:3.9.1'
     //implementation 'com.squareup.okhttp3:okhttp:3.9.1'
     //implementation 'com.squareup.okio:okio:1.13.0'
@@ -56,7 +56,7 @@ dependencies {
     //
     implementation 'com.android.support:cardview-v7:26.1.0'
     //TabLayout
-    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2'
     //适配
     implementation 'com.zhy:autolayout:1.4.5'
     //消息

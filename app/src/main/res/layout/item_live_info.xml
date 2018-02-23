@@ -1,93 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5.0dp"
-    android:orientation="vertical">
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/img_item_gridview"
-        android:layout_width="200.0dp"
-        android:layout_height="100.0dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="10.0dp"
-        fresco:actualImageScaleType="centerCrop"
-        fresco:placeholderImage="@drawable/vector_drawable_load_pictrue"
-        fresco:placeholderImageScaleType="centerCrop"
-        fresco:roundedCornerRadius="6dip" />
-
-    <TextView
-        android:id="@+id/tv_column_item_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/img_item_gridview"
-        android:width="200.0dp"
-        android:ellipsize="end"
-        android:includeFontPadding="false"
-        android:shadowRadius="0.1"
-        android:singleLine="true"
-        android:textColor="#373737"
-        android:textSize="12sp"
-        android:textStyle="bold" />
-
-    <FrameLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="3dp">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="match_parent">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/img_item_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:placeholderImage="@drawable/vector_drawable_load_pictrue"
+            fresco:placeholderImageScaleType="center" />
 
         <RelativeLayout
+            android:id="@+id/info_layout"
             android:layout_width="match_parent"
-            android:layout_height="100.0dp">
-
-            <RelativeLayout
-                android:layout_width="55.0dp"
-                android:layout_height="18.0dp"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/item_live_info_shape"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/tv_online_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:text="9999"
-                    android:textColor="#ffffff"
-                    android:textSize="10sp" />
-
-                <ImageView
-                    android:layout_width="10.0dp"
-                    android:layout_height="10.0dp"
-                    android:layout_marginRight="3.0dp"
-                    android:layout_marginTop="3.0dp"
-                    android:layout_toLeftOf="@id/tv_online_num"
-                    android:src="@drawable/vector_drawable_line" />
-            </RelativeLayout>
-
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_item_gridview"
+            android:layout_margin="4dp"
+            android:layout_centerVertical="true">
             <ImageView
                 android:id="@+id/img_nickname"
-                android:layout_width="10.0dp"
-                android:layout_height="10.0dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="6.0dp"
-                android:layout_marginLeft="5.0dp"
-                android:layout_marginRight="5.0dp"
-                android:src="@drawable/vector_drawable_user" />
+                android:layout_width="12.0dp"
+                android:layout_height="12.0dp"
+                android:src="@drawable/vector_drawable_user"
+                android:layout_centerVertical="true"/>
 
             <TextView
                 android:id="@+id/tv_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="5.0dp"
-                android:layout_toRightOf="@id/img_nickname"
+                android:layout_toEndOf="@id/img_nickname"
+                android:layout_marginStart="2dp"
                 android:ellipsize="end"
-                android:text="超人归来"
-                android:textColor="#ffffff"
-                android:textSize="10sp"
-                android:textStyle="bold" />
+                android:textColor="@color/gray2"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="test"/>
+
+            <TextView
+                android:id="@+id/tv_online_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:ellipsize="end"
+                tools:text="9999"
+                android:textColor="@color/gray2"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="12.0dp"
+                android:layout_height="12.0dp"
+                android:layout_toStartOf="@id/tv_online_num"
+                android:layout_marginEnd="2dp"
+                android:src="@drawable/vector_drawable_line"
+                android:layout_centerVertical="true"/>
         </RelativeLayout>
-    </FrameLayout>
-</RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_column_item_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_layout"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:shadowRadius="0.1"
+            android:maxLines="2"
+            android:minLines="2"
+            android:textColor="#373737"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
