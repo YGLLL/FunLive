@@ -13,8 +13,6 @@ import java.util.List;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
  * 备注消息：使用了FragmentStatePagerAdapter，可以在切换Fragment时不销毁Fragment

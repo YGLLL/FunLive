@@ -1,15 +1,18 @@
 package com.github.yglll.funlive.presenter.impl;
 
+import com.github.yglll.funlive.net.bean.CapiCategory;
 import com.github.yglll.funlive.net.bean.TempLiveVideoInfo;
+import com.github.yglll.funlive.net.handlingerror.ApiException;
+import com.github.yglll.funlive.net.handlingerror.subscriber.ErrorSubscriber;
 import com.github.yglll.funlive.presenter.interfaces.VideoPlayerInterfaces;
 import com.orhanobut.logger.Logger;
+
+import java.util.List;
 
 import rx.Observer;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
  * 备注消息：
@@ -18,20 +21,15 @@ import rx.Observer;
 public class VideoPlayerPresenter extends VideoPlayerInterfaces.Presenter {
     @Override
     public void setVideoUrl(int roomId) {
-        mModel.getVideoUrl(roomId).subscribe(new Observer<TempLiveVideoInfo>() {
-            @Override
-            public void onCompleted() {
-
-            }
+        mModel.getVideoUrl(roomId).subscribe(new ErrorSubscriber<TempLiveVideoInfo>() {
 
             @Override
-            public void onError(Throwable e) {
+            protected void onError(ApiException ex) {
 
             }
 
             @Override
             public void onNext(TempLiveVideoInfo tempLiveVideoInfo) {
-                Logger.i("onNext(TempLiveVideoInfo tempLiveVideoInfo)");
                 mView.acquisitionVideoUrl(tempLiveVideoInfo.getHls_url());
             }
         });

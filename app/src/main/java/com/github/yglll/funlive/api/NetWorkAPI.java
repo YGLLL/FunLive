@@ -2,8 +2,6 @@ package com.github.yglll.funlive.api;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：API地址
  * 备注消息：
@@ -15,8 +13,13 @@ public class NetWorkAPI {
 
     //获取直播房间列表
     //http://open.douyucdn.cn/api/RoomApi/live/{分类 ID 戒者分类别名}
-    //http://open.douyucdn.cn/api/RoomApi/live获取所有直播列表
     public static final String roomList="api/RoomApi/live/";
+
+    //http://open.douyucdn.cn/api/RoomApi/live获取所有直播列表
+    public static final String allRoom="api/RoomApi/live/";
+
+    //颜值房间列表
+    public static final String faceScoreRoomList="api/RoomApi/live/201";
 
     //获取直播房间详情信息/api/RoomApi/room/{房间 Id 或者房间别名}
     public static final String details="api/RoomApi/room/";
@@ -31,10 +34,6 @@ public class NetWorkAPI {
     //栏目>类别>房间
     //轮播图
     public static final String getCarousel = "api/v1/slide/6";
-    //最热房间列表
-    public static final String getHomeHotColumn = "api/v1/getbigDataRoom";
-    //颜值房间列表
-    public static final String getHomeFaceScoreColumn = "api/v1/getVerticalRoom";
     //热门类别列表
     public static final String getHomeRecommendHotCate = "api/v1/getHotCate";
     //栏目列表

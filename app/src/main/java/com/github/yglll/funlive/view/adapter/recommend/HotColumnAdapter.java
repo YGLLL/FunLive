@@ -12,23 +12,22 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.HomeHotColumn;
+import com.github.yglll.funlive.net.bean.RoomInfo;
 
 import java.util.List;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
  * 备注消息：
  * 创建时间：2018/01/21   22:36
  **/
 public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<HomeHotColumn> mHomeHotColumn;
+    private List<RoomInfo> mHomeHotColumn;
     private Context context;
 
-    public HotColumnAdapter(Context context, List<HomeHotColumn> mHomeHotColumn)
+    public HotColumnAdapter(Context context, List<RoomInfo> mHomeHotColumn)
     {
         this.context=context;
         this.mHomeHotColumn=mHomeHotColumn;
@@ -46,14 +45,10 @@ public class HotColumnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
     private void bindHotColumun(HotColumnHolder holder,final int position) {
-        holder.img_item_gridview.setImageURI(Uri.parse(mHomeHotColumn.get(position).getVertical_src()));
+        holder.img_item_gridview.setImageURI(Uri.parse(mHomeHotColumn.get(position).getRoom_src()));
         holder.tv_column_item_nickname.setText(mHomeHotColumn.get(position).getRoom_name());
         holder.tv_nickname.setText(mHomeHotColumn.get(position).getNickname());
         holder.tv_online_num.setText(String.valueOf(mHomeHotColumn.get(position).getOnline()));
-        if(mHomeHotColumn.get(position).getCate_id().equals("201"))
-        {
-            //holder.rl_live_icon.setBackgroundResource(R.drawable.search_header_live_type_mobile);
-        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

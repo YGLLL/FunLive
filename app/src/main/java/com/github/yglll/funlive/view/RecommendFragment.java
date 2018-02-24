@@ -33,8 +33,6 @@ import cn.bingoogolapple.bgabanner.BGABanner;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
  * 备注消息：
@@ -88,7 +86,7 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     private void refresh(){
         mPresenter.setCarousel();
         mPresenter.setHotColumn();
-        mPresenter.setFaceScoreColumn(0,4);
+        mPresenter.setFaceScoreColumn();
         mPresenter.setHotCate();
         mPresenter.setNavigation();
     }
@@ -137,12 +135,12 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     }
 
     @Override
-    public void showHotColumn(List<HomeHotColumn> list) {
+    public void showHotColumn(List<RoomInfo> list) {
         recommendAdapter.setHomeHotColumns(list);
     }
 
     @Override
-    public void showFaceScoreColumn(List<HomeFaceScoreColumn> list) {
+    public void showFaceScoreColumn(List<RoomInfo> list) {
         recommendAdapter.setHomeFaceScoreColumns(list);
     }
 

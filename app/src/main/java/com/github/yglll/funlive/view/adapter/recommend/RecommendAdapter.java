@@ -17,6 +17,7 @@ import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.HomeFaceScoreColumn;
 import com.github.yglll.funlive.net.bean.HomeHotColumn;
 import com.github.yglll.funlive.net.bean.HomeCate;
+import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.view.manager.FullyGridLayoutManager;
 import com.github.yglll.funlive.utils.Utils;
 
@@ -26,8 +27,6 @@ import java.util.List;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
  * 备注消息：
@@ -36,9 +35,9 @@ import java.util.List;
 //todo 不用进一步封装,但需要优化代码
 public class RecommendAdapter extends RecyclerView.Adapter {
 
-    private List<HomeHotColumn> homeHotColumns;
+    private List<RoomInfo> homeHotColumns;
     private HotColumnAdapter hotColumnAdapter;
-    private List<HomeFaceScoreColumn> homeFaceScoreColumns;
+    private List<RoomInfo> homeFaceScoreColumns;
     private FaceScoreColumnAdapter faceScoreColumnAdapter;
     private List<HomeCate> homeCates;
     private RecommendAllColumnAdapter recommendAllColumnAdapter;
@@ -206,12 +205,12 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         return navigationView;
     }
 
-    public void setHomeHotColumns(List<HomeHotColumn> homeHotColumns) {
+    public void setHomeHotColumns(List<RoomInfo> homeHotColumns) {
         this.homeHotColumns = homeHotColumns;
         notifyDataSetChanged();
     }
 
-    public void setHomeFaceScoreColumns(List<HomeFaceScoreColumn> homeFaceScoreColumns) {
+    public void setHomeFaceScoreColumns(List<RoomInfo> homeFaceScoreColumns) {
         this.homeFaceScoreColumns = homeFaceScoreColumns;
         notifyDataSetChanged();
     }

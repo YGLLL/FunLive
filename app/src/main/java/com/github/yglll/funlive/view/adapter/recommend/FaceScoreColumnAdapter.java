@@ -10,33 +10,32 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.HomeFaceScoreColumn;
+import com.github.yglll.funlive.net.bean.RoomInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
  * 备注消息：
  * 创建时间：2018/01/25   15:52
  **/
 public class FaceScoreColumnAdapter extends RecyclerView.Adapter<FaceScoreColumnAdapter.FaceScoreColumnHolder> {
-    private List<HomeFaceScoreColumn> mHomeFaceScoreColumn;
+    private List<RoomInfo> mHomeFaceScoreColumn;
 
     public FaceScoreColumnAdapter() {
-        this.mHomeFaceScoreColumn = new ArrayList<HomeFaceScoreColumn>();
+        this.mHomeFaceScoreColumn = new ArrayList<>();
     }
 
-    public void setFaceScoreColumn(List<HomeFaceScoreColumn> mHomeFaceScoreColumn) {
+    public void setFaceScoreColumn(List<RoomInfo> mHomeFaceScoreColumn) {
         this.mHomeFaceScoreColumn.clear();
         this.mHomeFaceScoreColumn.addAll(mHomeFaceScoreColumn);
         notifyDataSetChanged();
     }
 
-    public void setFaceScoreColumnLoadMore(List<HomeFaceScoreColumn> mHomeFaceScoreColumn) {
+    public void setFaceScoreColumnLoadMore(List<RoomInfo> mHomeFaceScoreColumn) {
         this.mHomeFaceScoreColumn.addAll(mHomeFaceScoreColumn);
         notifyDataSetChanged();
     }
@@ -49,10 +48,9 @@ public class FaceScoreColumnAdapter extends RecyclerView.Adapter<FaceScoreColumn
 
     @Override
     public void onBindViewHolder(FaceScoreColumnHolder holder, int position) {
-        holder.img_item_gridview.setImageURI(Uri.parse(mHomeFaceScoreColumn.get(position).getVertical_src()));
+        holder.img_item_gridview.setImageURI(Uri.parse(mHomeFaceScoreColumn.get(position).getRoom_src()));
         holder.tv_column_item_nickname.setText(mHomeFaceScoreColumn.get(position).getNickname());
         holder.tv_online_num.setText(String.valueOf(mHomeFaceScoreColumn.get(position).getOnline()));
-        holder.tv_facescore_city.setText(mHomeFaceScoreColumn.get(position).getAnchor_city());
 
         holder.img_item_gridview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,14 +76,12 @@ public class FaceScoreColumnAdapter extends RecyclerView.Adapter<FaceScoreColumn
         public SimpleDraweeView img_item_gridview;
         public TextView tv_column_item_nickname;
         public TextView tv_online_num;
-        public TextView tv_facescore_city;
 
         public FaceScoreColumnHolder(View view) {
             super(view);
             img_item_gridview = (SimpleDraweeView) view.findViewById(R.id.img_item_gridview);
             tv_column_item_nickname = (TextView) view.findViewById(R.id.tv_nickname);
             tv_online_num = (TextView) view.findViewById(R.id.tv_online_num);
-            tv_facescore_city = (TextView) view.findViewById(R.id.tv_facescore_city);
         }
     }
 }

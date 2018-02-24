@@ -10,8 +10,6 @@ import butterknife.Unbinder;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：定义每一个Activity都应该有的行为：在初始化时绑定MVP，在销毁时解除绑定MVP
  * 备注消息：

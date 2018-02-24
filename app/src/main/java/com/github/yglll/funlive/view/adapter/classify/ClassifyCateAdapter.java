@@ -22,8 +22,6 @@ import java.util.List;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
  * 备注消息：
@@ -76,7 +74,11 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_live_info,parent,false));
+        if(isFaceScoreColumn){
+            return new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_live_info_facescore,parent,false));
+        }else {
+            return new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_live_info,parent,false));
+        }
     }
     @Override
     public void onBindViewHolder(Holder holder,final int position) {

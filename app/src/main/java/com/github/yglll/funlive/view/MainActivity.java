@@ -1,26 +1,19 @@
 package com.github.yglll.funlive.view;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.view.EventBus.SelectPageViewEvent;
 import com.github.yglll.funlive.view.adapter.MainActivityPagerAdapter;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Logger;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -30,6 +23,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 作者：YGL
+ * 版本号：1.0
+ * 类描述：
+ * 备注消息：
+ * 创建时间：
+ **/
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.view_pager)
     ViewPager viewPager;
@@ -42,12 +42,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initView();
+    }
 
-        MainActivityPagerAdapter mPagerAdapter=new MainActivityPagerAdapter(getSupportFragmentManager());
+    private void initView(){
+        MainActivityPagerAdapter mPagerAdapter=new MainActivityPagerAdapter(getSupportFragmentManager(),getFragments());
         //不摧毁Fragment
         viewPager.setOffscreenPageLimit(mPagerAdapter.getCount());
         viewPager.setAdapter(mPagerAdapter);
-        viewPager.addOnPageChangeListener(mInternalPageChangeListener);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+            @Override
+            public void onPageSelected(int position) {
+                if (menuItem != null) {
+                    menuItem.setChecked(false);
+                } else {
+                    mBottomNavigationView.getMenu().getItem(0).setChecked(false);
+                }
+                menuItem = mBottomNavigationView.getMenu().getItem(position);
+                menuItem.setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {}
+        });
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -72,6 +92,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //添加三大Fragment
+    private List<Fragment> getFragments(){
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new RecommendFragment());
+        fragments.add(new ClassifyFragment());
+        fragments.add(new UserFragment());
+        return fragments;
+    }
+
     //使用EventBus接收来自NavigationAdapter的消息
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSelectPage(SelectPageViewEvent event) {
@@ -91,27 +120,4 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
-
-    private final ViewPager.OnPageChangeListener mInternalPageChangeListener=new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            if (menuItem != null) {
-                menuItem.setChecked(false);
-            } else {
-                mBottomNavigationView.getMenu().getItem(0).setChecked(false);
-            }
-            menuItem = mBottomNavigationView.getMenu().getItem(position);
-            menuItem.setChecked(true);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
 }

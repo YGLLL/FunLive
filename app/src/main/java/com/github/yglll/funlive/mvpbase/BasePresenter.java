@@ -4,8 +4,6 @@ import android.content.Context;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：定义每一个Presenter都应该具备的基本属性
  * 备注消息：

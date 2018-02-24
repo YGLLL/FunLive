@@ -2,6 +2,9 @@ package com.github.yglll.funlive.presenter.impl;
 
 import com.github.yglll.funlive.net.bean.CapiCategory;
 import com.github.yglll.funlive.net.bean.CateList;
+import com.github.yglll.funlive.net.bean.Category;
+import com.github.yglll.funlive.net.handlingerror.ApiException;
+import com.github.yglll.funlive.net.handlingerror.subscriber.ErrorSubscriber;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyPresenterInterfaces;
 
 import java.util.List;
@@ -10,8 +13,6 @@ import rx.Observer;
 
 /**
  * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
  * 版本号：1.0
  * 类描述：
  * 备注消息：
@@ -21,14 +22,10 @@ public class ClassifyPresenter extends ClassifyPresenterInterfaces.Presenter{
 
     @Override
     public void setCateList() {
-        mModel.getCateList().subscribe(new Observer<List<CateList>>() {
-            @Override
-            public void onCompleted() {
-
-            }
+        mModel.getCateList().subscribe(new ErrorSubscriber<List<CateList>>() {
 
             @Override
-            public void onError(Throwable e) {
+            protected void onError(ApiException ex) {
 
             }
 
@@ -41,14 +38,10 @@ public class ClassifyPresenter extends ClassifyPresenterInterfaces.Presenter{
 
     @Override
     public void setCate(String cateName) {
-        mModel.getCate(cateName).subscribe(new Observer<List<CapiCategory>>() {
-            @Override
-            public void onCompleted() {
-
-            }
+        mModel.getCate(cateName).subscribe(new ErrorSubscriber<List<CapiCategory>>() {
 
             @Override
-            public void onError(Throwable e) {
+            protected void onError(ApiException ex) {
 
             }
 

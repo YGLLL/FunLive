@@ -9,15 +9,15 @@
     app:cardElevation="1dp">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/img_item_gridview"
             android:layout_width="match_parent"
-            android:layout_height="180.0dp"
-            app:placeholderImage="@drawable/vector_drawable_load_pictrue"
-            app:placeholderImageScaleType="center"
+            android:layout_height="180dp"
             app:actualImageScaleType="centerCrop"
-            tools:src="@drawable/vector_drawable_load_pictrue" />
+            app:placeholderImage="@drawable/vector_drawable_load_pictrue"
+            app:placeholderImageScaleType="center" />
 
         <RelativeLayout
             android:id="@+id/info_layout"
@@ -43,7 +43,7 @@
                 android:layout_toEndOf="@id/img_nickname"
                 android:layout_marginStart="2dp"
                 android:ellipsize="end"
-                android:textColor="@color/grayDark"
+                android:textColor="@color/gray2"
                 android:textSize="12sp"
                 tools:text="test"/>
 
@@ -66,32 +66,20 @@
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/info_layout"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_centerVertical="true">
-        <ImageView
-            android:id="@+id/city_image"
-            android:layout_width="12.0dp"
-            android:layout_height="12.0dp"
-            android:layout_marginEnd="2dp"
-            android:src="@drawable/vector_drawable_location"
-            android:layout_centerVertical="true"/>
-
         <TextView
-            android:id="@+id/tv_facescore_city"
+            android:id="@+id/tv_column_item_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/city_image"
-            android:textSize="12sp"
-            android:textColor="@color/gray2"
+            android:layout_below="@id/info_layout"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:ellipsize="end"
-            android:singleLine="true"
-            tools:text="贵港" />
-    </RelativeLayout>
+            android:includeFontPadding="false"
+            android:shadowRadius="0.1"
+            android:maxLines="2"
+            android:minLines="2"
+            android:textColor="@color/grayDark"
+            android:textSize="14sp" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>
