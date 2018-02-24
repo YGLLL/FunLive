@@ -8,6 +8,7 @@
     <color name="gray">#c6c6c6</color>
     <color name="gray2">#888888</color>
     <color name="grayDark">#333333</color>
+    <color name="transparencyBlack">#00FFFFFF</color>
 
     <!--主题色-->
     <color name="green500">#4CAF50</color>

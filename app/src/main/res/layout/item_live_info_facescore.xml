@@ -1,109 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5.0dp"
-    android:layout_height="wrap_content">
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/img_item_gridview"
-        android:layout_width="200.0dp"
-        android:layout_height="250.0dp"
-        fresco:placeholderImage="@drawable/ic_launcher"
-        fresco:actualImageScaleType="centerCrop"
-        fresco:placeholderImageScaleType="centerCrop"
-        android:src="@drawable/ic_launcher"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="10.0dp"
-        fresco:roundedCornerRadius="6dip"
-        android:layout_alignParentStart="true" />
-    <ImageView
-        android:id="@+id/img_nickname"
-        android:layout_width="12.0dp"
-        android:layout_height="12.0dp"
-        android:src="@drawable/ic_launcher"
-        android:layout_below="@id/img_item_gridview"
-        android:layout_marginLeft="3.0dp"
-        android:layout_marginRight="3.0dp"
-        android:layout_marginTop="2.0dp"
-        />
-     <TextView
-         android:id="@+id/tv_column_item_nickname"
-         android:layout_toRightOf="@id/img_nickname"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@id/img_item_gridview"
-         android:textSize="12sp"
-         android:textColor="#373737"
-         android:ellipsize="end"
-         android:singleLine="true"
-         android:text="超人不哭"
-         android:width="100.0dp"
-         />
-    <TextView
-        android:id="@+id/tv_facescore_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/img_item_gridview"
-        android:textSize="12sp"
-        android:textColor="#8e8e8e"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:layout_alignParentRight="true"
-        android:text="北京"
-        />
-    <ImageView
-        android:layout_width="12.0dp"
-        android:layout_height="12.0dp"
-        android:src="@drawable/ic_launcher"
-        android:layout_marginTop="3.0dp"
-        android:layout_below="@id/img_item_gridview"
-        android:layout_toLeftOf="@id/tv_facescore_city"
-        android:layout_marginRight="3.0dp"
-        />
-    <FrameLayout
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="4dp"
+    app:cardElevation="1dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/img_item_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="180.0dp"
+            app:placeholderImage="@drawable/vector_drawable_load_pictrue"
+            app:placeholderImageScaleType="center"
+            app:actualImageScaleType="centerCrop"
+            tools:src="@drawable/vector_drawable_load_pictrue" />
+
+        <RelativeLayout
+            android:id="@+id/info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_item_gridview"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_centerVertical="true">
+            <ImageView
+                android:id="@+id/img_nickname"
+                android:layout_width="12.0dp"
+                android:layout_height="12.0dp"
+                android:src="@drawable/vector_drawable_user"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/img_nickname"
+                android:layout_marginStart="2dp"
+                android:ellipsize="end"
+                android:textColor="@color/grayDark"
+                android:textSize="12sp"
+                tools:text="test"/>
+
+            <TextView
+                android:id="@+id/tv_online_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:ellipsize="end"
+                tools:text="9999"
+                android:textColor="@color/gray2"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="12.0dp"
+                android:layout_height="12.0dp"
+                android:layout_toStartOf="@id/tv_online_num"
+                android:layout_marginEnd="2dp"
+                android:src="@drawable/vector_drawable_line"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/info_layout"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:id="@+id/city_image"
+            android:layout_width="12.0dp"
+            android:layout_height="12.0dp"
+            android:layout_marginEnd="2dp"
+            android:src="@drawable/vector_drawable_location"
+            android:layout_centerVertical="true"/>
 
-        >
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        >
-        <RelativeLayout
-            android:layout_width="45.0dp"
-            android:layout_height="18.0dp"
-            android:background="@drawable/ic_launcher"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            >
         <TextView
-            android:id="@+id/tv_online_num"
+            android:id="@+id/tv_facescore_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/city_image"
+            android:textSize="12sp"
+            android:textColor="@color/gray2"
             android:ellipsize="end"
-            android:text="9999"
-            android:textColor="#ffffff"
-            android:textSize="10sp" />
-        <ImageView
-            android:layout_width="10.0dp"
-            android:layout_height="10.0dp"
-            android:layout_marginRight="3.0dp"
-            android:layout_marginTop="3.0dp"
-            android:layout_toLeftOf="@id/tv_online_num"
-            android:src="@drawable/ic_launcher" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="60.0dp"
-            android:layout_height="18.0dp"
-            android:background="@drawable/ic_launcher"
-            android:layout_alignParentLeft="true"
-            android:gravity="center"
-            >
-        </RelativeLayout>
-
+            android:singleLine="true"
+            tools:text="贵港" />
     </RelativeLayout>
-</FrameLayout>
-</RelativeLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

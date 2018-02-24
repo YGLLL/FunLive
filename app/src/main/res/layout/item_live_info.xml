@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="3dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="4dp"
+    app:cardElevation="1dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -13,16 +15,19 @@
             android:id="@+id/img_item_gridview"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            fresco:actualImageScaleType="centerCrop"
-            fresco:placeholderImage="@drawable/vector_drawable_load_pictrue"
-            fresco:placeholderImageScaleType="center" />
+            app:actualImageScaleType="centerCrop"
+            app:placeholderImage="@drawable/vector_drawable_load_pictrue"
+            app:placeholderImageScaleType="center" />
 
         <RelativeLayout
             android:id="@+id/info_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/img_item_gridview"
-            android:layout_margin="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_centerVertical="true">
             <ImageView
                 android:id="@+id/img_nickname"
@@ -40,7 +45,6 @@
                 android:ellipsize="end"
                 android:textColor="@color/gray2"
                 android:textSize="12sp"
-                android:textStyle="bold"
                 tools:text="test"/>
 
             <TextView
@@ -67,16 +71,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_layout"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:ellipsize="end"
             android:includeFontPadding="false"
             android:shadowRadius="0.1"
             android:maxLines="2"
             android:minLines="2"
-            android:textColor="#373737"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textColor="@color/grayDark"
+            android:textSize="14sp" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

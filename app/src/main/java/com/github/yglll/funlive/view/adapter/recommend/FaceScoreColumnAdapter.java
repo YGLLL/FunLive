@@ -83,7 +83,7 @@ public class FaceScoreColumnAdapter extends RecyclerView.Adapter<FaceScoreColumn
         public FaceScoreColumnHolder(View view) {
             super(view);
             img_item_gridview = (SimpleDraweeView) view.findViewById(R.id.img_item_gridview);
-            tv_column_item_nickname = (TextView) view.findViewById(R.id.tv_column_item_nickname);
+            tv_column_item_nickname = (TextView) view.findViewById(R.id.tv_nickname);
             tv_online_num = (TextView) view.findViewById(R.id.tv_online_num);
             tv_facescore_city = (TextView) view.findViewById(R.id.tv_facescore_city);
         }
