@@ -24,39 +24,45 @@ import rx.Observable;
  * 备注消息：
  * 创建时间：2017/12/21   13:47
  **/
-public interface Live {
-    @GET(NetWorkAPI.roomList+"{id}")
-    Observable<HttpResponse<List<RoomInfo>>> getLiveList(@Path("id") String id, @QueryMap Map<String, Integer> params);
+public interface FunLiveAPI {
+    //*******************baseApi**************************************************
 
-    //首页   推荐轮播图
-    @GET(NetWorkAPI.getCarousel)
-    Observable<HttpResponse<List<HomeCarousel>>> getCarousel();
+    @GET(APILocation.roomList+"{id}")
+    Observable<HttpResponse<List<RoomInfo>>> getRoomList(@Path("id") String id, @QueryMap Map<String, Integer> params);
 
-    //首页    最热
-    @GET(NetWorkAPI.allRoom)
+    //首页最热
+    @GET(APILocation.allRoom)
     Observable<HttpResponse<List<RoomInfo>>> getHotColumn(@QueryMap Map<String, Integer> params);
 
-    //首页---颜值
-    @GET(NetWorkAPI.faceScoreRoomList)
+    //首页颜值
+    @GET(APILocation.faceScoreRoomList)
     Observable<HttpResponse<List<RoomInfo>>> getFaceScoreColumn(@QueryMap Map<String, Integer> params);
 
+    //获取所有分类
+    @GET(APILocation.allCategory)
+    Observable<HttpResponse<List<Category>>> getCategory(@QueryMap Map<String, Integer> params);
+
+
+    //*************************baseApi_capi*****************************************
+
+
+    //首页   推荐轮播图
+    @GET(APILocation.getCarousel)
+    Observable<HttpResponse<List<HomeCarousel>>> getCarousel();
+
     //首页---热门类别
-    @GET(NetWorkAPI.getHomeRecommendHotCate)
+    @GET(APILocation.getHomeRecommendHotCate)
     Observable<HttpResponse<List<HomeCate>>> getHotCate(@QueryMap Map<String, String> params);
 
-    //获取所有分类
-    @GET(NetWorkAPI.allCategory)
-    Observable<HttpResponse<List<Category>>> getCategory();
-
     //所有栏目
-    @GET(NetWorkAPI.getCateList)
+    @GET(APILocation.getCateList)
     Observable<HttpResponse<List<CateList>>> getCateList(@QueryMap Map<String, String> params);
 
     //获取一个栏目所有类别
-    @GET(NetWorkAPI.getCate)
+    @GET(APILocation.getCate)
     Observable<HttpResponse<List<CapiCategory>>> getCapiCategory(@QueryMap Map<String, String> params);
 
     //通过roomId获取视频播放地址
-    @GET(NetWorkAPI.getVideoUrl)
+    @GET(APILocation.getVideoUrl)
     Observable<HttpResponse<TempLiveVideoInfo>> getVideoUrl(@QueryMap Map<String, Integer> params);
 }

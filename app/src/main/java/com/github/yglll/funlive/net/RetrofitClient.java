@@ -2,7 +2,7 @@ package com.github.yglll.funlive.net;
 
 import android.text.TextUtils;
 
-import com.github.yglll.funlive.api.NetWorkAPI;
+import com.github.yglll.funlive.api.APILocation;
 import com.github.yglll.funlive.net.retrofitfactory.ConverterFactory;
 
 import retrofit2.Retrofit;
@@ -20,7 +20,7 @@ public class RetrofitClient {
     private static Retrofit retrofit;
 
     public RetrofitClient(){
-        baseUrl= NetWorkAPI.baseUrl;
+        baseUrl= APILocation.baseUrl;
     }
     public RetrofitClient(String baseUrl){
         this.baseUrl=baseUrl;

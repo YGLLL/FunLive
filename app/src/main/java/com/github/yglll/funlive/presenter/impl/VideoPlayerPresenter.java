@@ -1,5 +1,7 @@
 package com.github.yglll.funlive.presenter.impl;
 
+import android.widget.Toast;
+
 import com.github.yglll.funlive.net.bean.CapiCategory;
 import com.github.yglll.funlive.net.bean.TempLiveVideoInfo;
 import com.github.yglll.funlive.net.handlingerror.ApiException;
@@ -9,6 +11,7 @@ import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import rx.Observer;
 
 /**
@@ -25,7 +28,7 @@ public class VideoPlayerPresenter extends VideoPlayerInterfaces.Presenter {
 
             @Override
             protected void onError(ApiException ex) {
-
+                mView.showErrorWithStatus(ex.message);
             }
 
             @Override

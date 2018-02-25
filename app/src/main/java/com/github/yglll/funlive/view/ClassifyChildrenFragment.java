@@ -3,6 +3,7 @@ package com.github.yglll.funlive.view;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.ClassifyModel;
@@ -14,10 +15,14 @@ import com.github.yglll.funlive.presenter.impl.ClassifyPresenter;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyPresenterInterfaces;
 import com.github.yglll.funlive.view.adapter.classify.ClassifyAdapter;
 import com.github.yglll.funlive.view.adapter.classify.ClassifyGridAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
 import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
 
 /**
  * 作者：YGL
@@ -28,8 +33,8 @@ import butterknife.BindView;
  **/
 public class ClassifyChildrenFragment extends BaseFragment<ClassifyModel,ClassifyPresenter> implements ClassifyPresenterInterfaces.View{
 
-    @BindView(R.id.swipe_refresh_layout)
-    SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.refresh_layout)
+    SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.grid_view)
     GridView gridView;
 
@@ -44,25 +49,22 @@ public class ClassifyChildrenFragment extends BaseFragment<ClassifyModel,Classif
     @Override
     protected void onInitView(Bundle bundle) {
         cateName=getArguments().getString(ClassifyAdapter.CATENAMEKEY,"");
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(RefreshLayout refreshLayout) {
                 refresh();
+                smartRefreshLayout.finishRefresh();
             }
         });
 
         classifyGridAdapter=new ClassifyGridAdapter();
         gridView.setAdapter(classifyGridAdapter);
+
+        refresh();
     }
 
     private void refresh(){
         mPresenter.setCate(cateName);
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-        refresh();
     }
 
     @Override
@@ -72,7 +74,9 @@ public class ClassifyChildrenFragment extends BaseFragment<ClassifyModel,Classif
 
     @Override
     public void showErrorWithStatus(String msg) {
-
+        smartRefreshLayout.finishLoadMore();
+        smartRefreshLayout.finishRefresh();
+        Toasty.info(getActivity(),msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

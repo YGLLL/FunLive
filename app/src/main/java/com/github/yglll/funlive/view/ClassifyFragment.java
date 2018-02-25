@@ -2,6 +2,7 @@ package com.github.yglll.funlive.view;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.widget.Toast;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.github.yglll.funlive.R;
@@ -17,6 +18,7 @@ import com.github.yglll.funlive.view.adapter.classify.ClassifyAdapter;
 import java.util.List;
 
 import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
 
 /**
  * 作者：YGL
@@ -36,7 +38,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyModel,ClassifyPresent
 
     @Override
     public void showErrorWithStatus(String msg) {
-
+        Toasty.info(getActivity(),msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

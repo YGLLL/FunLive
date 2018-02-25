@@ -14,10 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.yglll.funlive.R;
-import com.github.yglll.funlive.net.bean.HomeFaceScoreColumn;
-import com.github.yglll.funlive.net.bean.HomeHotColumn;
+import com.github.yglll.funlive.net.bean.Category;
 import com.github.yglll.funlive.net.bean.HomeCate;
 import com.github.yglll.funlive.net.bean.RoomInfo;
+import com.github.yglll.funlive.view.adapter.RoomListAdapter;
 import com.github.yglll.funlive.view.manager.FullyGridLayoutManager;
 import com.github.yglll.funlive.utils.Utils;
 
@@ -32,27 +32,25 @@ import java.util.List;
  * 备注消息：
  * 创建时间：2018/01/18   18:40
  **/
-//todo 不用进一步封装,但需要优化代码
 public class RecommendAdapter extends RecyclerView.Adapter {
 
     private List<RoomInfo> homeHotColumns;
-    private HotColumnAdapter hotColumnAdapter;
     private List<RoomInfo> homeFaceScoreColumns;
-    private FaceScoreColumnAdapter faceScoreColumnAdapter;
-    private List<HomeCate> homeCates;
-    private RecommendAllColumnAdapter recommendAllColumnAdapter;
+    private List<List<RoomInfo>> data;
+    private List<Category> categories;
+    private RoomListAdapter roomListAdapter;
 
     private Context mContext;
 
-    protected View customHeaderView=null;
-    protected View customLoadMoreView=null;
+    protected View carouselView=null;
     protected View navigationView=null;
 
     public RecommendAdapter(Context context){
         this.mContext=context;
         homeHotColumns=new ArrayList<>();
         homeFaceScoreColumns=new ArrayList<>();
-        homeCates =new ArrayList<>();
+        categories=new ArrayList<>();
+        data =new ArrayList<>();
     }
 
     public class NormalViewHolder extends RecyclerView.ViewHolder {
@@ -85,99 +83,71 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType){
-            case VIEW_TYPE.HEADER:
-                return new CustomViewHolder(customHeaderView);
-            case VIEW_TYPE.FOOTER:
-                break;
-            case VIEW_TYPE.NORMAL:
-                return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recommend, parent, false));
+            case VIEW_TYPE.CAROUSEL:
+                return new CustomViewHolder(carouselView);
             case VIEW_TYPE.NAVIGATION:
                 return new CustomViewHolder(navigationView);
+            default:
+                return new NormalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recommend, parent, false));
         }
-        return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        int start = isHaveHeader()+isHaveNavigation();
-        if (position>=start && !isFooter(position)) {
-            onBindNormalViewHolder(holder, position - start, true);
-        }
-    }
-    private void onBindNormalViewHolder(RecyclerView.ViewHolder holder, int position,Boolean isItem){
         if(holder instanceof NormalViewHolder){
+            position-=2;
             NormalViewHolder normalViewHolder=(NormalViewHolder)holder;
             switch (position){
                 case 0:
                     normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
                     normalViewHolder.tv_column_name.setText("最热");
                     normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
-                    hotColumnAdapter = new HotColumnAdapter(normalViewHolder.rv_column_list.getContext(),homeHotColumns);
-                    normalViewHolder.rv_column_list.setAdapter(hotColumnAdapter);
+                    roomListAdapter=new RoomListAdapter(mContext,homeHotColumns);
+                    normalViewHolder.rv_column_list.setAdapter(roomListAdapter);
                     break;
                 case 1:
                     normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
                     normalViewHolder.tv_column_name.setText("颜值");
                     normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
-                    faceScoreColumnAdapter=new FaceScoreColumnAdapter();
-                    faceScoreColumnAdapter.setFaceScoreColumn(homeFaceScoreColumns);
-                    normalViewHolder.rv_column_list.setAdapter(faceScoreColumnAdapter);
+                    roomListAdapter =new RoomListAdapter(mContext,homeFaceScoreColumns,true);
+                    normalViewHolder.rv_column_list.setAdapter(roomListAdapter);
                     break;
                 default:
-                    if(homeCates.size()>0){
+                    if(data.size()>0){
                         normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
-                        normalViewHolder.tv_column_name.setText(homeCates.get(position - 2).getTag_name());
+                        normalViewHolder.tv_column_name.setText(categories.get(position).getGame_name());
                         normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
-                        recommendAllColumnAdapter =new RecommendAllColumnAdapter(normalViewHolder.rv_column_list.getContext(), homeCates.get(position - 2).getRoom_list());
-                        normalViewHolder.rv_column_list.setAdapter(recommendAllColumnAdapter);
+                        roomListAdapter=new RoomListAdapter(mContext,data.get(position));
+                        normalViewHolder.rv_column_list.setAdapter(roomListAdapter);
                     }
             }
         }
     }
 
-    public boolean isFooter(int position) {
-        int start = isHaveFooter();
-        return customLoadMoreView != null && position > getItemCount() + start;
-    }
 
-    public boolean isHeader(int position) {
-        return isHaveHeader() > 0 && position == 0;
-    }
 
     @Override
     public int getItemCount() {
-        return homeHotColumns.size()+3;
+        return homeHotColumns.size()+4;
     }
 
     @Override
     public final int getItemViewType(int position){
         switch (position){
             case 0:
-                if(isHaveHeader()>0)return VIEW_TYPE.HEADER;
-                break;
+                return VIEW_TYPE.CAROUSEL;
             case 1:
-                if(isHaveNavigation()>0)return VIEW_TYPE.NAVIGATION;
+                return VIEW_TYPE.NAVIGATION;
+            case 2:
+                return VIEW_TYPE.HOT;
+            case 3:
+                return VIEW_TYPE.FACE;
             default:
-                if(position>=getItemCount()&&isHaveFooter()>0)return VIEW_TYPE.FOOTER;
+                return VIEW_TYPE.NORMAL;
         }
-        return VIEW_TYPE.NORMAL;
     }
 
-    private int isHaveNavigation(){return navigationView==null?0:1;}
-    private int isHaveHeader(){
-        return customHeaderView==null?0:1;
-    }
-    private int isHaveFooter(){
-        return customLoadMoreView==null?0:1;
-    }
-
-    public View setCustomHeaderView(View customHeaderView) {
-        Utils.removeViewFromParent(customHeaderView);
-        this.customHeaderView = customHeaderView;
-        notifyDataSetChanged();
-        return customHeaderView;
-    }
-    public View setCustomHeaderView(@LayoutRes int id,RecyclerView recyclerView){
+    public View setCarouselView(@LayoutRes int id,RecyclerView recyclerView){
         if (recyclerView==null)return null;
         Context context=recyclerView.getContext();
         String resourceTypeName=context.getResources().getResourceTypeName(id);
@@ -185,12 +155,9 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             throw new RuntimeException(context.getResources().getResourceTypeName(id)+" does not a layout,check again");
         }
         FrameLayout frameLayout=new FrameLayout(context);
-        customHeaderView=LayoutInflater.from(context).inflate(id,frameLayout,false);
+        carouselView=LayoutInflater.from(context).inflate(id,frameLayout,false);
         notifyDataSetChanged();
-        return customHeaderView;
-    }
-    public void setCustomLoadMoreView(View customLoadMoreView) {
-        this.customLoadMoreView = customLoadMoreView;
+        return carouselView;
     }
     public View setNavigationView(@LayoutRes int id,RecyclerView recyclerView) {
         if (recyclerView==null)return null;
@@ -215,15 +182,17 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void setHomeCates(List<HomeCate> homeCates) {
-        this.homeCates = homeCates;
+    public void setData(List<Category> categories,List<List<RoomInfo>> data) {
+        this.categories=categories;
+        this.data = data;
         notifyDataSetChanged();
     }
 
     protected class VIEW_TYPE{
-        public static final int HEADER=-1;
-        public static final int FOOTER=-2;
-        public static final int NORMAL=-3;
-        public static final int NAVIGATION=-4;
+        public static final int CAROUSEL=-1;
+        public static final int NAVIGATION=-2;
+        public static final int HOT=-3;
+        public static final int FACE=-4;
+        public static final int NORMAL=-5;
     }
 }

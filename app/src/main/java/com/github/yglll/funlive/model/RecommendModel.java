@@ -1,7 +1,7 @@
 package com.github.yglll.funlive.model;
 
-import com.github.yglll.funlive.api.Live;
-import com.github.yglll.funlive.api.NetWorkAPI;
+import com.github.yglll.funlive.api.FunLiveAPI;
+import com.github.yglll.funlive.api.APILocation;
 import com.github.yglll.funlive.net.bean.Category;
 import com.github.yglll.funlive.net.bean.HomeCarousel;
 import com.github.yglll.funlive.net.bean.HomeCate;
@@ -12,6 +12,7 @@ import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterface
 import com.github.yglll.funlive.utils.ParamsMapUtils;
 
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 
@@ -27,8 +28,8 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
     @Override
     public Observable<List<HomeCarousel>> getCarousel() {
         return new RetrofitClient()
-                .setBaseUrl(NetWorkAPI.baseUrl_capi)
-                .builder(Live.class)
+                .setBaseUrl(APILocation.baseUrl_capi)
+                .builder(FunLiveAPI.class)
                 .getCarousel()
                 //拦截并处理错误
                 .compose(new DefaultTransformer<List<HomeCarousel>>());//转换
@@ -37,7 +38,7 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
     @Override
     public Observable<List<RoomInfo>> getHotColumn() {
         return new RetrofitClient()
-                .builder(Live.class)
+                .builder(FunLiveAPI.class)
                 .getHotColumn(ParamsMapUtils.getRecommendHotParams())
                 //拦截并处理错误
                 .compose(new DefaultTransformer<List<RoomInfo>>());
@@ -46,27 +47,34 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
     @Override
     public Observable<List<RoomInfo>> getFaceScoreColumn() {
         return new RetrofitClient()
-                .builder(Live.class)
+                .builder(FunLiveAPI.class)
                 .getFaceScoreColumn(ParamsMapUtils.getRecommendOtherCateParams())
                 //拦截并处理错误
                 .compose(new DefaultTransformer<List<RoomInfo>>());
     }
 
     @Override
-    public Observable<List<HomeCate>> getHotCate() {
+    public Observable<List<Category>> getCates(Map<String,Integer> map){
         return new RetrofitClient()
-                .setBaseUrl(NetWorkAPI.baseUrl_capi)
-                .builder(Live.class)
-                .getHotCate(ParamsMapUtils.getDefaultParams())
+                .builder(FunLiveAPI.class)
+                .getCategory(map)
                 //拦截并处理错误
-                .compose(new DefaultTransformer<List<HomeCate>>());
+                .compose(new DefaultTransformer<List<Category>>());
+    }
+
+    @Override
+    public Observable<List<RoomInfo>> getRoomList(String cateId, Map<String, Integer> map) {
+        return new RetrofitClient()
+                .builder(FunLiveAPI.class)
+                .getRoomList(cateId,map)
+                .compose(new DefaultTransformer<List<RoomInfo>>());
     }
 
     @Override
     public Observable<List<Category>> getNavigation() {
         return new RetrofitClient()
-                .builder(Live.class)
-                .getCategory()
+                .builder(FunLiveAPI.class)
+                .getCategory(ParamsMapUtils.getRecommendNavigationParams())
                 //拦截并处理错误
                 .compose(new DefaultTransformer<List<Category>>());
     }

@@ -31,6 +31,7 @@ import com.github.yglll.funlive.db.FunLiveDB;
 import com.github.yglll.funlive.model.VideoPlayerModel;
 import com.github.yglll.funlive.mvpbase.BaseActivity;
 import com.github.yglll.funlive.mvpbase.BaseView;
+import com.github.yglll.funlive.net.bean.FunLiveRoom;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.VideoPlayerPresenter;
 import com.github.yglll.funlive.presenter.interfaces.VideoPlayerInterfaces;
@@ -92,7 +93,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     TextView tvLoadingBuffer;
 
     private DanmuProcess mDanmuProcess;
-    private RoomInfo roomInfo;
+    private FunLiveRoom room;
     private int mScreenWidth = 0;//屏幕宽度
     private boolean mIsFullScreen = true;//是否为全屏
     private int mShowVolume;//声音
@@ -115,8 +116,6 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     //    弹幕控制开关 默认打开状态
     private boolean mDanmuControlFalg = true;
 
-    //屏幕状态横屏or竖屏
-    private boolean screenMode=false;
     //亮度键
     private static final String LIGHTKEY="lightKey";
 
@@ -144,11 +143,20 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
         }
     };
 
+    public static void startActivity(Context mContext,FunLiveRoom funLiveRoom){
+        Intent intent = new Intent(mContext,VideoPlayer.class);
+        intent.putExtra("funLiveRoom",funLiveRoom);
+        mContext.startActivity(intent);
+    }
+
     @Override
     protected int getLayoutId() {
-        screenMode=getIntent().getBooleanExtra("screenMode",false);
+        room=(FunLiveRoom) getIntent().getSerializableExtra("funLiveRoom");
+        if(room==null){
+            return 0;
+        }
         //横屏or竖屏
-        if(screenMode){
+        if(room.getVertical()){
             //竖屏
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }else {
@@ -164,21 +172,16 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
 
     @Override
     public void initView(Bundle bundle) {
-        roomInfo=(RoomInfo) getIntent().getSerializableExtra("roomInfo");
-        if(roomInfo==null){
-            return;
-        }
-
-        tvLiveNickname.setText(roomInfo.getRoom_name());
+        tvLiveNickname.setText(room.getRoom_name());
 
         vmVideoview.setKeepScreenOn(true);
-        mPresenter.setVideoUrl(roomInfo.getRoom_id());
+        mPresenter.setVideoUrl(room.getRoom_id());
 
         //获取屏幕宽度
         Pair<Integer, Integer> screenPair = ScreenResolution.getResolution(this);
         mScreenWidth = screenPair.first;
 
-        initDanMu(roomInfo.getRoom_id());
+        initDanMu(room.getRoom_id());
         initVolumeWithLight();
         addTouchListener();
         vmVideoview.setVideoLayout(VideoView.VIDEO_LAYOUT_STRETCH, 0);
@@ -186,11 +189,11 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
 
         funLiveDB=FunLiveDB.getInstance(this);
         //查询是否为收藏房间
-        if(queryRoomForSQL(roomInfo.getRoom_id())){
+        if(queryRoomForSQL(room.getRoom_id())){
             ivLiveFollow.setImageResource(R.drawable.vector_drawable_follow_light);
         }
         //记录历史纪录
-        funLiveDB.setRoomInfo(roomInfo,FunLiveDbHelper.userHistoryTableName);
+        funLiveDB.setFunLiveRoom(room,FunLiveDbHelper.userHistoryTableName);
     }
 
     private void onEvent() {
@@ -390,7 +393,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
 
     @Override
     public void showErrorWithStatus(String msg) {
-
+        Toasty.info(this,msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -508,7 +511,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     //刷新
     @OnClick(R.id.iv_live_refresh)
     public void ivLiveRefresh() {
-        mPresenter.setVideoUrl(roomInfo.getRoom_id());
+        mPresenter.setVideoUrl(room.getRoom_id());
     }
 
     //分享
@@ -516,7 +519,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     public void share(){
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT,getResources().getString(R.string.video_player_share)+roomInfo.getUrl());
+        intent.putExtra(Intent.EXTRA_TEXT,getResources().getString(R.string.video_player_share)+room.getUrl());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//为Activity新建一个任务栈
         startActivity(intent);
     }
@@ -525,14 +528,14 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     @OnClick(R.id.iv_live_follow)
     public void liveFollow(){
         //查询收藏数据表是否有此房间
-        if(queryRoomForSQL(roomInfo.getRoom_id())){
+        if(queryRoomForSQL(room.getRoom_id())){
             //删除
-            deleteRoomForSQL(roomInfo.getRoom_id());
+            deleteRoomForSQL(room.getRoom_id());
             //控制View
             ivLiveFollow.setImageResource(R.drawable.vector_drawable_follow);
         }else {
             //添加当前房间到数据库
-            addRoomForSQL(this.roomInfo);
+            addRoomForSQL(this.room);
             //控制View
             ivLiveFollow.setImageResource(R.drawable.vector_drawable_follow_light);
             Toasty.info(this,getString(R.string.followed), Toast.LENGTH_SHORT).show();
@@ -551,14 +554,14 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     private void deleteRoomForSQL(int roomId){
         funLiveDB.deleteRoom(roomId,FunLiveDbHelper.userCollectionTableName);
     }
-    private void addRoomForSQL(RoomInfo roomInfo){
-        funLiveDB.setRoomInfo(roomInfo,FunLiveDbHelper.userCollectionTableName);
+    private void addRoomForSQL(FunLiveRoom funLiveRoom){
+        funLiveDB.setFunLiveRoom(funLiveRoom,FunLiveDbHelper.userCollectionTableName);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        mPresenter.setVideoUrl(roomInfo.getRoom_id());
+        mPresenter.setVideoUrl(room.getRoom_id());
         if (vmVideoview != null) {
             vmVideoview.start();
 

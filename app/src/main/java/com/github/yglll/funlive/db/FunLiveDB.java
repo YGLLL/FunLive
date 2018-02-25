@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.github.yglll.funlive.net.bean.FunLiveRoom;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 
 import java.util.ArrayList;
@@ -46,11 +47,11 @@ public class FunLiveDB {
         return sqLiteDatabase;
     }
 
-    public List<RoomInfo> getAllRoomInfo(String tableName){
-        return getRoomInfo(-1,tableName);
+    public List<FunLiveRoom> getAllFunLiveRoom(String tableName){
+        return getFunLiveRoom(-1,tableName);
     }
-    public List<RoomInfo> getRoomInfo(int roomId, String tableName) {
-        List<RoomInfo> roomInfoList=new ArrayList<>();
+    public List<FunLiveRoom> getFunLiveRoom(int roomId, String tableName) {
+        List<FunLiveRoom> funLiveRoomList=new ArrayList<>();
         Cursor cursor;
         if(roomId==-1){
             cursor=sqLiteDatabase.query(tableName,null,null,null,null,null,null);
@@ -59,37 +60,47 @@ public class FunLiveDB {
         }
         if(cursor.moveToFirst()){
             do {
-                RoomInfo roomInfo=new RoomInfo();
-                roomInfo.setHn(cursor.getInt(cursor.getColumnIndex("hn")));
-                roomInfo.setNickname(cursor.getString(cursor.getColumnIndex("nickname")));
-                roomInfo.setOnline(cursor.getInt(cursor.getColumnIndex("online")));
-                roomInfo.setOwner_uid(cursor.getString(cursor.getColumnIndex("owner_uid")));
-                roomInfo.setRoom_id(cursor.getInt(cursor.getColumnIndex("room_id")));
-                roomInfo.setRoom_name(cursor.getString(cursor.getColumnIndex("room_name")));
-                roomInfo.setRoom_src(cursor.getString(cursor.getColumnIndex("room_src")));
-                roomInfo.setUrl(cursor.getString(cursor.getColumnIndex("url")));
-                roomInfoList.add(roomInfo);
+                FunLiveRoom funLiveRoom=new FunLiveRoom();
+                funLiveRoom.setHn(cursor.getInt(cursor.getColumnIndex("hn")));
+                funLiveRoom.setNickname(cursor.getString(cursor.getColumnIndex("nickname")));
+                funLiveRoom.setOnline(cursor.getInt(cursor.getColumnIndex("online")));
+                funLiveRoom.setOwner_uid(cursor.getString(cursor.getColumnIndex("owner_uid")));
+                funLiveRoom.setRoom_id(cursor.getInt(cursor.getColumnIndex("room_id")));
+                funLiveRoom.setRoom_name(cursor.getString(cursor.getColumnIndex("room_name")));
+                funLiveRoom.setRoom_src(cursor.getString(cursor.getColumnIndex("room_src")));
+                funLiveRoom.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+                if(cursor.getInt(cursor.getColumnIndex("vertical"))==1){
+                    funLiveRoom.setVertical(true);
+                }else {
+                    funLiveRoom.setVertical(false);
+                }
+                funLiveRoomList.add(funLiveRoom);
             }while (cursor.moveToNext());
             cursor.close();
         }
-        return roomInfoList;
+        return funLiveRoomList;
     }
 
-    public void setRoomInfo(RoomInfo roomInfo,String tableName) {
+    public void setFunLiveRoom(FunLiveRoom funLiveRoom,String tableName) {
         //限制最大写入数据
         //int limit=10;
         //while (getTableSize(tableName)>limit){
         //    deleteRoomFromId(0,tableName);
         //}
         ContentValues contentValues=new ContentValues();
-        contentValues.put("room_id",roomInfo.getRoom_id());
-        contentValues.put("room_src",roomInfo.getRoom_src());
-        contentValues.put("room_name",roomInfo.getRoom_name());
-        contentValues.put("owner_uid",roomInfo.getOwner_uid());
-        contentValues.put("online",roomInfo.getOnline());
-        contentValues.put("hn",roomInfo.getHn());
-        contentValues.put("nickname",roomInfo.getNickname());
-        contentValues.put("url",roomInfo.getUrl());
+        contentValues.put("room_id",funLiveRoom.getRoom_id());
+        contentValues.put("room_src",funLiveRoom.getRoom_src());
+        contentValues.put("room_name",funLiveRoom.getRoom_name());
+        contentValues.put("owner_uid",funLiveRoom.getOwner_uid());
+        contentValues.put("online",funLiveRoom.getOnline());
+        contentValues.put("hn",funLiveRoom.getHn());
+        contentValues.put("nickname",funLiveRoom.getNickname());
+        contentValues.put("url",funLiveRoom.getUrl());
+        if(funLiveRoom.getVertical()){
+            contentValues.put("vertical",1);
+        }else {
+            contentValues.put("vertical",0);
+        }
         sqLiteDatabase.insert(tableName,null,contentValues);
         contentValues.clear();
     }

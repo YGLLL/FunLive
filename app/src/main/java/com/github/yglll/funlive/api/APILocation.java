@@ -7,7 +7,7 @@ package com.github.yglll.funlive.api;
  * 备注消息：
  * 创建时间：2017/12/13   7:15
  **/
-public class NetWorkAPI {
+public class APILocation {
     //base地址
     public static final String baseUrl="http://open.douyucdn.cn/";
 
@@ -16,7 +16,7 @@ public class NetWorkAPI {
     public static final String roomList="api/RoomApi/live/";
 
     //http://open.douyucdn.cn/api/RoomApi/live获取所有直播列表
-    public static final String allRoom="api/RoomApi/live/";
+    public static final String allRoom="api/RoomApi/live";
 
     //颜值房间列表
     public static final String faceScoreRoomList="api/RoomApi/live/201";

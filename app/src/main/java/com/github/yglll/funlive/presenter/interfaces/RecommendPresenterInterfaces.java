@@ -25,25 +25,26 @@ import rx.Observable;
 public interface RecommendPresenterInterfaces {
     interface View extends BaseView {
         void showCarousel(List<HomeCarousel> list);
+        void showNavigation(List<Category> list);
         void showHotColumn(List<RoomInfo> list);
         void showFaceScoreColumn(List<RoomInfo> list);
-        void showHotCate(List<HomeCate> list);
-        void showNavigation(List<Category> list);
+        void showHotCates(List<Category> categories,List<List<RoomInfo>> roomList);
     }
 
     interface Model extends BaseModel {
         Observable<List<HomeCarousel>> getCarousel();
+        Observable<List<Category>> getNavigation();
         Observable<List<RoomInfo>> getHotColumn();
         Observable<List<RoomInfo>> getFaceScoreColumn();
-        Observable<List<HomeCate>> getHotCate();
-        Observable<List<Category>> getNavigation();
+        Observable<List<Category>> getCates(Map<String,Integer> map);
+        Observable<List<RoomInfo>> getRoomList(String cateId,Map<String,Integer> map);
     }
 
     abstract class Presenter extends BasePresenter<View,Model> {
         public abstract void setCarousel();
+        public abstract void setNavigation();
         public abstract void setHotColumn();
         public abstract void setFaceScoreColumn();
-        public abstract void setHotCate();
-        public abstract void setNavigation();
+        public abstract void setHotCates();
     }
 }

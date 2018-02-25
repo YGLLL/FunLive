@@ -31,13 +31,20 @@ public class ParamsMapUtils extends BaseParamsMapUtil {
     }
     //首页热门类参数
     public static Map<String, Integer> getRecommendHotParams() {
-        return getBaseApiDefaultParams(0,8);
+        return getBaseApiDefaultParams(0,4);
     }
     //首页其他类参数
     public static Map<String, Integer> getRecommendOtherCateParams() {
         return getBaseApiDefaultParams(0,4);
     }
-
+    //首页导航栏参数
+    public static Map<String, Integer> getRecommendNavigationParams() {
+        return getBaseApiDefaultParams(0,7);
+    }
+    //首页获得多个其它类参数
+    public static Map<String, Integer> getRecommendCateParams() {
+        return getBaseApiDefaultParams(0,6);
+    }
     //**************************baseApi_capi***************************************
 
     //默认参数

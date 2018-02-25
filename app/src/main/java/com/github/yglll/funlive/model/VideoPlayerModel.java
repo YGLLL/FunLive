@@ -1,6 +1,6 @@
 package com.github.yglll.funlive.model;
 
-import com.github.yglll.funlive.api.Live;
+import com.github.yglll.funlive.api.FunLiveAPI;
 import com.github.yglll.funlive.net.bean.TempLiveVideoInfo;
 import com.github.yglll.funlive.net.RetrofitClient;
 import com.github.yglll.funlive.net.handlingerror.DefaultTransformer;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 import rx.Observable;
 
-import static com.github.yglll.funlive.api.NetWorkAPI.baseUrl_m;
+import static com.github.yglll.funlive.api.APILocation.baseUrl_m;
 
 /**
  * 作者：YGL
@@ -27,7 +27,7 @@ public class VideoPlayerModel implements VideoPlayerInterfaces.Model {
         map.put("roomId",roomId);
         return new RetrofitClient()
                 .setBaseUrl(baseUrl_m)
-                .builder(Live.class)
+                .builder(FunLiveAPI.class)
                 .getVideoUrl(map)
                 //必须compose，不然会出现线程错误
                 //拦截并处理错误

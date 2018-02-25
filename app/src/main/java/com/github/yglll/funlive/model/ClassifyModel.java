@@ -1,7 +1,7 @@
 package com.github.yglll.funlive.model;
 
-import com.github.yglll.funlive.api.Live;
-import com.github.yglll.funlive.api.NetWorkAPI;
+import com.github.yglll.funlive.api.FunLiveAPI;
+import com.github.yglll.funlive.api.APILocation;
 import com.github.yglll.funlive.net.bean.CapiCategory;
 import com.github.yglll.funlive.net.bean.CateList;
 import com.github.yglll.funlive.net.RetrofitClient;
@@ -24,8 +24,8 @@ public class ClassifyModel implements ClassifyPresenterInterfaces.Model {
     @Override
     public Observable<List<CateList>> getCateList() {
         return new RetrofitClient()
-                .setBaseUrl(NetWorkAPI.baseUrl_capi)
-                .builder(Live.class)
+                .setBaseUrl(APILocation.baseUrl_capi)
+                .builder(FunLiveAPI.class)
                 .getCateList(ParamsMapUtils.getDefaultParams())
                 //拦截并处理错误
                 .compose(new DefaultTransformer<List<CateList>>());
@@ -34,8 +34,8 @@ public class ClassifyModel implements ClassifyPresenterInterfaces.Model {
     @Override
     public Observable<List<CapiCategory>> getCate(String mCloumnName) {
         return new RetrofitClient()
-                .setBaseUrl(NetWorkAPI.baseUrl_capi)
-                .builder(Live.class)
+                .setBaseUrl(APILocation.baseUrl_capi)
+                .builder(FunLiveAPI.class)
                 .getCapiCategory(ParamsMapUtils.getLiveOtherTwoColumn(mCloumnName))
                 //拦截并处理错误
                 .compose(new DefaultTransformer<List<CapiCategory>>());

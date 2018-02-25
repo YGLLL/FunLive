@@ -1,19 +1,16 @@
-package com.github.yglll.funlive.view.adapter.classify;
+package com.github.yglll.funlive.view.adapter;
 
-import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
-import android.os.Vibrator;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.net.bean.FunLiveRoom;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.view.VideoPlayer;
 
@@ -27,7 +24,7 @@ import java.util.List;
  * 备注消息：
  * 创建时间：2018/02/08   23:17
  **/
-public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapter.Holder> {
+public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.Holder> {
     private List<RoomInfo> roomInfos;
     private Boolean isFaceScoreColumn;
     private Context mContxt;
@@ -51,22 +48,22 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
         }
     }
 
-    public ClassifyCateAdapter(Context context){
+    public RoomListAdapter(Context context){
         mContxt=context;
         isFaceScoreColumn=false;
         roomInfos=new ArrayList<>();
     }
-    public ClassifyCateAdapter(Context context,Boolean bool){
+    public RoomListAdapter(Context context, Boolean bool){
         mContxt=context;
         roomInfos=new ArrayList<>();
         isFaceScoreColumn=bool;
     }
-    public ClassifyCateAdapter(Context context,List<RoomInfo> list) {
+    public RoomListAdapter(Context context, List<RoomInfo> list) {
         mContxt=context;
         isFaceScoreColumn=false;
         roomInfos=list;
     }
-    public ClassifyCateAdapter(Context context,List<RoomInfo> list,Boolean bool) {
+    public RoomListAdapter(Context context, List<RoomInfo> list, Boolean bool) {
         mContxt=context;
         roomInfos=list;
         isFaceScoreColumn=bool;
@@ -86,29 +83,11 @@ public class ClassifyCateAdapter extends RecyclerView.Adapter<ClassifyCateAdapte
         holder.tv_column_item_nickname.setText(roomInfos.get(position).getRoom_name());
         holder.tv_nickname.setText(roomInfos.get(position).getNickname());
         holder.tv_online_num.setText(String.valueOf(roomInfos.get(position).getOnline()));
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                //震动
-                Vibrator vibrator=(Vibrator)mContxt.getSystemService(Service.VIBRATOR_SERVICE);
-                vibrator.vibrate(200);
-                //显示itemControl
-
-                return true;
-            }
-        });
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContxt, VideoPlayer.class);
-                intent.putExtra("roomInfo",roomInfos.get(position));
-                if(isFaceScoreColumn) {
-                    //颜值栏目 竖屏播放
-                    intent.putExtra("screenMode",true);
-                    mContxt.startActivity(intent);
-                }else {
-                    mContxt.startActivity(intent);
-                }
+                FunLiveRoom funLiveRoom=FunLiveRoom.valueOf(roomInfos.get(position),isFaceScoreColumn);
+                VideoPlayer.startActivity(mContxt,funLiveRoom);
             }
         });
     }

@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class FunLiveDbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "live.db";
     public static final String userCollectionTableName="UserCollection";
     public static final String userHistoryTableName="UserHistory";
@@ -23,7 +23,8 @@ public class FunLiveDbHelper extends SQLiteOpenHelper {
             "online integer," +
             "hn integer," +
             "nickname text," +
-            "url text);";
+            "url text," +
+            "vertical integer);";
     public static final String SQL_CREATE_USER_HISTORY_TABLE="create table "+userHistoryTableName+"(" +
             "id integer primary key autoincrement," +
             "room_id integer," +
@@ -33,7 +34,8 @@ public class FunLiveDbHelper extends SQLiteOpenHelper {
             "online integer," +
             "hn integer," +
             "nickname text," +
-            "url text);";
+            "url text," +
+            "vertical integer);";
 
     public FunLiveDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

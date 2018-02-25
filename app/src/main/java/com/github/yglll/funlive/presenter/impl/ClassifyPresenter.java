@@ -26,7 +26,7 @@ public class ClassifyPresenter extends ClassifyPresenterInterfaces.Presenter{
 
             @Override
             protected void onError(ApiException ex) {
-
+                mView.showErrorWithStatus(ex.message);
             }
 
             @Override
@@ -42,7 +42,7 @@ public class ClassifyPresenter extends ClassifyPresenterInterfaces.Presenter{
 
             @Override
             protected void onError(ApiException ex) {
-
+                mView.showErrorWithStatus(ex.message);
             }
 
             @Override

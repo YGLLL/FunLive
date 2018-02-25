@@ -7,11 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.model.RecommendModel;
 import com.github.yglll.funlive.net.bean.Category;
+import com.github.yglll.funlive.net.bean.FunLiveRoom;
 import com.github.yglll.funlive.net.bean.HomeCarousel;
 import com.github.yglll.funlive.net.bean.HomeFaceScoreColumn;
 import com.github.yglll.funlive.net.bean.HomeHotColumn;
@@ -24,12 +26,17 @@ import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterface
 import com.github.yglll.funlive.view.adapter.recommend.CarouselAdapter;
 import com.github.yglll.funlive.view.adapter.recommend.NavigationAdapter;
 import com.github.yglll.funlive.view.adapter.recommend.RecommendAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import cn.bingoogolapple.bgabanner.BGABanner;
+import es.dmoral.toasty.Toasty;
 
 /**
  * 作者：YGL
@@ -40,8 +47,8 @@ import cn.bingoogolapple.bgabanner.BGABanner;
  **/
 public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPresenter> implements RecommendPresenterInterfaces.View, BGABanner.Delegate<SimpleDraweeView, String> {
 
-    @BindView(R.id.swipe_refresh_layout)
-    SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.refresh_layout)
+    SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     private BGABanner bgaBanner;
@@ -58,16 +65,23 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
 
     @Override
     public void onInitView(Bundle savedInstanceState){
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(RefreshLayout refreshLayout) {
                 refresh();
+            }
+        });
+        smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                Toasty.info(getActivity(),getActivity().getString(R.string.no_more),Toast.LENGTH_SHORT).show();
+                smartRefreshLayout.finishLoadMore();
             }
         });
 
         recommendAdapter=new RecommendAdapter(getActivity());
 
-        haderView = recommendAdapter.setCustomHeaderView(R.layout.recommend_carousel,recyclerView);
+        haderView = recommendAdapter.setCarouselView(R.layout.recommend_carousel,recyclerView);
         bgaBanner=(BGABanner) haderView.findViewById(R.id.recommed_banner);
         bgaBanner.setDelegate(this);
         carouselAdapter =new CarouselAdapter();
@@ -81,20 +95,16 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
 
         recyclerView.setAdapter(recommendAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        smartRefreshLayout.autoRefresh();
     }
 
     private void refresh(){
         mPresenter.setCarousel();
+        mPresenter.setNavigation();
         mPresenter.setHotColumn();
         mPresenter.setFaceScoreColumn();
-        mPresenter.setHotCate();
-        mPresenter.setNavigation();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        refresh();
+        mPresenter.setHotCates();
     }
 
     @Override
@@ -105,21 +115,14 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     @Override
     public void onBannerItemClick(BGABanner banner, SimpleDraweeView itemView, String model, int position) {
         HomeCarousel homeCarousel=homeCarouselList.get(position);
-        Intent intent=new Intent(getActivity(),VideoPlayer.class);
-        intent.putExtra("roomInfo", RoomInfo.valueOf(homeCarousel.getRoom()));
-        if(homeCarousel.getRoom().getCate_id().equals("201")){
-            //竖屏播放
-            intent.putExtra("screenMode",true);
-            getActivity().startActivity(intent);
-        }else {
-            //横屏播放
-            getActivity().startActivity(intent);
-        }
+        VideoPlayer.startActivity(getActivity(), FunLiveRoom.valueOf(homeCarousel.getRoom()));
     }
 
     @Override
     public void showErrorWithStatus(String msg) {
-
+        smartRefreshLayout.finishLoadMore();
+        smartRefreshLayout.finishRefresh();
+        Toasty.info(getActivity(),msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -145,8 +148,9 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     }
 
     @Override
-    public void showHotCate(List<HomeCate> list) {
-        recommendAdapter.setHomeCates(list);
+    public void showHotCates(List<Category> categories, List<List<RoomInfo>> roomList) {
+        smartRefreshLayout.finishRefresh();
+        recommendAdapter.setData(categories,roomList);
     }
 
     @Override

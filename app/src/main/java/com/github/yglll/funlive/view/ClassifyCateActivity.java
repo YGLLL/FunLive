@@ -14,7 +14,7 @@ import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.ClassifyCateActivityPresenter;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyCateActivityInterfaces;
 import com.github.yglll.funlive.view.manager.FullyGridLayoutManager;
-import com.github.yglll.funlive.view.adapter.classify.ClassifyCateAdapter;
+import com.github.yglll.funlive.view.adapter.RoomListAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -41,7 +41,7 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
     RecyclerView recyclerView;
 
     private CapiCategory capiCategory;
-    private ClassifyCateAdapter classifyCateAdapter;
+    private RoomListAdapter roomListAdapter;
 
     @Override
     public void showErrorWithStatus(String msg) {
@@ -74,11 +74,11 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
 
         if(capiCategory.getTag_id().equals("201")){
             //颜值栏目
-            classifyCateAdapter=new ClassifyCateAdapter(this,true);
+            roomListAdapter =new RoomListAdapter(this,true);
         }else {
-            classifyCateAdapter=new ClassifyCateAdapter(this);
+            roomListAdapter =new RoomListAdapter(this);
         }
-        recyclerView.setAdapter(classifyCateAdapter);
+        recyclerView.setAdapter(roomListAdapter);
         recyclerView.setLayoutManager(new FullyGridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
     }
 
@@ -110,12 +110,12 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
     @Override
     public void showLiveList(List<RoomInfo> list) {
         smartRefreshLayout.finishRefresh();
-        classifyCateAdapter.setData(list);
+        roomListAdapter.setData(list);
     }
 
     @Override
     public void LoadMoreLive(List<RoomInfo> list) {
         smartRefreshLayout.finishLoadMore();
-        classifyCateAdapter.setLoadMoreData(list);
+        roomListAdapter.setLoadMoreData(list);
     }
 }

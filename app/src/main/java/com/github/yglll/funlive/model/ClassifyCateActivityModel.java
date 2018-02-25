@@ -1,6 +1,6 @@
 package com.github.yglll.funlive.model;
 
-import com.github.yglll.funlive.api.Live;
+import com.github.yglll.funlive.api.FunLiveAPI;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.net.RetrofitClient;
 import com.github.yglll.funlive.net.handlingerror.DefaultTransformer;
@@ -22,8 +22,8 @@ public class ClassifyCateActivityModel implements ClassifyCateActivityInterfaces
     @Override
     public Observable<List<RoomInfo>> getLiveList(String string,Map<String,Integer> map) {
         return new RetrofitClient()
-                .builder(Live.class)
-                .getLiveList(string, map)
+                .builder(FunLiveAPI.class)
+                .getRoomList(string, map)
                 //拦截并处理错误
                 .compose(new DefaultTransformer<List<RoomInfo>>());
     }
