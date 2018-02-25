@@ -34,8 +34,10 @@ public class APILocation {
     //栏目>类别>房间
     //轮播图
     public static final String getCarousel = "api/v1/slide/6";
+    //首页最热
+    public static final String getHomeHotColumn = "/api/v1/getbigDataRoom";
     //热门类别列表
-    public static final String getHomeRecommendHotCate = "api/v1/getHotCate";
+    public static final String getRecommendHotCate = "api/v1/getHotCate";
     //栏目列表
     public static final String getCateList = "/api/v1/getColumnList";
     //获取栏目中的类别列表

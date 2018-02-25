@@ -2,6 +2,7 @@ package com.github.yglll.funlive.presenter.impl;
 
 import android.widget.Toast;
 
+import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.CapiCategory;
 import com.github.yglll.funlive.net.bean.TempLiveVideoInfo;
 import com.github.yglll.funlive.net.handlingerror.ApiException;
@@ -28,7 +29,11 @@ public class VideoPlayerPresenter extends VideoPlayerInterfaces.Presenter {
 
             @Override
             protected void onError(ApiException ex) {
-                mView.showErrorWithStatus(ex.message);
+                if(ex.message.equals("系统错误")){
+                    mView.showErrorWithStatus(mContext.getString(R.string.anchor_absent));
+                }else {
+                    mView.showErrorWithStatus(ex.message);
+                }
             }
 
             @Override

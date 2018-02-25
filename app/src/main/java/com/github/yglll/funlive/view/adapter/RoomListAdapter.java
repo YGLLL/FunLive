@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * 作者：YGL
  * 版本号：1.0
- * 类描述：
+ * 类描述：通用房间列表适配器
  * 备注消息：
  * 创建时间：2018/02/08   23:17
  **/
@@ -98,7 +98,7 @@ public class RoomListAdapter extends RecyclerView.Adapter<RoomListAdapter.Holder
     }
 
     public void setData(List<RoomInfo> roomInfos) {
-        this.roomInfos = roomInfos;
+        this.roomInfos.addAll(roomInfos);
         notifyDataSetChanged();
     }
 

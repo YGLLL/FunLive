@@ -26,4 +26,5 @@
     <string name="buffer2">%</string>
     <string name="followed">已收藏</string>
     <string name="no_data">暂无记录</string>
+    <string name="anchor_absent">主播暂时不在哦，看看别的吧</string>
 </resources>

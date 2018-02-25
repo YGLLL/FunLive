@@ -28,12 +28,10 @@ public class ResponseBodyConverter<T> implements Converter<ResponseBody,T> {
         ResponseBodyConverter(Gson gson, Type type) {
         this.gson = gson;
         this.type = type;
-        Logger.i("ResponseBodyConverter(Gson gson, Type type)");
     }
 
     @Override
     public T convert(ResponseBody responseBody) throws IOException {
-        Logger.i("public T convert(ResponseBody responseBody) throws IOException");
         String value=responseBody.string();
 
         HttpResponse httpResponse=new HttpResponse();

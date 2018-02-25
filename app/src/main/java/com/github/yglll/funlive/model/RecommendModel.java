@@ -6,6 +6,7 @@ import com.github.yglll.funlive.net.bean.Category;
 import com.github.yglll.funlive.net.bean.HomeCarousel;
 import com.github.yglll.funlive.net.bean.HomeCate;
 import com.github.yglll.funlive.net.RetrofitClient;
+import com.github.yglll.funlive.net.bean.HomeHotColumn;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.net.handlingerror.DefaultTransformer;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
@@ -36,12 +37,13 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
     }
 
     @Override
-    public Observable<List<RoomInfo>> getHotColumn() {
+    public Observable<List<HomeHotColumn>> getHotColumn() {
         return new RetrofitClient()
+                .setBaseUrl(APILocation.baseUrl_capi)
                 .builder(FunLiveAPI.class)
-                .getHotColumn(ParamsMapUtils.getRecommendHotParams())
+                .getHotColumn()
                 //拦截并处理错误
-                .compose(new DefaultTransformer<List<RoomInfo>>());
+                .compose(new DefaultTransformer<List<HomeHotColumn>>());
     }
 
     @Override

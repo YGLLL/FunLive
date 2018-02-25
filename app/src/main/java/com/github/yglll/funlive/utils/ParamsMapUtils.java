@@ -57,15 +57,6 @@ public class ParamsMapUtils extends BaseParamsMapUtil {
         return mapparam;
     }
 
-    //首页--推荐--颜值
-    //默认  :4条数据
-    public static Map<String, String> getHomeFaceScoreColumn(int offset,int limit) {
-        mapparam = getDefaultParams();
-        mapparam.put("offset",offset+"");
-        mapparam.put("limit", limit+"");
-        return mapparam;
-    }
-
     //其他栏目二级分类
     public static Map<String, String> getLiveOtherTwoColumn(String ColumnName) {
         mapparam = getDefaultParams();

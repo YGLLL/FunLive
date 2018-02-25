@@ -136,9 +136,8 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
         }
     }
 
-    //todo 有错误需要处理
     @Override
-    public void showHotColumn(List<RoomInfo> list) {
+    public void showHotColumn(List<HomeHotColumn> list) {
         recommendAdapter.setHomeHotColumns(list);
     }
 

@@ -141,4 +141,22 @@ public class FunLiveRoom implements Serializable {
         }
         return funLiveRoom;
     }
+
+    public static FunLiveRoom valueOf(HomeHotColumn theRoom){
+        FunLiveRoom funLiveRoom=new FunLiveRoom();
+        funLiveRoom.setRoom_id(Integer.valueOf(theRoom.getRoom_id()));
+        funLiveRoom.setRoom_src(theRoom.getRoom_src());
+        funLiveRoom.setRoom_name(theRoom.getRoom_name());
+        funLiveRoom.setOwner_uid("none");
+        funLiveRoom.setOnline(theRoom.getOnline());
+        funLiveRoom.setHn(theRoom.getOnline());
+        funLiveRoom.setNickname(theRoom.getNickname());
+        funLiveRoom.setUrl("http://www.douyu.com"+theRoom.getRoom_id());
+        if(theRoom.getCate_id().equals("201")){
+            funLiveRoom.setVertical(true);
+        }else {
+            funLiveRoom.setVertical(false);
+        }
+        return funLiveRoom;
+    }
 }

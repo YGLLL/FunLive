@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.Category;
 import com.github.yglll.funlive.net.bean.HomeCate;
+import com.github.yglll.funlive.net.bean.HomeHotColumn;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.view.adapter.RoomListAdapter;
 import com.github.yglll.funlive.view.manager.FullyGridLayoutManager;
@@ -34,7 +35,7 @@ import java.util.List;
  **/
 public class RecommendAdapter extends RecyclerView.Adapter {
 
-    private List<RoomInfo> homeHotColumns;
+    private List<HomeHotColumn> homeHotColumns;
     private List<RoomInfo> homeFaceScoreColumns;
     private List<List<RoomInfo>> data;
     private List<Category> categories;
@@ -102,8 +103,8 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                     normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
                     normalViewHolder.tv_column_name.setText("最热");
                     normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
-                    roomListAdapter=new RoomListAdapter(mContext,homeHotColumns);
-                    normalViewHolder.rv_column_list.setAdapter(roomListAdapter);
+                    HomeHotColumnAdapter homeHotColumnAdapter=new HomeHotColumnAdapter(mContext,homeHotColumns);
+                    normalViewHolder.rv_column_list.setAdapter(homeHotColumnAdapter);
                     break;
                 case 1:
                     normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
@@ -182,13 +183,13 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         return navigationView;
     }
 
-    public void setHomeHotColumns(List<RoomInfo> homeHotColumns) {
-        this.homeHotColumns = homeHotColumns;
+    public void setHomeHotColumns(List<HomeHotColumn> homeHotColumns) {
+        this.homeHotColumns.addAll(homeHotColumns);
         notifyDataSetChanged();
     }
 
     public void setHomeFaceScoreColumns(List<RoomInfo> homeFaceScoreColumns) {
-        this.homeFaceScoreColumns = homeFaceScoreColumns;
+        this.homeFaceScoreColumns.addAll(homeFaceScoreColumns);
         notifyDataSetChanged();
     }
 

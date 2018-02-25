@@ -1,6 +1,7 @@
 package com.github.yglll.funlive.presenter.impl;
 import com.github.yglll.funlive.net.bean.Category;
 import com.github.yglll.funlive.net.bean.HomeCarousel;
+import com.github.yglll.funlive.net.bean.HomeHotColumn;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.net.handlingerror.ApiException;
 import com.github.yglll.funlive.net.handlingerror.subscriber.ErrorSubscriber;
@@ -66,7 +67,7 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
 
     @Override
     public void setHotColumn() {
-        mModel.getHotColumn().subscribe(new ErrorSubscriber<List<RoomInfo>>() {
+        mModel.getHotColumn().subscribe(new ErrorSubscriber<List<HomeHotColumn>>() {
 
             @Override
             protected void onError(ApiException ex) {
@@ -74,7 +75,7 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
             }
 
             @Override
-            public void onNext(List<RoomInfo> homeHotColumns) {
+            public void onNext(List<HomeHotColumn> homeHotColumns) {
                 mView.showHotColumn(homeHotColumns);
             }
         });
@@ -116,7 +117,7 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
         if(count<categories.size()){
             //不再加载颜值类别，上面已加载
             if(categories.get(count).getCate_id()==201){
-                count++;
+                categories.remove(count);
                 getCategorysRooms(categories);
             }else {
                 mModel.getRoomList(String.valueOf(categories.get(count).getCate_id()),

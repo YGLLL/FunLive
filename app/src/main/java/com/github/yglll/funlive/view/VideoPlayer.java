@@ -394,6 +394,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     @Override
     public void showErrorWithStatus(String msg) {
         Toasty.info(this,msg, Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

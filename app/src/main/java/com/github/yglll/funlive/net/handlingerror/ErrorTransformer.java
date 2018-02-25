@@ -43,6 +43,7 @@ public class ErrorTransformer<T> implements Observable.Transformer<HttpResponse<
             @Override
             public T call(HttpResponse<T> tHttpResponse) {
                 if (tHttpResponse.getError()!=0) {
+                    //"服务器端"错误信息返回
                     //如果服务器端有错误信息返回，那么抛出异常，让下面的方法去捕获异常做统一处理
                     throw  new RuntimeException(String.valueOf(tHttpResponse.getData()));
                 }
@@ -53,8 +54,7 @@ public class ErrorTransformer<T> implements Observable.Transformer<HttpResponse<
         }).onErrorResumeNext(new Func1<Throwable, Observable<? extends T>>() {
             @Override
             public Observable<? extends T> call(Throwable throwable) {
-                //throwable.printStackTrace();
-                //return null;
+                //接收所有错误，统一处理
                 return Observable.error(ExceptionEngine.handleException(throwable));
             }
         });

@@ -93,6 +93,10 @@ public class ExceptionEngine {
             ex = new ApiException(e, ERROR.NETWORD_ERROR);
             ex.message = "网络连接不可用";  //均视为网络错误
             return ex;
+        }else if(e instanceof RuntimeException){//服务端返回的错误
+            ex = new ApiException(e, ERROR.NETWORD_ERROR);
+            ex.message = e.getMessage();
+            return ex;
         }else {
             Logger.i("ERROR.UNKNOWN:"+e.toString());
             ex = new ApiException(e, ERROR.UNKNOWN);
