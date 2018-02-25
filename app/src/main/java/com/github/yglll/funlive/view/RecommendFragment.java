@@ -65,6 +65,8 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
 
     @Override
     public void onInitView(Bundle savedInstanceState){
+        recommendAdapter=new RecommendAdapter(getActivity());
+
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
@@ -74,12 +76,9 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
         smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshLayout) {
-                Toasty.info(getActivity(),getActivity().getString(R.string.no_more),Toast.LENGTH_SHORT).show();
-                smartRefreshLayout.finishLoadMore();
+                mPresenter.setMoreHotCates();
             }
         });
-
-        recommendAdapter=new RecommendAdapter(getActivity());
 
         haderView = recommendAdapter.setCarouselView(R.layout.recommend_carousel,recyclerView);
         bgaBanner=(BGABanner) haderView.findViewById(R.id.recommed_banner);
@@ -100,11 +99,11 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     }
 
     private void refresh(){
+        recommendAdapter.clear();
         mPresenter.setCarousel();
         mPresenter.setNavigation();
         mPresenter.setHotColumn();
         mPresenter.setFaceScoreColumn();
-        mPresenter.setHotCates();
     }
 
     @Override
@@ -137,6 +136,7 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
         }
     }
 
+    //todo 有错误需要处理
     @Override
     public void showHotColumn(List<RoomInfo> list) {
         recommendAdapter.setHomeHotColumns(list);
@@ -148,13 +148,14 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     }
 
     @Override
-    public void showHotCates(List<Category> categories, List<List<RoomInfo>> roomList) {
-        smartRefreshLayout.finishRefresh();
-        recommendAdapter.setData(categories,roomList);
+    public void showNavigation(List<Category> list) {
+        navigationAdapter.setData(list);
     }
 
     @Override
-    public void showNavigation(List<Category> list) {
-        navigationAdapter.setData(list);
+    public void showHotCates(List<Category> categories, List<List<RoomInfo>> roomList) {
+        smartRefreshLayout.finishRefresh();
+        smartRefreshLayout.finishLoadMore();
+        recommendAdapter.setData(categories,roomList);
     }
 }

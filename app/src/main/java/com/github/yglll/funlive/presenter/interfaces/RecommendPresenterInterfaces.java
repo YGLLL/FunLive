@@ -33,10 +33,9 @@ public interface RecommendPresenterInterfaces {
 
     interface Model extends BaseModel {
         Observable<List<HomeCarousel>> getCarousel();
-        Observable<List<Category>> getNavigation();
+        Observable<List<Category>> getAllCates();
         Observable<List<RoomInfo>> getHotColumn();
         Observable<List<RoomInfo>> getFaceScoreColumn();
-        Observable<List<Category>> getCates(Map<String,Integer> map);
         Observable<List<RoomInfo>> getRoomList(String cateId,Map<String,Integer> map);
     }
 
@@ -45,6 +44,6 @@ public interface RecommendPresenterInterfaces {
         public abstract void setNavigation();
         public abstract void setHotColumn();
         public abstract void setFaceScoreColumn();
-        public abstract void setHotCates();
+        public abstract void setMoreHotCates();
     }
 }

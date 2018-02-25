@@ -114,6 +114,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                     break;
                 default:
                     if(data.size()>0){
+                        position-=2;
                         normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
                         normalViewHolder.tv_column_name.setText(categories.get(position).getGame_name());
                         normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
@@ -128,7 +129,16 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return homeHotColumns.size()+4;
+        return data.size()+getOtherCount();
+    }
+
+    private int getOtherCount(){
+        int i=0;
+        if (carouselView!=null)i++;
+        if(navigationView!=null)i++;
+        if(homeHotColumns.size()>0)i++;
+        if(homeFaceScoreColumns.size()>0)i++;
+        return i;
     }
 
     @Override
@@ -183,9 +193,18 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     }
 
     public void setData(List<Category> categories,List<List<RoomInfo>> data) {
-        this.categories=categories;
-        this.data = data;
+        this.categories.addAll(categories);
+        this.data.addAll(data);
         notifyDataSetChanged();
+    }
+
+    public void clear(){
+        carouselView=null;
+        navigationView=null;
+        homeHotColumns.clear();
+        homeFaceScoreColumns.clear();
+        categories.clear();
+        data.clear();
     }
 
     protected class VIEW_TYPE{

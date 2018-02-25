@@ -50,6 +50,7 @@ public class NavigationAdapter extends BaseAdapter {
         return 0;
     }
 
+    //todo 优化性能
     @Override
     public View getView(int i, View view,ViewGroup viewGroup) {
         final Context context=viewGroup.getContext();
@@ -57,8 +58,7 @@ public class NavigationAdapter extends BaseAdapter {
         SimpleDraweeView simpleDraweeView=mView.findViewById(R.id.img_item_gridview);
         TextView name=mView.findViewById(R.id.category_name);
         if(data.size()>0){
-            final Category category=data.get(i);
-            if(i==7){
+            if(i>=7){
                 simpleDraweeView.setImageURI(Uri.parse("res://mipmap/"+R.mipmap.ic_launcher));
                 name.setText(context.getText(R.string.more));
                 simpleDraweeView.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +70,7 @@ public class NavigationAdapter extends BaseAdapter {
                     }
                 });
             }else {
+                final Category category=data.get(i);
                 simpleDraweeView.setImageURI(Uri.parse(category.getGame_icon()));
                 name.setText(category.getGame_name());
                 simpleDraweeView.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +87,7 @@ public class NavigationAdapter extends BaseAdapter {
     }
 
     public void setData(List<Category> data) {
-        this.data = data;
+        this.data.addAll(data);
         notifyDataSetChanged();
     }
 }

@@ -54,10 +54,10 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
     }
 
     @Override
-    public Observable<List<Category>> getCates(Map<String,Integer> map){
+    public Observable<List<Category>> getAllCates(){
         return new RetrofitClient()
                 .builder(FunLiveAPI.class)
-                .getCategory(map)
+                .getAllCategory()
                 //拦截并处理错误
                 .compose(new DefaultTransformer<List<Category>>());
     }
@@ -68,14 +68,5 @@ public class RecommendModel implements RecommendPresenterInterfaces.Model{
                 .builder(FunLiveAPI.class)
                 .getRoomList(cateId,map)
                 .compose(new DefaultTransformer<List<RoomInfo>>());
-    }
-
-    @Override
-    public Observable<List<Category>> getNavigation() {
-        return new RetrofitClient()
-                .builder(FunLiveAPI.class)
-                .getCategory(ParamsMapUtils.getRecommendNavigationParams())
-                //拦截并处理错误
-                .compose(new DefaultTransformer<List<Category>>());
     }
 }

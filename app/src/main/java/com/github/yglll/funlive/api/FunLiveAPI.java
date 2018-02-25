@@ -40,7 +40,7 @@ public interface FunLiveAPI {
 
     //获取所有分类
     @GET(APILocation.allCategory)
-    Observable<HttpResponse<List<Category>>> getCategory(@QueryMap Map<String, Integer> params);
+    Observable<HttpResponse<List<Category>>> getAllCategory();
 
 
     //*************************baseApi_capi*****************************************

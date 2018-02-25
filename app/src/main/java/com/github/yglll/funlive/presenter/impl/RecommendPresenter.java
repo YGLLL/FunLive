@@ -1,17 +1,8 @@
 package com.github.yglll.funlive.presenter.impl;
-
-import android.util.Log;
-import android.widget.Toast;
-
-import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.Category;
 import com.github.yglll.funlive.net.bean.HomeCarousel;
-import com.github.yglll.funlive.net.bean.HomeFaceScoreColumn;
-import com.github.yglll.funlive.net.bean.HomeHotColumn;
-import com.github.yglll.funlive.net.bean.HomeCate;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.net.handlingerror.ApiException;
-import com.github.yglll.funlive.net.handlingerror.ExceptionEngine;
 import com.github.yglll.funlive.net.handlingerror.subscriber.ErrorSubscriber;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
 import com.github.yglll.funlive.utils.ParamsMapUtils;
@@ -19,8 +10,6 @@ import com.github.yglll.funlive.utils.ParamsMapUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.dmoral.toasty.Toasty;
-import rx.Observer;
 
 /**
  * 作者：YGL
@@ -31,8 +20,10 @@ import rx.Observer;
  **/
 public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
 
-    private List<Category> dataHead;
+    private List<Category> allCates;
     private List<List<RoomInfo>> data;
+    private int loadLimit=6;
+    private int count=0;
 
     @Override
     public void setCarousel() {
@@ -46,6 +37,29 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
             @Override
             public void onNext(List<HomeCarousel> list) {
                 mView.showCarousel(list);
+            }
+        });
+    }
+
+    @Override
+    public void setNavigation() {
+        mModel.getAllCates().subscribe(new ErrorSubscriber<List<Category>>() {
+
+            @Override
+            protected void onError(ApiException ex) {
+                mView.showErrorWithStatus(ex.message);
+            }
+
+            @Override
+            public void onNext(List<Category> list) {
+                allCates=new ArrayList<>();
+                allCates.addAll(list);
+
+                List<Category> categories=new ArrayList<>();
+                categories.addAll(list.subList(0,7));
+                mView.showNavigation(categories);
+
+                setHotCates();
             }
         });
     }
@@ -82,63 +96,55 @@ public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
         });
     }
 
-    @Override
-    public void setHotCates() {
-        mModel.getCates(ParamsMapUtils.getRecommendCateParams()).subscribe(new ErrorSubscriber<List<Category>>() {
-            @Override
-            protected void onError(ApiException ex) {
-                mView.showErrorWithStatus(ex.message);
-            }
-
-            @Override
-            public void onNext(List<Category> categories) {
-                data=new ArrayList<>();
-                dataHead=new ArrayList<>();
-                dataHead.addAll(categories);
-                getCategorysRooms(categories);
-            }
-        });
-    }
-
-    //迭代
-    private void getCategorysRooms(final List<Category> categories){
-        if(categories.size()>0){
-            if(categories.get(0).getCate_id()==201){
-                categories.remove(0);
-                getCategorysRooms(categories);
-            }
-            mModel.getRoomList(String.valueOf(categories.get(0).getCate_id()),
-                    ParamsMapUtils.getRecommendOtherCateParams()).subscribe(new ErrorSubscriber<List<RoomInfo>>() {
-                @Override
-                protected void onError(ApiException ex) {
-                    mView.showErrorWithStatus(ex.message);
-                }
-
-                @Override
-                public void onNext(List<RoomInfo> roomInfos) {
-                    data.add(roomInfos);
-                    categories.remove(0);
-                    getCategorysRooms(categories);
-                }
-            });
-        }else {
-            mView.showHotCates(dataHead,data);
+    private void setHotCates() {
+        if(count==0){
+            data=new ArrayList<>();
+            getCategorysRooms(allCates.subList(0,loadLimit));
         }
     }
 
     @Override
-    public void setNavigation() {
-        mModel.getNavigation().subscribe(new ErrorSubscriber<List<Category>>() {
+    public void setMoreHotCates() {
+        if(count==0){
+            data=new ArrayList<>();
+            getCategorysRooms(allCates.subList(0,loadLimit));
+        }
+    }
 
-            @Override
-            protected void onError(ApiException ex) {
-                mView.showErrorWithStatus(ex.message);
-            }
+    //迭代,获得每一个Category的4间房间
+    private void getCategorysRooms(final List<Category> categories){
+        if(count<categories.size()){
+            //不再加载颜值类别，上面已加载
+            if(categories.get(count).getCate_id()==201){
+                count++;
+                getCategorysRooms(categories);
+            }else {
+                mModel.getRoomList(String.valueOf(categories.get(count).getCate_id()),
+                        ParamsMapUtils.getRecommendOtherCateParams()).subscribe(new ErrorSubscriber<List<RoomInfo>>() {
+                    @Override
+                    protected void onError(ApiException ex) {
+                        mView.showErrorWithStatus(ex.message);
+                    }
 
-            @Override
-            public void onNext(List<Category> list) {
-                mView.showNavigation(list);
+                    @Override
+                    public void onNext(List<RoomInfo> roomInfos) {
+                        count++;
+                        data.add(roomInfos);
+                        getCategorysRooms(categories);
+                    }
+                });
             }
-        });
+        }else {
+            //迭代完毕
+            count=0;
+            List<Category> list1=new ArrayList<>();
+            list1.addAll(categories);
+            categories.clear();
+            List<List<RoomInfo>> list2=new ArrayList<>();
+            list2.addAll(data);
+            data.clear();
+
+            mView.showHotCates(list1,list2);
+        }
     }
 }
