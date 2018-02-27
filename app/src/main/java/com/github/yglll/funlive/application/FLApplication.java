@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.github.yglll.funlive.R;
+import com.google.android.gms.ads.MobileAds;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.header.BezierCircleHeader;
@@ -53,5 +54,7 @@ public class FLApplication extends Application {
         //初始化图片加载框架
         Fresco.initialize(this);
         Logger.addLogAdapter(new AndroidLogAdapter());
+        //AdMob
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
     }
 }

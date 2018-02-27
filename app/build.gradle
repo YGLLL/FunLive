@@ -69,4 +69,6 @@ dependencies {
     implementation 'com.github.GrenderG:Toasty:1.2.8'
     //弹幕
     implementation 'com.github.ctiao:DanmakuFlameMaster:0.9.21'
+    //AdMob
+    implementation 'com.google.android.gms:play-services-ads:11.8.0'
 }

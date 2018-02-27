@@ -27,4 +27,7 @@
     <string name="followed">已收藏</string>
     <string name="no_data">暂无记录</string>
     <string name="anchor_absent">主播暂时不在哦，看看别的吧</string>
+
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

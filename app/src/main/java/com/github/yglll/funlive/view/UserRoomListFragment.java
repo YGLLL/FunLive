@@ -21,6 +21,8 @@ import com.github.yglll.funlive.db.FunLiveProvide;
 import com.github.yglll.funlive.net.bean.FunLiveRoom;
 import com.github.yglll.funlive.view.adapter.user.UserRoomListAdapter;
 import com.github.yglll.funlive.view.manager.FullyGridLayoutManager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -50,6 +52,8 @@ public class UserRoomListFragment extends Fragment implements LoaderManager.Load
     RecyclerView recyclerView;
     @BindView(R.id.empty_view)
     TextView emptyView;
+    @BindView(R.id.ad_view)
+    AdView adView;
 
     private FunLiveDB funLiveDB;
     private UserRoomListAdapter userRoomListAdapter;
@@ -96,6 +100,10 @@ public class UserRoomListFragment extends Fragment implements LoaderManager.Load
 
         //活动Loader实例，并初始化它
         getLoaderManager().initLoader(0, null,this);
+
+        //AdMob
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 
     private void emptyViewControl(boolean bool){
