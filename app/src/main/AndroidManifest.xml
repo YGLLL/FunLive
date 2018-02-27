@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!--震动-->
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"></uses-permission>
 
     <application
         android:name="com.github.yglll.funlive.application.FLApplication"
@@ -37,5 +38,11 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_provider_info"/>
         </receiver>
+        <provider
+            android:authorities="com.github.yglll.funlive.db.provider"
+            android:name=".db.FunLiveProvide"
+            android:exported="false"
+            android:syncable="true">
+        </provider>
     </application>
 </manifest>

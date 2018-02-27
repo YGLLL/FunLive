@@ -11,10 +11,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class FunLiveDbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "live.db";
-    public static final String userCollectionTableName="UserCollection";
-    public static final String userHistoryTableName="UserHistory";
+    public static final String collection ="UserCollection";
+    public static final String history ="UserHistory";
 
-    public static final String SQL_CREATE_USER_COLLECTION_TABLE="create table "+userCollectionTableName+"(" +
+    public static final String SQL_CREATE_USER_COLLECTION_TABLE="create table "+ collection +"(" +
             "id integer primary key autoincrement," +
             "room_id integer," +
             "room_src text," +
@@ -25,7 +25,7 @@ public class FunLiveDbHelper extends SQLiteOpenHelper {
             "nickname text," +
             "url text," +
             "vertical integer);";
-    public static final String SQL_CREATE_USER_HISTORY_TABLE="create table "+userHistoryTableName+"(" +
+    public static final String SQL_CREATE_USER_HISTORY_TABLE="create table "+ history +"(" +
             "id integer primary key autoincrement," +
             "room_id integer," +
             "room_src text," +

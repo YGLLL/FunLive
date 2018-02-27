@@ -1,12 +1,10 @@
 package com.github.yglll.funlive.view;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,7 +30,6 @@ import com.github.yglll.funlive.model.VideoPlayerModel;
 import com.github.yglll.funlive.mvpbase.BaseActivity;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.net.bean.FunLiveRoom;
-import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.presenter.impl.VideoPlayerPresenter;
 import com.github.yglll.funlive.presenter.interfaces.VideoPlayerInterfaces;
 import com.github.yglll.funlive.db.FunLiveDbHelper;
@@ -193,7 +190,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
             ivLiveFollow.setImageResource(R.drawable.vector_drawable_follow_light);
         }
         //记录历史纪录
-        funLiveDB.setFunLiveRoom(room,FunLiveDbHelper.userHistoryTableName);
+        funLiveDB.setFunLiveRoom(room,FunLiveDbHelper.history);
     }
 
     private void onEvent() {
@@ -545,7 +542,7 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
     }
 
     private Boolean queryRoomForSQL(int roomId){
-        Cursor cursor= funLiveDB.getSqLiteDatabase().query(FunLiveDbHelper.userCollectionTableName,new String[]{"room_id"},"room_id=?",new String[]{String.valueOf(roomId)},null,null,null);
+        Cursor cursor= funLiveDB.getSqLiteDatabase().query(FunLiveDbHelper.collection,new String[]{"room_id"},"room_id=?",new String[]{String.valueOf(roomId)},null,null,null);
         if (cursor.moveToFirst()){
             return true;
         }else {
@@ -553,10 +550,10 @@ public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresen
         }
     }
     private void deleteRoomForSQL(int roomId){
-        funLiveDB.deleteRoom(roomId,FunLiveDbHelper.userCollectionTableName);
+        funLiveDB.deleteRoom(roomId,FunLiveDbHelper.collection);
     }
     private void addRoomForSQL(FunLiveRoom funLiveRoom){
-        funLiveDB.setFunLiveRoom(funLiveRoom,FunLiveDbHelper.userCollectionTableName);
+        funLiveDB.setFunLiveRoom(funLiveRoom,FunLiveDbHelper.collection);
     }
 
     @Override

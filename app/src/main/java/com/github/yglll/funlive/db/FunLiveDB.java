@@ -7,9 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.github.yglll.funlive.net.bean.FunLiveRoom;
 import com.github.yglll.funlive.net.bean.RoomInfo;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.vov.vitamio.utils.Log;
 
 /**
  * 作者：YGL
@@ -61,6 +64,7 @@ public class FunLiveDB {
         if(cursor.moveToFirst()){
             do {
                 FunLiveRoom funLiveRoom=new FunLiveRoom();
+                funLiveRoom.setId(cursor.getInt(cursor.getColumnIndex("id")));
                 funLiveRoom.setHn(cursor.getInt(cursor.getColumnIndex("hn")));
                 funLiveRoom.setNickname(cursor.getString(cursor.getColumnIndex("nickname")));
                 funLiveRoom.setOnline(cursor.getInt(cursor.getColumnIndex("online")));
@@ -121,6 +125,7 @@ public class FunLiveDB {
         sqLiteDatabase.delete(tableName,"room_id=?",new String[]{String.valueOf(roomId)});
     }
     public void deleteRoomFromId(int id,String tableName){
-        sqLiteDatabase.delete(tableName,"id=?",new String[]{String.valueOf(id)});
+        int i=sqLiteDatabase.delete(tableName,"id=?",new String[]{String.valueOf(id)});
+        Logger.i("deleteRoomFromId:"+i+"    id:"+id);
     }
 }

@@ -13,6 +13,7 @@ import java.io.Serializable;
  **/
 public class FunLiveRoom implements Serializable {
 
+    private int id;
     private int room_id;
     private String room_src;
     private String room_name;
@@ -22,6 +23,14 @@ public class FunLiveRoom implements Serializable {
     private String nickname;
     private String url;
     private Boolean vertical;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getRoom_id() {
         return room_id;

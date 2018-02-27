@@ -1,21 +1,15 @@
 package com.github.yglll.funlive.view;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.flyco.tablayout.CommonTabLayout;
-import com.flyco.tablayout.SlidingTabLayout;
-import com.flyco.tablayout.listener.CustomTabEntity;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.db.FunLiveDbHelper;
 import com.github.yglll.funlive.view.adapter.user.UserAdapter;
@@ -101,8 +95,8 @@ public class UserFragment extends Fragment{
 
     private List<Fragment> getFragments(){
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(UserRoomListFragment.getInstance(FunLiveDbHelper.userCollectionTableName));
-        fragments.add(UserRoomListFragment.getInstance(FunLiveDbHelper.userHistoryTableName));
+        fragments.add(UserRoomListFragment.getInstance(FunLiveDbHelper.collection));
+        fragments.add(UserRoomListFragment.getInstance(FunLiveDbHelper.history));
         return fragments;
     }
 }

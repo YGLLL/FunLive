@@ -38,9 +38,10 @@
 
             <TextView
                 android:id="@+id/tv_nickname"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/img_nickname"
+                android:layout_toStartOf="@id/image_line"
                 android:layout_marginStart="2dp"
                 android:ellipsize="end"
                 android:textColor="@color/gray2"
@@ -58,6 +59,7 @@
                 android:textSize="12sp" />
 
             <ImageView
+                android:id="@+id/image_line"
                 android:layout_width="12.0dp"
                 android:layout_height="12.0dp"
                 android:layout_toStartOf="@id/tv_online_num"

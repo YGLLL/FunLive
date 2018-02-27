@@ -68,20 +68,33 @@
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_column_item_nickname"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/info_layout"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:ellipsize="end"
-            android:includeFontPadding="false"
-            android:shadowRadius="0.1"
-            android:maxLines="2"
-            android:minLines="2"
-            android:textColor="@color/grayDark"
-            android:textSize="14sp" />
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:id="@+id/tv_column_item_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/delete"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:shadowRadius="0.1"
+                android:maxLines="2"
+                android:minLines="2"
+                android:textColor="@color/grayDark"
+                android:textSize="14sp" />
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/vector_drawable_delete"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
