@@ -6,6 +6,8 @@ import android.content.Context;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.github.yglll.funlive.R;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.header.BezierCircleHeader;
@@ -27,6 +29,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
  * 创建时间：2017/12/31   23:12
  **/
 public class FLApplication extends Application {
+    private Tracker mTracker;
 
     //static 代码段可以减少对内存的使用
     static {
@@ -46,6 +49,15 @@ public class FLApplication extends Application {
                 return new BallPulseFooter(context);//.setDrawableSize(20);
             }
         });
+    }
+
+    synchronized public Tracker getDefaultTracker() {
+        if (mTracker == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+            mTracker = analytics.newTracker(R.xml.tracker_app);
+        }
+        return mTracker;
     }
 
     @Override

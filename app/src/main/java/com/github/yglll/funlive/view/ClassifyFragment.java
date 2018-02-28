@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.application.FLApplication;
 import com.github.yglll.funlive.model.ClassifyModel;
 import com.github.yglll.funlive.net.bean.CapiCategory;
 import com.github.yglll.funlive.net.bean.CateList;
@@ -14,6 +15,8 @@ import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.presenter.impl.ClassifyPresenter;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyPresenterInterfaces;
 import com.github.yglll.funlive.view.adapter.classify.ClassifyAdapter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 
@@ -82,5 +85,16 @@ public class ClassifyFragment extends BaseFragment<ClassifyModel,ClassifyPresent
     public void onStart() {
         super.onStart();
         refresh();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        //google analytics
+        FLApplication application = (FLApplication) getActivity().getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+
+        mTracker.setScreenName(ClassifyFragment.class.toString());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

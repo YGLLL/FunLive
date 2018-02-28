@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 26
@@ -70,5 +71,7 @@ dependencies {
     //弹幕
     implementation 'com.github.ctiao:DanmakuFlameMaster:0.9.21'
     //AdMob
-    implementation 'com.google.android.gms:play-services-ads:11.8.0'
+    implementation 'com.google.android.gms:play-services-ads:11.4.2'
+    //analytics
+    implementation 'com.google.android.gms:play-services-analytics:11.4.2'
 }

@@ -11,8 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.application.FLApplication;
 import com.github.yglll.funlive.db.FunLiveDbHelper;
 import com.github.yglll.funlive.view.adapter.user.UserAdapter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,5 +101,16 @@ public class UserFragment extends Fragment{
         fragments.add(UserRoomListFragment.getInstance(FunLiveDbHelper.collection));
         fragments.add(UserRoomListFragment.getInstance(FunLiveDbHelper.history));
         return fragments;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        //google analytics
+        FLApplication application = (FLApplication) getActivity().getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+
+        mTracker.setScreenName(UserFragment.class.toString());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

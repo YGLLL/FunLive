@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.application.FLApplication;
 import com.github.yglll.funlive.model.ClassifyCateActivityModel;
 import com.github.yglll.funlive.mvpbase.BaseActivity;
 import com.github.yglll.funlive.mvpbase.BaseView;
@@ -15,6 +16,8 @@ import com.github.yglll.funlive.presenter.impl.ClassifyCateActivityPresenter;
 import com.github.yglll.funlive.presenter.interfaces.ClassifyCateActivityInterfaces;
 import com.github.yglll.funlive.view.manager.FullyGridLayoutManager;
 import com.github.yglll.funlive.view.adapter.RoomListAdapter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -117,5 +120,16 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
     public void LoadMoreLive(List<RoomInfo> list) {
         smartRefreshLayout.finishLoadMore();
         roomListAdapter.setLoadMoreData(list);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        //google analytics
+        FLApplication application = (FLApplication)getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+
+        mTracker.setScreenName(ClassifyCateActivity.class.toString());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.application.FLApplication;
 import com.github.yglll.funlive.view.EventBus.SelectPageViewEvent;
 import com.github.yglll.funlive.view.adapter.MainActivityPagerAdapter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -19,6 +22,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.application.FLApplication;
 import com.github.yglll.funlive.model.RecommendModel;
 import com.github.yglll.funlive.net.bean.Category;
 import com.github.yglll.funlive.net.bean.FunLiveRoom;
@@ -26,6 +27,8 @@ import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterface
 import com.github.yglll.funlive.view.adapter.recommend.CarouselAdapter;
 import com.github.yglll.funlive.view.adapter.recommend.NavigationAdapter;
 import com.github.yglll.funlive.view.adapter.recommend.RecommendAdapter;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -156,5 +159,16 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
         smartRefreshLayout.finishRefresh();
         smartRefreshLayout.finishLoadMore();
         recommendAdapter.setData(categories,roomList);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        //google analytics
+        FLApplication application = (FLApplication) getActivity().getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+
+        mTracker.setScreenName(RecommendFragment.class.toString());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }
