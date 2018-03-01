@@ -1,6 +1,6 @@
 package com.github.yglll.funlive.net.handlingerror;
 
-import com.github.yglll.funlive.net.response.HttpResponse;
+import com.github.yglll.funlive.net.bean.HttpResponse;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

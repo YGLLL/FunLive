@@ -35,8 +35,7 @@ import es.dmoral.toasty.Toasty;
  * 备注消息：
  * 创建时间：2018/02/08   0:45
  **/
-//todo 返回Activity时恢复列表状态
-public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel,ClassifyCateActivityPresenter> implements ClassifyCateActivityInterfaces.View {
+public class CateActivity extends BaseActivity<ClassifyCateActivityModel,ClassifyCateActivityPresenter> implements ClassifyCateActivityInterfaces.View {
 
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout smartRefreshLayout;
@@ -129,7 +128,7 @@ public class ClassifyCateActivity extends BaseActivity<ClassifyCateActivityModel
         FLApplication application = (FLApplication)getApplication();
         Tracker mTracker = application.getDefaultTracker();
 
-        mTracker.setScreenName(ClassifyCateActivity.class.toString());
+        mTracker.setScreenName(CateActivity.class.toString());
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

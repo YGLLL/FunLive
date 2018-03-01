@@ -8,7 +8,7 @@ import com.github.yglll.funlive.net.bean.HomeCate;
 import com.github.yglll.funlive.net.bean.HomeHotColumn;
 import com.github.yglll.funlive.net.bean.RoomInfo;
 import com.github.yglll.funlive.net.bean.TempLiveVideoInfo;
-import com.github.yglll.funlive.net.response.HttpResponse;
+import com.github.yglll.funlive.net.bean.HttpResponse;
 
 import java.util.List;
 import java.util.Map;

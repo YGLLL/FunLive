@@ -1,8 +1,7 @@
 package com.github.yglll.funlive.net.retrofitfactory;
 
-import com.github.yglll.funlive.net.response.HttpResponse;
+import com.github.yglll.funlive.net.bean.HttpResponse;
 import com.google.gson.Gson;
-import com.orhanobut.logger.Logger;
 
 import org.json.JSONException;
 import org.json.JSONObject;

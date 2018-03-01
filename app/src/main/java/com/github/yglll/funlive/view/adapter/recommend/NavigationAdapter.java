@@ -13,7 +13,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.CapiCategory;
 import com.github.yglll.funlive.net.bean.Category;
-import com.github.yglll.funlive.view.ClassifyCateActivity;
+import com.github.yglll.funlive.view.CateActivity;
 import com.github.yglll.funlive.view.EventBus.SelectPageViewEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -76,7 +76,7 @@ public class NavigationAdapter extends BaseAdapter {
                 simpleDraweeView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(context, ClassifyCateActivity.class);
+                        Intent intent=new Intent(context, CateActivity.class);
                         intent.putExtra("cate", CapiCategory.valueOf(category));
                         context.startActivity(intent);
                     }

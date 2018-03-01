@@ -1,13 +1,7 @@
 package com.github.yglll.funlive.net.retrofitfactory;
 
-import com.github.yglll.funlive.net.response.HttpResponse;
 import com.google.gson.Gson;
-import com.orhanobut.logger.Logger;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 

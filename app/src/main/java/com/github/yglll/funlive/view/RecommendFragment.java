@@ -1,10 +1,10 @@
 package com.github.yglll.funlive.view;
 
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -16,12 +16,11 @@ import com.github.yglll.funlive.model.RecommendModel;
 import com.github.yglll.funlive.net.bean.Category;
 import com.github.yglll.funlive.net.bean.FunLiveRoom;
 import com.github.yglll.funlive.net.bean.HomeCarousel;
-import com.github.yglll.funlive.net.bean.HomeFaceScoreColumn;
 import com.github.yglll.funlive.net.bean.HomeHotColumn;
-import com.github.yglll.funlive.net.bean.HomeCate;
 import com.github.yglll.funlive.mvpbase.BaseFragment;
 import com.github.yglll.funlive.mvpbase.BaseView;
 import com.github.yglll.funlive.net.bean.RoomInfo;
+import com.github.yglll.funlive.net.bean.HttpResponse;
 import com.github.yglll.funlive.presenter.impl.RecommendPresenter;
 import com.github.yglll.funlive.presenter.interfaces.RecommendPresenterInterfaces;
 import com.github.yglll.funlive.view.adapter.recommend.CarouselAdapter;
@@ -29,17 +28,27 @@ import com.github.yglll.funlive.view.adapter.recommend.NavigationAdapter;
 import com.github.yglll.funlive.view.adapter.recommend.RecommendAdapter;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import es.dmoral.toasty.Toasty;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 作者：YGL
@@ -60,6 +69,8 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     private View haderView;
     private RecommendAdapter recommendAdapter;
     private NavigationAdapter navigationAdapter;
+    private CarouselTask carouselTask;
+    private final String carouselUrl="http://capi.douyucdn.cn/api/v1/slide/6";
 
     @Override
     protected int getLayoutId() {
@@ -69,6 +80,7 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     @Override
     public void onInitView(Bundle savedInstanceState){
         recommendAdapter=new RecommendAdapter(getActivity());
+        carouselTask=new CarouselTask();
 
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -90,7 +102,6 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
         bgaBanner.setAdapter(carouselAdapter);
 
         View navigationView=recommendAdapter.setNavigationView(R.layout.recommend_navigation,recyclerView);
-        //todo 使navigationView风格与其他item保持一致
         GridView gridView=navigationView.findViewById(R.id.grid_view);
         navigationAdapter=new NavigationAdapter();
         gridView.setAdapter(navigationAdapter);
@@ -103,7 +114,8 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
 
     private void refresh(){
         recommendAdapter.clear();
-        mPresenter.setCarousel();
+        //mPresenter.setCarousel();
+        carouselTask.execute();
         mPresenter.setNavigation();
         mPresenter.setHotColumn();
         mPresenter.setFaceScoreColumn();
@@ -170,5 +182,48 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
 
         mTracker.setScreenName(RecommendFragment.class.toString());
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
+
+    //AsyncTask
+    class CarouselTask extends AsyncTask<Object,Object,List<HomeCarousel>> {
+
+        @Override
+        protected List<HomeCarousel> doInBackground(Object... objects) {
+            Request request=new Request.Builder().url(carouselUrl).build();
+            OkHttpClient client=new OkHttpClient();
+            try {
+                Response response=client.newCall(request).execute();
+                final String responseData=response.body().string();
+                if (!TextUtils.isEmpty(responseData)){
+                    return analysisJson(responseData);
+                }
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            return new ArrayList<>();
+        }
+
+        private List<HomeCarousel> analysisJson(String jsonStr){
+            Gson gson=new Gson();
+            try {
+                JSONObject response=new JSONObject(jsonStr);
+                int error=response.getInt("error");
+                if(error!=0) {
+                    return new ArrayList<>();
+                }else{
+                    Type type=new TypeToken<List<HomeCarousel>>(){}.getType();
+                    return gson.fromJson(response.getString("data"),type);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return new ArrayList<>();
+        }
+
+        @Override
+        protected void onPostExecute(List<HomeCarousel> list){
+            super.onPostExecute(list);
+            showCarousel(list);
+        }
     }
 }

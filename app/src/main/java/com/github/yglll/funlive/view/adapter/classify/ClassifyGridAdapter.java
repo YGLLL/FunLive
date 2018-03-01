@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.net.bean.CapiCategory;
-import com.github.yglll.funlive.view.ClassifyCateActivity;
+import com.github.yglll.funlive.view.CateActivity;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public class ClassifyGridAdapter extends BaseAdapter {
         simpleDraweeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(mContext, ClassifyCateActivity.class);
+                Intent intent=new Intent(mContext, CateActivity.class);
                 intent.putExtra("cate",capiCategory);
                 mContext.startActivity(intent);
             }

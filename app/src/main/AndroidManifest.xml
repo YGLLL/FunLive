@@ -31,7 +31,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
-        <activity android:name=".view.ClassifyCateActivity"></activity>
+        <activity android:name=".view.CateActivity"></activity>
         <receiver android:name=".view.widget.FunLiveWidget">
             <intent-filter >
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
