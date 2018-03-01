@@ -11,7 +11,7 @@ import org.json.JSONException;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
 
-import retrofit2.adapter.rxjava.HttpException;
+import retrofit2.HttpException;
 
 /**
  * 作者：YGL

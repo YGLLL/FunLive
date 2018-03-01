@@ -17,7 +17,7 @@
             android:layout_width="30.0dp"
             android:layout_height="30.0dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20.0dp"
+            android:layout_marginStart="20.0dp"
             android:src="@drawable/vector_drawable_back" />
 
         <TextView
@@ -25,10 +25,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10.0dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@id/iv_back"
-            android:layout_toLeftOf="@+id/iv_live_follow"
+            android:layout_marginStart="10.0dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@id/iv_back"
+            android:layout_toStartOf="@+id/iv_live_follow"
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:maxLines="1"
@@ -39,8 +39,8 @@
             android:layout_width="30.0dp"
             android:layout_height="30.0dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20.0dp"
-            android:layout_alignParentRight="true"
+            android:layout_marginEnd="20.0dp"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/vector_drawable_share" />
 
         <ImageView
@@ -48,8 +48,8 @@
             android:layout_width="30.0dp"
             android:layout_height="30.0dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="25.0dp"
-            android:layout_toLeftOf="@id/iv_live_share"
+            android:layout_marginEnd="25.0dp"
+            android:layout_toStartOf="@id/iv_live_share"
             android:src="@drawable/vector_drawable_follow" />
 
 
@@ -68,7 +68,7 @@
             android:layout_width="30.0dp"
             android:layout_height="30.0dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20.0dp"
+            android:layout_marginStart="20.0dp"
             android:src="@drawable/vector_drawable_play" />
 
         <ImageView
@@ -76,8 +76,8 @@
             android:layout_width="30.0dp"
             android:layout_height="30.0dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="25.0dp"
-            android:layout_toRightOf="@id/iv_live_play"
+            android:layout_marginStart="25.0dp"
+            android:layout_toEndOf="@id/iv_live_play"
             android:src="@drawable/vector_drawable_refresh" />
 
         <ImageView
@@ -85,8 +85,8 @@
             android:layout_width="30.0dp"
             android:layout_height="30.0dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20.0dp"
-            android:layout_alignParentRight="true"
+            android:layout_marginEnd="20.0dp"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/vector_drawable_danmu" />
 
     </RelativeLayout>
@@ -109,7 +109,7 @@
                 android:layout_centerInParent="true"/>
 
             <TextView
-                android:layout_alignLeft="@+id/im_logo"
+                android:layout_alignEnd="@+id/im_logo"
                 android:layout_below="@+id/im_logo"
                 android:id="@+id/tv_loading_buffer"
                 android:layout_width="wrap_content"
