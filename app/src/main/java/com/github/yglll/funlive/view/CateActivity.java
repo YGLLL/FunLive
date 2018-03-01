@@ -1,5 +1,7 @@
 package com.github.yglll.funlive.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,6 +46,12 @@ public class CateActivity extends BaseActivity<ClassifyCateActivityModel,Classif
 
     private CapiCategory capiCategory;
     private RoomListAdapter roomListAdapter;
+
+    public static void startActivity(Context context,CapiCategory capiCategory){
+        Intent intent=new Intent(context, CateActivity.class);
+        intent.putExtra("cate", capiCategory);
+        context.startActivity(intent);
+    }
 
     @Override
     public void showErrorWithStatus(String msg) {

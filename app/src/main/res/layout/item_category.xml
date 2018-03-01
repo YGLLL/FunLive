@@ -11,11 +11,12 @@
         android:layout_width="50.0dp"
         android:layout_height="50.0dp"
         fresco:actualImageScaleType="centerCrop"
-        fresco:placeholderImage="@drawable/ic_launcher"
+        fresco:placeholderImage="@drawable/vector_drawable_load_pictrue"
         fresco:placeholderImageScaleType="centerCrop"
         fresco:roundAsCircle="true"/>
     <TextView
         android:id="@+id/category_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="50.0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"/>
 </LinearLayout>

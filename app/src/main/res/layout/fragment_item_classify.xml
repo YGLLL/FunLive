@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     >
     <GridView
+        android:layout_margin="8dp"
         android:id="@+id/grid_view"
         android:gravity="center"
         android:layout_width="match_parent"

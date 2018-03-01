@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.github.yglll.funlive.net.bean.CateList;
-import com.github.yglll.funlive.view.ClassifyChildrenFragment;
+import com.github.yglll.funlive.view.ClassifyGridFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +36,9 @@ public class ClassifyAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Bundle bundle=new Bundle();
         bundle.putString(CATENAMEKEY,data.get(position).getShort_name());
-        ClassifyChildrenFragment classifyChildrenFragment=new ClassifyChildrenFragment();
-        classifyChildrenFragment.setArguments(bundle);
-        return classifyChildrenFragment;
+        ClassifyGridFragment classifyGridFragment =new ClassifyGridFragment();
+        classifyGridFragment.setArguments(bundle);
+        return classifyGridFragment;
     }
 
     @Override

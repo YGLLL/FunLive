@@ -31,7 +31,7 @@ import es.dmoral.toasty.Toasty;
  * 备注消息：
  * 创建时间：2018/02/06   11:20
  **/
-public class ClassifyChildrenFragment extends BaseFragment<ClassifyModel,ClassifyPresenter> implements ClassifyPresenterInterfaces.View{
+public class ClassifyGridFragment extends BaseFragment<ClassifyModel,ClassifyPresenter> implements ClassifyPresenterInterfaces.View{
 
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout smartRefreshLayout;

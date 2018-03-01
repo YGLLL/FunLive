@@ -14,10 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.net.bean.CapiCategory;
 import com.github.yglll.funlive.net.bean.Category;
 import com.github.yglll.funlive.net.bean.HomeCate;
 import com.github.yglll.funlive.net.bean.HomeHotColumn;
 import com.github.yglll.funlive.net.bean.RoomInfo;
+import com.github.yglll.funlive.view.CateActivity;
 import com.github.yglll.funlive.view.adapter.RoomListAdapter;
 import com.github.yglll.funlive.view.manager.FullyGridLayoutManager;
 import com.github.yglll.funlive.utils.Utils;
@@ -37,8 +39,10 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     private List<HomeHotColumn> homeHotColumns;
     private List<RoomInfo> homeFaceScoreColumns;
+
     private List<List<RoomInfo>> data;
     private List<Category> categories;
+
     private RoomListAdapter roomListAdapter;
 
     private Context mContext;
@@ -55,9 +59,9 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     }
 
     public class NormalViewHolder extends RecyclerView.ViewHolder {
-        //栏目 Icon
-        public ImageView img_column_icon;
-        //栏目 名称
+        //栏目图标
+        public ImageView cateImage;
+        //栏目名称
         public TextView tv_column_name;
         //加载更多
         public RelativeLayout rl_column_more;
@@ -68,7 +72,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
         public NormalViewHolder(View itemView) {
             super(itemView);
-            img_column_icon = (ImageView) itemView.findViewById(R.id.img_column_icon);
+            cateImage=(ImageView) itemView.findViewById(R.id.cate_icon);
             tv_column_name = (TextView) itemView.findViewById(R.id.tv_column_name);
             rl_column_more = (RelativeLayout) itemView.findViewById(R.id.rl_column_more);
             rv_column_list = (RecyclerView) itemView.findViewById(R.id.rv_column_list);
@@ -100,14 +104,22 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             NormalViewHolder normalViewHolder=(NormalViewHolder)holder;
             switch (position){
                 case 0:
-                    normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
-                    normalViewHolder.tv_column_name.setText("最热");
+                    normalViewHolder.rl_column_more.setVisibility(View.GONE);
+                    normalViewHolder.tv_column_name.setText("热门");
                     normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
                     HomeHotColumnAdapter homeHotColumnAdapter=new HomeHotColumnAdapter(mContext,homeHotColumns);
                     normalViewHolder.rv_column_list.setAdapter(homeHotColumnAdapter);
                     break;
                 case 1:
-                    normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
+                    normalViewHolder.rl_column_more.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            CapiCategory capiCategory=new CapiCategory();
+                            capiCategory.setTag_name("颜值");
+                            capiCategory.setTag_id("201");
+                            CateActivity.startActivity(mContext,capiCategory);
+                        }
+                    });
                     normalViewHolder.tv_column_name.setText("颜值");
                     normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
                     roomListAdapter =new RoomListAdapter(mContext,homeFaceScoreColumns,true);
@@ -115,11 +127,16 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                     break;
                 default:
                     if(data.size()>0){
-                        position-=2;
-                        normalViewHolder.img_column_icon.setImageResource(R.mipmap.ic_launcher);
-                        normalViewHolder.tv_column_name.setText(categories.get(position).getGame_name());
+                        final int i=position-2;
+                        normalViewHolder.rl_column_more.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                CateActivity.startActivity(mContext,CapiCategory.valueOf(categories.get(i)));
+                            }
+                        });
+                        normalViewHolder.tv_column_name.setText(categories.get(i).getGame_name());
                         normalViewHolder.rv_column_list.setLayoutManager(new FullyGridLayoutManager(normalViewHolder.rv_column_list.getContext(), 2, GridLayoutManager.VERTICAL, false));
-                        roomListAdapter=new RoomListAdapter(mContext,data.get(position));
+                        roomListAdapter=new RoomListAdapter(mContext,data.get(i));
                         normalViewHolder.rv_column_list.setAdapter(roomListAdapter);
                     }
             }

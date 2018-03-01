@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
             <ImageView
-                android:id="@+id/img_column_icon"
+                android:id="@+id/cate_icon"
+                android:src="@drawable/vector_drawable_classify"
                 android:layout_width="20.0dp"
                 android:layout_height="20.0dp"
                 android:layout_centerVertical="true"
@@ -40,7 +41,7 @@
                 android:textStyle="bold"
                 android:elevation="2dp"
                 android:layout_marginTop="10.0dp"
-                android:layout_toEndOf="@+id/img_column_icon" />
+                android:layout_toEndOf="@id/cate_icon" />
             <RelativeLayout
                 android:id="@+id/rl_column_more"
                 android:layout_width="wrap_content"
@@ -58,13 +59,13 @@
                     android:layout_marginBottom="10.0dp"
                     android:layout_marginEnd="12.0dp"
                     android:elevation="2dp"
-                    app:srcCompat="@android:drawable/ic_media_play" />
+                    android:src="@drawable/vector_drawable_more" />
                 <TextView
                     android:id="@+id/tv_column_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="#b0b0b0"
+                    android:textColor="@color/gray"
                     android:layout_marginEnd="2.0dp"
                     android:text="更多"
                     android:elevation="2dp"

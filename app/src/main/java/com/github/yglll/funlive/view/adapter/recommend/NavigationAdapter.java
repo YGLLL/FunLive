@@ -59,7 +59,7 @@ public class NavigationAdapter extends BaseAdapter {
         TextView name=mView.findViewById(R.id.category_name);
         if(data.size()>0){
             if(i>=7){
-                simpleDraweeView.setImageURI(Uri.parse("res://mipmap/"+R.mipmap.ic_launcher));
+                simpleDraweeView.setImageURI(Uri.parse("res://drawable/"+R.drawable.vector_drawable_classify));
                 name.setText(context.getText(R.string.more));
                 simpleDraweeView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -76,9 +76,7 @@ public class NavigationAdapter extends BaseAdapter {
                 simpleDraweeView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(context, CateActivity.class);
-                        intent.putExtra("cate", CapiCategory.valueOf(category));
-                        context.startActivity(intent);
+                        CateActivity.startActivity(context,CapiCategory.valueOf(category));
                     }
                 });
             }
