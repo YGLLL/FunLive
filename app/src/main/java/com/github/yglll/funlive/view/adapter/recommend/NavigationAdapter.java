@@ -50,7 +50,6 @@ public class NavigationAdapter extends BaseAdapter {
         return 0;
     }
 
-    //todo 优化性能
     @Override
     public View getView(int i, View view,ViewGroup viewGroup) {
         final Context context=viewGroup.getContext();

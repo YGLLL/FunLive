@@ -56,7 +56,6 @@ public class ClassifyGridAdapter extends BaseAdapter {
     public View getView(int i, View view, final ViewGroup viewGroup) {
         final Context mContext=viewGroup.getContext();
         final CapiCategory capiCategory=data.get(i);
-        //todo 优化性能
         View mView= LayoutInflater.from(mContext).inflate(R.layout.item_category,viewGroup,false);
         SimpleDraweeView simpleDraweeView=mView.findViewById(R.id.img_item_gridview);
         TextView name=mView.findViewById(R.id.category_name);

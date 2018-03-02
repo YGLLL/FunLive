@@ -15,7 +15,7 @@
         android:allowBackup="true"
         android:icon="@drawable/vector_drawable_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/vector_drawable_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.MainActivity">
