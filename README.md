@@ -1,3 +1,8 @@
+```由于本应用使用了google analytics，
+在开始构建前你需要一个关于google analytics的google-services.json，
+以及你需要在res/xml/tracker_app.xml内输入你的Tracking ID```
+
+
 优达学城Android开发进阶
 # 毕业设计
 原设计:https://github.com/YGLLL/Capstone-Project
