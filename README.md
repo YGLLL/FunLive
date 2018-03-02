@@ -1,4 +1,5 @@
-```由于本应用使用了google analytics，
+```
+由于本应用使用了google analytics，
 在开始构建前你需要一个关于google analytics的google-services.json，
 以及你需要在res/xml/tracker_app.xml内输入你的Tracking ID
 ```
@@ -49,7 +50,8 @@ ps：目前直播观看5分钟后会自动停止，但刷新后可以继续观�
 - .view.RecommendFragment
 ### Loader
 - .view.UserRoomListFragment
-```ps:虽然这里使用了Loader载入数据，
+```
+ps:虽然这里使用了Loader载入数据，
 但我发现在删除数据库数据后onLoadFinished方法得不到调用（见.view.adapter.user.UserRoomListAdapter），
 找了很久找不到原因，
 所以不得不同时使用另一种载入数据的方法，
