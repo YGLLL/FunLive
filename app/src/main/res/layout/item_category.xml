@@ -3,17 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
     <com.facebook.drawee.view.SimpleDraweeView
+        android:layout_centerHorizontal="true"
         android:id="@+id/img_item_gridview"
         android:layout_width="50.0dp"
         android:layout_height="50.0dp"
-        fresco:actualImageScaleType="centerCrop"
-        fresco:placeholderImage="@drawable/vector_drawable_load_pictrue"
-        fresco:placeholderImageScaleType="centerCrop"
-        fresco:roundAsCircle="true"/>
+        app:actualImageScaleType="centerCrop"
+        app:placeholderImage="@drawable/vector_drawable_load_pictrue"
+        app:placeholderImageScaleType="centerCrop"
+        app:roundAsCircle="true"/>
     <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/img_item_gridview"
         android:id="@+id/category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
