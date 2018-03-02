@@ -1,18 +1,18 @@
 优达学城Android开发进阶
-#毕业设计
+# 毕业设计
 原设计:https://github.com/YGLLL/Capstone-Project
-##与原设计的不同
--取消了Video栏目
+## 与原设计的不同
+- 取消了Video栏目
 （原因：斗鱼暂未开放视频点播API）
--去掉首页顶部的分类TAB以及使Live栏仅展示分类TAB，不展示房间
+- 去掉首页顶部的分类TAB以及使Live栏仅展示分类TAB，不展示房间
 （原因：为了各个页面分工更明确）
 （ps：目前直播观看5分钟后会自动停止，但刷新后可以继续观看。
 这是因为播放链接抓取自斗鱼移动版网页，该链接仅能播放5分钟，这是目前唯一能实现的播放方式）
 
-##项目结构
--网络连接结构
+## 项目结构
+- 网络连接结构
 ![](https://github.com/YGLLL/Baking/blob/master/pic/Retrofit2.png)
--UI结构
+- UI结构
 ![](https://github.com/YGLLL/Baking/blob/master/pic/MainActivity.png)
 
 ##项目要求实现点
