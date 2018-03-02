@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:layout_gravity="center_horizontal">
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/img_item_gridview"
         android:layout_width="50.0dp"
