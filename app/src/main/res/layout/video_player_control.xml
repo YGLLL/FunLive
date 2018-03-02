@@ -109,8 +109,8 @@
                 android:layout_centerInParent="true"/>
 
             <TextView
-                android:layout_alignEnd="@+id/im_logo"
-                android:layout_below="@+id/im_logo"
+                android:layout_alignStart="@id/im_logo"
+                android:layout_below="@id/im_logo"
                 android:id="@+id/tv_loading_buffer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

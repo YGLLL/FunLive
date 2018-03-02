@@ -59,7 +59,7 @@ public class NavigationAdapter extends BaseAdapter {
         TextView name=mView.findViewById(R.id.category_name);
         if(data.size()>0){
             if(i>=7){
-                simpleDraweeView.setImageURI(Uri.parse("res://drawable/"+R.drawable.vector_drawable_classify));
+                simpleDraweeView.setImageURI(Uri.parse("res://drawable/"+R.drawable.cate_more));
                 name.setText(context.getText(R.string.more));
                 simpleDraweeView.setOnClickListener(new View.OnClickListener() {
                     @Override

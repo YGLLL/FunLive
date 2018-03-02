@@ -17,6 +17,7 @@ import com.github.yglll.funlive.presenter.interfaces.ClassifyPresenterInterfaces
 import com.github.yglll.funlive.view.adapter.classify.ClassifyAdapter;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyModel,ClassifyPresent
             titles[i]=list.get(i).getCate_name();
         }
         //不摧毁Fragment
-        viewPager.setOffscreenPageLimit(titles.length);
+        //viewPager.setOffscreenPageLimit(titles.length);
         classifyAdapter.setData(list);
         slidingTabLayout.setViewPager(viewPager,titles);
     }

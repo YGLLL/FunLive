@@ -80,7 +80,6 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     @Override
     public void onInitView(Bundle savedInstanceState){
         recommendAdapter=new RecommendAdapter(getActivity());
-        carouselTask=new CarouselTask();
 
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -115,6 +114,7 @@ public class RecommendFragment extends BaseFragment<RecommendModel,RecommendPres
     private void refresh(){
         recommendAdapter.clear();
         //mPresenter.setCarousel();
+        carouselTask=new CarouselTask();
         carouselTask.execute();
         mPresenter.setNavigation();
         mPresenter.setHotColumn();

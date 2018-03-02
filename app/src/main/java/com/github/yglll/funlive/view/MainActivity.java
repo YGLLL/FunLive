@@ -1,5 +1,6 @@
 package com.github.yglll.funlive.view;
 
+import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -30,8 +31,8 @@ import butterknife.ButterKnife;
 /**
  * 作者：YGL
  * 版本号：1.0
- * 类描述：
- * 备注消息：
+ * 类描述：入口
+ * 备注消息：阅读README.md可能会对你有一些帮助
  * 创建时间：
  **/
 public class MainActivity extends AppCompatActivity {
@@ -50,9 +51,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView(){
+        //强制竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         MainActivityPagerAdapter mPagerAdapter=new MainActivityPagerAdapter(getSupportFragmentManager(),getFragments());
         //不摧毁Fragment
-        viewPager.setOffscreenPageLimit(mPagerAdapter.getCount());
+        viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(mPagerAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
