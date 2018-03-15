@@ -7,6 +7,16 @@
 
 优达学城Android开发进阶
 # 毕业设计
+
+## 界面展示
+![](https://github.com/YGLLL/FunLive/blob/master/screenshot/1.jpg)
+![](https://github.com/YGLLL/FunLive/blob/master/screenshot/2.jpg)
+![](https://github.com/YGLLL/FunLive/blob/master/screenshot/3.jpg)
+![](https://github.com/YGLLL/FunLive/blob/master/screenshot/4.jpg)
+![](https://github.com/YGLLL/FunLive/blob/master/screenshot/5.jpg)
+![](https://github.com/YGLLL/FunLive/blob/master/screenshot/6.jpg)
+![](https://github.com/YGLLL/FunLive/blob/master/screenshot/7.jpg)
+
 原设计:https://github.com/YGLLL/Capstone-Project
 ## 与原设计的不同
 - 取消了Video栏目
@@ -24,9 +34,9 @@ ps：目前直播观看5分钟后会自动停止，但刷新后可以继续观�
 
 ## 项目结构
 - 网络组件结构大意
-![](Retrofit2.jpg)
+![](https://github.com/YGLLL/FunLive/blob/master/screenshot/Retrofit2.jpg)
 - UI结构
-![](MainActivity.jpg)
+![](https://github.com/YGLLL/FunLive/blob/master/screenshot/MainActivity.jpg)
 
 ## 项目要求实现点
 ### 小部件
