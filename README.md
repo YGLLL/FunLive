@@ -13,9 +13,9 @@
 ![](https://github.com/YGLLL/FunLive/blob/master/screenshot/2.jpg)
 ![](https://github.com/YGLLL/FunLive/blob/master/screenshot/3.jpg)
 ![](https://github.com/YGLLL/FunLive/blob/master/screenshot/4.jpg)
-![](https://github.com/YGLLL/FunLive/blob/master/screenshot/5.jpg)
 ![](https://github.com/YGLLL/FunLive/blob/master/screenshot/6.jpg)
 ![](https://github.com/YGLLL/FunLive/blob/master/screenshot/7.jpg)
+![](https://github.com/YGLLL/FunLive/blob/master/screenshot/5.jpg)
 
 原设计:https://github.com/YGLLL/Capstone-Project
 ## 与原设计的不同
