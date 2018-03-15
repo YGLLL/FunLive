@@ -32,7 +32,7 @@
 - UI结构
 ![](https://github.com/YGLLL/FunLive/blob/master/screenshot/MainActivity.jpg)
 
-##项目使用的开源库
+## 项目使用的开源库
 - Retrofit2
 - RxJava
 - fresco
