@@ -4,7 +4,10 @@
 以及你需要在res/xml/tracker_app.xml内输入你的Tracking ID
 ```
 
-**FunLive 是 Android 平台上一款观看直播视频的App 。项目基于 MVP 架构，采用各主流开源库实现。用户可以在FunLive内观看直播视频，可以控制弹幕的开关，App还可以记录用户的收藏以及历史纪录。数据来自斗鱼。**
+**FunLive 是 Android 平台上一款观看直播视频的App 。
+项目基于 MVP 架构，采用各主流开源库实现。
+用户可以在FunLive内观看直播视频，可以控制弹幕的开关，App还可以记录用户的收藏以及历史纪录。
+数据来自斗鱼。**
 
 ## 界面展示
 ![](https://github.com/YGLLL/FunLive/blob/master/screenshot/1.jpg)
