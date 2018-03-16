@@ -7,7 +7,7 @@
 优达学城Android开发进阶
 # 毕业设计
 
-**FunLive 是 Android 平台上一款观看直播视频的App ，目前还在开发中。项目基于 MVP 架构，采用各主流开源库实现。**
+**FunLive 是 Android 平台上一款观看直播视频的App 。项目基于 MVP 架构，采用各主流开源库实现。用户可以在FunLive内观看直播视频，可以控制弹幕的开关，App还可以记录用户的收藏以及历史纪录。**
 
 ## 界面展示
 ![](https://github.com/YGLLL/FunLive/blob/master/screenshot/1.jpg)
