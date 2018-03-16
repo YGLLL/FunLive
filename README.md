@@ -1,9 +1,3 @@
-```
-由于本应用使用了google analytics，
-在开始构建前你需要一个关于google analytics的google-services.json，
-以及你需要在res/xml/tracker_app.xml内输入你的Tracking ID
-```
-
 **FunLive 是 Android 平台上一款观看直播视频的App 。
 项目基于 MVP 架构，采用各主流开源库实现。
 用户可以在FunLive内观看直播视频，可以控制弹幕的开关，App还可以记录用户的收藏以及历史纪录。

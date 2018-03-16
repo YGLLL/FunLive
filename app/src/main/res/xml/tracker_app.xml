@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <string name="ga_trackingId">Your Google Analytics Tracking ID</string>
+    <string name="ga_trackingId">UA-114305838-2</string>
     <bool name="ga_autoActivityTracking">true</bool>
 </resources>

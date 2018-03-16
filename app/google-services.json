@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "279703655874",
+    "project_id": "firebase-funlive"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279703655874:android:9b3e006990b422b9",
+        "android_client_info": {
+          "package_name": "com.github.yglll.funlive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279703655874-58mnco0sjd573bd9gqlu0gbi7rfn4h71.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABXv38rhOxsXBY-GL_MMTwik_288Rzq0E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-114305838-2"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
