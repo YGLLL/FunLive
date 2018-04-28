@@ -30,4 +30,47 @@
 
     <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
     <string name="admob_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+
+
+
+    <!-- Strings related to login -->
+    <string name="prompt_account">用户名</string>
+    <string name="prompt_user_name">用户名</string>
+    <string name="prompt_email">邮箱</string>
+    <string name="prompt_password">密码</string>
+    <string name="prompt_password_confirm">确认密码</string>
+    <string name="action_sign_in">注册</string>
+    <string name="action_login_in">登录</string>
+    <string name="copyright"> ©ATDStudio 版权所有</string>
+    <string name="double_click_exit">再按一次退出程序</string>
+
+    <!--SigninActivity-->
+    <string name="account_empty">账户不能为空</string>
+    <string name="password_empty">密码不能为空</string>
+    <string name="code_empty">验证码不能为空</string>
+    <string name="signing">登陆中</string>
+    <string name="signin_successful">登陆成功</string>
+    <string name="code">验证码</string>
+    <string name="reset_password">忘记密码?</string>
+
+    <string name="remote_error">出现错误:</string>
+    <string name="info_down"> 下载中 </string>
+    <!--SignupActivity-->
+    <string name="please_wait">请稍等</string>
+    <string name="email_empty">邮箱不能为空</string>
+    <string name="signup_successful">注册成功</string>
+    <string name="password_diff">密码不一致</string>
+
+    <!--服务器返回错误-->
+    <string name="name_format_error">用户名格式错误</string>
+    <string name="email_format_error">邮件格式错误</string>
+    <string name="name_exists_error">用户名已存在</string>
+    <string name="email_exists_error">邮箱已注册</string>
+    <string name="account_or_password_error">帐号或密码错误</string>
+    <string name="user_freezed">用户被冻结</string>
+    <string name="human_code_error">验证码错误</string>
+    <string name="invite_code_error">邀请码错误</string>
+    <string name="unknown_error">未知错误</string>
+    <string name="logout">退出登录</string>
 </resources>

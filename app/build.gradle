@@ -85,4 +85,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:11.4.2'
     //analytics
     implementation 'com.google.android.gms:play-services-analytics:11.4.2'
+    // bootstrap
+    implementation 'com.beardedhen:androidbootstrap:2.0.1'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }

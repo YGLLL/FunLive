@@ -15,4 +15,22 @@
     <color name="greenDark">#087f23</color>
     <color name="greenLight">#80e27e</color>
     <color name="orangeA200">#FFAB40</color>
+
+
+
+    <color name="blue">#1d97f5</color>
+    <color name="btn_enable">#61c8e5</color>
+    <color name="btn_unable">#b8b8b8</color>
+    <color name="txt">#25696B</color>
+    <color name="dlg_pressed_bg_color">#cfD4D4D4</color>
+    <color name="side_background">#FF16AB41</color>
+    <drawable name="menu_press_night">#f0f0f2</drawable>
+
+    <!--SigninUserActivity-->
+    <color name="gray_light">#CCCCCC</color>
+    <color name="gray_drak">#666666</color>
+    <color name="gray_drak2">#333333</color>
+    <color name="black">#000000</color>
+    <color name="tgray">#55999999</color>
+    <color name="transparency">#00000000</color>
 </resources>

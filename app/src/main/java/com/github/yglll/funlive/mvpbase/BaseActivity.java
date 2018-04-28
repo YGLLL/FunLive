@@ -3,7 +3,9 @@ package com.github.yglll.funlive.mvpbase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -33,13 +35,18 @@ public abstract class BaseActivity<M extends BaseModel,P extends BasePresenter> 
         //设置返回键和标题
         ActionBar actionBar=getSupportActionBar();
         if(actionBar!=null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
+            if(isGoHome()){
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
             actionBar.setTitle(activityTitle());
         }
     }
 
     public abstract void initView(Bundle bundle);
     public abstract String activityTitle();
+    public Boolean isGoHome(){
+        return true;
+    }
 
     //在销毁时解除绑定
     @Override
@@ -94,5 +101,25 @@ public abstract class BaseActivity<M extends BaseModel,P extends BasePresenter> 
     //获得Presenter实例
     private <T> T getPresenterImpl() {
         return ContractProxy.getInstance().presenter(getPresenterClazz());
+    }
+
+    private Toast mToast;
+    public void showToast(int res) {
+        showToast(getString(res));
+    }
+    public void showToast(final Object message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mToast == null) {
+                    mToast = Toast.makeText(getBaseContext(), message + "", Toast.LENGTH_SHORT);
+                    mToast.setGravity(Gravity.CENTER, 0, 0);
+                } else {
+                    mToast.setText(message + "");
+                    mToast.setDuration(Toast.LENGTH_SHORT);
+                }
+                mToast.show();
+            }
+        });
     }
 }

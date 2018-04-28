@@ -1,12 +1,17 @@
 package com.github.yglll.funlive.view;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.SigninUserManager;
 import com.github.yglll.funlive.db.FunLiveDB;
 import com.github.yglll.funlive.db.FunLiveProvide;
 import com.github.yglll.funlive.net.bean.FunLiveRoom;
@@ -52,8 +58,6 @@ public class UserRoomListFragment extends Fragment implements LoaderManager.Load
     RecyclerView recyclerView;
     @BindView(R.id.empty_view)
     TextView emptyView;
-    @BindView(R.id.ad_view)
-    AdView adView;
 
     private FunLiveDB funLiveDB;
     private UserRoomListAdapter userRoomListAdapter;
@@ -100,10 +104,6 @@ public class UserRoomListFragment extends Fragment implements LoaderManager.Load
 
         //活动Loader实例，并初始化它
         getLoaderManager().initLoader(0, null,this);
-
-        //AdMob
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
     }
 
     private void emptyViewControl(boolean bool){

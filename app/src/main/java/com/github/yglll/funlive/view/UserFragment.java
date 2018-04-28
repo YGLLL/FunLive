@@ -1,16 +1,21 @@
 package com.github.yglll.funlive.view;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.SigninUserManager;
 import com.github.yglll.funlive.application.FLApplication;
 import com.github.yglll.funlive.db.FunLiveDbHelper;
 import com.github.yglll.funlive.view.adapter.user.UserAdapter;
@@ -36,6 +41,8 @@ public class UserFragment extends Fragment{
     BottomNavigationView bottomNavigationView;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
+    @BindView(R.id.fab)
+    FloatingActionButton floatingActionButton;
 
     private UserAdapter userAdapter;
     private MenuItem menuItem;
@@ -92,6 +99,25 @@ public class UserFragment extends Fragment{
                     viewPager.setCurrentItem(i);
                 }
                 return true;
+            }
+        });
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //删除此项
+                AlertDialog dialog = new AlertDialog.Builder(getContext())
+                        .setNegativeButton("取消", null)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SigninUserManager.userLogout(getActivity());
+                                startActivity(new Intent(getActivity(),SigninActivity.class));
+                                getActivity().finish();
+                            }
+                        })
+                        .setMessage("确认退出登录？").create();
+                dialog.show();
             }
         });
     }

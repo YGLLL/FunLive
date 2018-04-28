@@ -1,5 +1,6 @@
 package com.github.yglll.funlive.view;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.github.yglll.funlive.R;
+import com.github.yglll.funlive.SigninUserManager;
 import com.github.yglll.funlive.application.FLApplication;
 import com.github.yglll.funlive.view.EventBus.SelectPageViewEvent;
 import com.github.yglll.funlive.view.adapter.MainActivityPagerAdapter;
@@ -44,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if(SigninUserManager.getSigninUser(this)==null){
+            finish();
+            startActivity(new Intent(this,SigninActivity.class));
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);

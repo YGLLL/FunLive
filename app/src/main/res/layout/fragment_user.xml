@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bnv"
+<FrameLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:itemIconTint="@drawable/color_menu_user_nav"
-        app:itemTextColor="@drawable/color_menu_user_nav"
-        app:menu="@menu/menu_user" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bnv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:itemIconTint="@drawable/color_menu_user_nav"
+            app:itemTextColor="@drawable/color_menu_user_nav"
+            app:menu="@menu/menu_user" />
 
-    <View
-        android:elevation="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="#34707070"/>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+        <View
+            android:elevation="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#34707070"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+<android.support.design.widget.FloatingActionButton
+    android:id="@+id/fab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:src="@android:drawable/ic_delete"
+    android:layout_margin="10dp"/>
+</FrameLayout>
