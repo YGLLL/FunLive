@@ -11,13 +11,7 @@ import com.github.yglll.funlive.view.ClassifyGridFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：使用了FragmentStatePagerAdapter，可以在切换Fragment时不销毁Fragment
- * 创建时间：2018/02/04   11:04
- **/
+
 public class ClassifyAdapter extends FragmentStatePagerAdapter {
     public static final String CATENAMEKEY="cateName";
 

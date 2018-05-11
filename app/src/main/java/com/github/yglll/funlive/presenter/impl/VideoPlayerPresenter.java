@@ -15,13 +15,7 @@ import java.util.List;
 import es.dmoral.toasty.Toasty;
 import rx.Observer;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/10   22:53
- **/
+
 public class VideoPlayerPresenter extends VideoPlayerInterfaces.Presenter {
     @Override
     public void setVideoUrl(int roomId) {

@@ -1,11 +1,6 @@
 package com.github.yglll.funlive;
 
-/*
- *创建人:yanggl
- *创建时间:2018-4-28  14:30
- *类描述:
- *备注:
- */
+
 public class User {
     private String name;
     private String pwd;

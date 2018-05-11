@@ -15,13 +15,7 @@ import java.util.Map;
 
 import rx.Observable;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2017/12/27   9:30
- **/
+
 public interface RecommendPresenterInterfaces {
     interface View extends BaseView {
         void showCarousel(List<HomeCarousel> list);

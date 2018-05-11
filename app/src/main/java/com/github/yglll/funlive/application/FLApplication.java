@@ -21,13 +21,6 @@ import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2017/12/31   23:12
- **/
 public class FLApplication extends Application {
     private Tracker mTracker;
 

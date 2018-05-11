@@ -2,13 +2,7 @@ package com.github.yglll.funlive.mvpbase;
 
 import android.content.Context;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：定义每一个Presenter都应该具备的基本属性
- * 备注消息：
- * 创建时间：2018/01/10   21:46
- **/
+
 public class BasePresenter<V extends BaseView,M extends BaseModel> implements Presenter<V,M> {
     protected Context mContext;
     protected V mView;

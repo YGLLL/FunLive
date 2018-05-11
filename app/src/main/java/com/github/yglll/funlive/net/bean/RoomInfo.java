@@ -2,13 +2,7 @@ package com.github.yglll.funlive.net.bean;
 
 import java.io.Serializable;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/08   22:59
- **/
+
 public class RoomInfo{
     /*
     * "room_id": 300401,

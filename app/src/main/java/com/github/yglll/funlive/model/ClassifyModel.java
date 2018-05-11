@@ -13,13 +13,7 @@ import java.util.List;
 
 import rx.Observable;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/03   18:53
- **/
+
 public class ClassifyModel implements ClassifyPresenterInterfaces.Model {
     @Override
     public Observable<List<CateList>> getCateList() {

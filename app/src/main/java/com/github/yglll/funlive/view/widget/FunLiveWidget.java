@@ -10,13 +10,7 @@ import android.widget.RemoteViews;
 import com.github.yglll.funlive.R;
 import com.github.yglll.funlive.view.MainActivity;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/19   2:07
- **/
+
 public class FunLiveWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {

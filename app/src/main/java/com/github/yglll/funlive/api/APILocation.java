@@ -1,12 +1,5 @@
 package com.github.yglll.funlive.api;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：API地址
- * 备注消息：
- * 创建时间：2017/12/13   7:15
- **/
 public class APILocation {
     //base地址
     public static final String baseUrl="http://open.douyucdn.cn/";

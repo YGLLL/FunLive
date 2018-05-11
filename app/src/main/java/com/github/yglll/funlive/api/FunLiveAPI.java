@@ -18,13 +18,6 @@ import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：使用retrofit2访问API
- * 备注消息：
- * 创建时间：2017/12/21   13:47
- **/
 public interface FunLiveAPI {
     //*******************baseApi**************************************************
 

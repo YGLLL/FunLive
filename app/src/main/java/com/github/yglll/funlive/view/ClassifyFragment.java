@@ -24,13 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import es.dmoral.toasty.Toasty;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/01/14   17:42
- **/
+
 public class ClassifyFragment extends BaseFragment<ClassifyModel,ClassifyPresenter> implements ClassifyPresenterInterfaces.View{
 
     @BindView(R.id.sliding_tab_layout)

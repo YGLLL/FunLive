@@ -12,13 +12,7 @@ import com.github.yglll.funlive.view.UserRoomListFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/20   23:22
- **/
+
 public class UserAdapter extends FragmentStatePagerAdapter{
 
     private List<Fragment> fragmentList;

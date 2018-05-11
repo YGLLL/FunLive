@@ -12,15 +12,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
- * 版本号：1.0
- * 类描述：主要负责处理业务逻辑
- * 备注消息：
- * 创建时间：2018/01/10   22:15
- **/
+
 public class SigninPresenter extends SigninContract.Presenter {
     private static final int NAME_FORMAT_ERROR=-1;
     private static final int EMAIL_FORMAT_ERROR=-2;

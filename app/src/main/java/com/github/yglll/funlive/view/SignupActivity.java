@@ -20,15 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
- * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/01/12   9:37
- **/
+
 public class SignupActivity extends BaseActivity<SignModel, SignupPresenter> implements SignupContract.View {
 
     @BindView(R.id.user_name)

@@ -13,13 +13,7 @@ import java.net.UnknownHostException;
 
 import retrofit2.HttpException;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/16   22:23
- **/
+
 public class ExceptionEngine {
     //对应HTTP的状态码
     public static final int UNAUTHORIZED = 401;

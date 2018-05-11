@@ -2,15 +2,7 @@ package com.github.yglll.funlive.net.bean;
 
 import java.io.Serializable;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：斗鱼API中的房间信息(com.github.yglll.funlive.net.bean.RoomInfo)中，
- * 并没有信息表明视频该横屏播放还是竖屏播放
- * 此类在RoomInfo基础上，加入该信息，以指导视频播放器该如何播放
- * 备注消息：
- * 创建时间：2018/02/24   18:40
- **/
+
 public class FunLiveRoom implements Serializable {
 
     private int id;

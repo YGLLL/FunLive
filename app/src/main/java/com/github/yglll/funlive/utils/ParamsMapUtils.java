@@ -6,13 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/01/21   13:27
- **/
+
 public class ParamsMapUtils extends BaseParamsMapUtil {
 
     private static Map<String, String> mapparam;

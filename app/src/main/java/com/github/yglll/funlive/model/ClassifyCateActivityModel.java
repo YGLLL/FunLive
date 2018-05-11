@@ -11,13 +11,7 @@ import java.util.Map;
 
 import rx.Observable;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/08   9:35
- **/
+
 public class ClassifyCateActivityModel implements ClassifyCateActivityInterfaces.Model {
     @Override
     public Observable<List<RoomInfo>> getLiveList(String string,Map<String,Integer> map) {

@@ -43,13 +43,7 @@ import io.vov.vitamio.utils.ScreenResolution;
 import io.vov.vitamio.widget.VideoView;
 import master.flame.danmaku.ui.widget.DanmakuView;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：使用SharedPreferences保持亮度
- * 创建时间：2018/01/20   22:24
- **/
+
 public class VideoPlayer extends BaseActivity<VideoPlayerModel,VideoPlayerPresenter> implements VideoPlayerInterfaces.View, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnErrorListener {
 
     @BindView(R.id.vm_videoview)

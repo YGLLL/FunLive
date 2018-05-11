@@ -19,15 +19,7 @@ import com.github.yglll.funlive.presenter.interfaces.SigninContract;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
- * 作者：YGL
- * 电话：13036804886
- * 邮箱：2369015621@qq.com
- * 版本号：1.0
- * 类描述：主要负责处理UI逻辑
- * 备注消息：
- * 创建时间：2018/01/10   20:18
- **/
+
 public class SigninActivity extends BaseActivity<SignModel, SigninPresenter> implements SigninContract.View {
     @BindView(R.id.account)
     BootstrapEditText account;

@@ -10,9 +10,7 @@ import android.support.annotation.Nullable;
 
 import com.orhanobut.logger.Logger;
 
-/**
- * Created by Administrator on 2018/2/19.
- */
+
 
 public class FunLiveProvide extends ContentProvider {
     private static final UriMatcher uriMatcher=getUriMatcher();

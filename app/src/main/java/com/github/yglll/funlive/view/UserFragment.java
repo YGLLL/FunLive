@@ -28,13 +28,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/01/14   17:47
- **/
 public class UserFragment extends Fragment{
 
     @BindView(R.id.bnv)

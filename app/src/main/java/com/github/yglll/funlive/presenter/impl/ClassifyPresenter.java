@@ -11,13 +11,7 @@ import java.util.List;
 
 import rx.Observer;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/03   18:52
- **/
+
 public class ClassifyPresenter extends ClassifyPresenterInterfaces.Presenter{
 
     @Override

@@ -18,14 +18,7 @@ import com.github.yglll.funlive.view.VideoPlayer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：推荐页“最热”类别适配器，使用的是旧API,返回的是HomeHotColumn
- * 而不是RoomInfo，需要专用的适配器
- * 备注消息：
- * 创建时间：2018/02/26   0:11
- **/
+
 public class HomeHotColumnAdapter extends RecyclerView.Adapter<HomeHotColumnAdapter.Holder>{
     private List<HomeHotColumn> data;
     private Context mContxt;

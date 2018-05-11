@@ -28,13 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/01/18   18:40
- **/
+
 public class RecommendAdapter extends RecyclerView.Adapter {
 
     private List<HomeHotColumn> homeHotColumns;

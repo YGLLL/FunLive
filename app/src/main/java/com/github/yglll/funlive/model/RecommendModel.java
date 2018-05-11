@@ -17,13 +17,7 @@ import java.util.Map;
 
 import rx.Observable;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/01/19   18:59
- **/
+
 public class RecommendModel implements RecommendPresenterInterfaces.Model{
 
     @Override

@@ -14,13 +14,6 @@ import java.util.List;
 
 import io.vov.vitamio.utils.Log;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/20   21:18
- **/
 public class FunLiveDB {
     private SQLiteDatabase sqLiteDatabase;
     private static FunLiveDB funLiveDB;

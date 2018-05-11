@@ -3,13 +3,7 @@ package com.github.yglll.funlive.net.bean;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/01/26   22:40
- **/
+
 public class HomeCate {
 
     private String push_vertical_screen;

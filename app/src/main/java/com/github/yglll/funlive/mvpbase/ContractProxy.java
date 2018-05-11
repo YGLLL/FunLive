@@ -5,13 +5,6 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：通过反射, 获得定义Class时声明的父类的泛型参数的类型.
- * 备注消息：
- * 创建时间：2018/01/10   23:06
- **/
 
 public class ContractProxy {
     private static final ContractProxy m_instance = new ContractProxy();

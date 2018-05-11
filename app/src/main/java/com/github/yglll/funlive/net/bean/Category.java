@@ -1,12 +1,6 @@
 package com.github.yglll.funlive.net.bean;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/02   13:59
- **/
+
 public class Category {
     /*
     {

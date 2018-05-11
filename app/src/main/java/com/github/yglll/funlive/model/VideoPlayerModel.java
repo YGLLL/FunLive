@@ -13,13 +13,7 @@ import rx.Observable;
 
 import static com.github.yglll.funlive.api.APILocation.baseUrl_m;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/10   22:44
- **/
+
 public class VideoPlayerModel implements VideoPlayerInterfaces.Model {
     @Override
     public Observable<TempLiveVideoInfo> getVideoUrl(int roomId) {

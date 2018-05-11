@@ -10,13 +10,7 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：定义每一个Activity都应该有的行为：在初始化时绑定MVP，在销毁时解除绑定MVP
- * 备注消息：
- * 创建时间：2018/01/10   22:33
- **/
+
 public abstract class BaseActivity<M extends BaseModel,P extends BasePresenter> extends AppCompatActivity {
     //    定义Presenter
     protected P mPresenter;

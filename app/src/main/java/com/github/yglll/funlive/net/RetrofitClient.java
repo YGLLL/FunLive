@@ -8,13 +8,7 @@ import com.github.yglll.funlive.net.retrofitfactory.ConverterFactory;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2017/12/21   16:03
- **/
+
 public class RetrofitClient {
     private static String baseUrl;
     private static Retrofit retrofit;

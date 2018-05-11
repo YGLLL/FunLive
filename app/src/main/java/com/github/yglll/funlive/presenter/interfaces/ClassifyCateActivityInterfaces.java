@@ -10,13 +10,7 @@ import java.util.Map;
 
 import rx.Observable;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/08   9:30
- **/
+
 public interface ClassifyCateActivityInterfaces {
     interface View extends BaseView {
         void showLiveList(List<RoomInfo> list);

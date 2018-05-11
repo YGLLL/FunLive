@@ -4,9 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by Administrator on 2018/2/19.
- */
+
 
 public class FunLiveDbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;

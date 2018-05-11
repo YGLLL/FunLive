@@ -12,13 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2017/12/27   9:30
- **/
+
 public class RecommendPresenter extends RecommendPresenterInterfaces.Presenter{
 
     private List<Category> allCates;

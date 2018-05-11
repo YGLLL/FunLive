@@ -10,13 +10,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2017/12/23   23:38
- **/
+
 public class ConverterFactory extends Converter.Factory {
     private final Gson gson;
 

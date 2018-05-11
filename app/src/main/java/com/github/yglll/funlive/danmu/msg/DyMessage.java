@@ -5,14 +5,7 @@ import com.github.yglll.funlive.danmu.utils.FormatTransfer;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-/**
- * 作者：YGL
 
- * 版本号：1.0
- * 类描述：
- * 备注消息：此部分代码参考自项目:https://github.com/Bilibili/DanmakuFlameMaster
- * 创建时间：2018/02/17
- **/
 public class DyMessage {
     //弹幕客户端类型设置
     public final static int DY_MESSAGE_TYPE_CLIENT = 689;

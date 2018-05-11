@@ -5,13 +5,7 @@ import com.github.yglll.funlive.net.bean.HttpResponse;
 import rx.Observable;
 import rx.functions.Func1;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：拦截并处理错误
- * 备注消息：
- * 创建时间：2018/01/03   21:25
- **/
+
 public class ErrorTransformer<T> implements Observable.Transformer<HttpResponse<T>,T> {
 
     public static <T> ErrorTransformer<T> create() {

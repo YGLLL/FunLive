@@ -5,13 +5,6 @@ import com.github.yglll.funlive.net.handlingerror.ApiException;
 import rx.Observer;
 
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/16   23:32
- **/
 public abstract class ErrorSubscriber<T> implements Observer<T> {
 
     @Override

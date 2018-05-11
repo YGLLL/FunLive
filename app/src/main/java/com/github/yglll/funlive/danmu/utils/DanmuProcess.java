@@ -29,13 +29,7 @@ import master.flame.danmaku.danmaku.model.android.SpannedCacheStuffer;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.danmaku.parser.IDataSource;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：此部分代码参考自项目:https://github.com/Bilibili/DanmakuFlameMaster
- * 创建时间：2018/02/17
- **/
+
 public class DanmuProcess {
     private Context mContext;
     private IDanmakuView mDanmakuView;

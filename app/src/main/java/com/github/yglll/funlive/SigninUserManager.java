@@ -4,12 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-/*
- *创建人:yanggl
- *创建时间:2018-4-28  14:28
- *类描述:
- *备注:
- */
+
 public class SigninUserManager{
     public final static int NOUSER=1;
     public final static int PWDERROR=2;

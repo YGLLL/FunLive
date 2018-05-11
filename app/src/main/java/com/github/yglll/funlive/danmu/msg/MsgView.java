@@ -5,13 +5,7 @@ import android.text.TextUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：此部分代码参考自项目:https://github.com/Bilibili/DanmakuFlameMaster
- * 创建时间：2018/02/17
- **/
+
 public class MsgView {
     private Map<String, Object> messageList;
 

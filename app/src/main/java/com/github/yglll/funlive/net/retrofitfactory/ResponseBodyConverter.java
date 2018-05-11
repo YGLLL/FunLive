@@ -12,13 +12,7 @@ import java.lang.reflect.Type;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：抛出服务器约定异常
- * 备注消息：
- * 创建时间：2017/12/23   23:43
- **/
+
 public class ResponseBodyConverter<T> implements Converter<ResponseBody,T> {
 
     private final Gson gson;

@@ -6,13 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/01/21   22:34
- **/
+
 public class FullyGridLayoutManager extends GridLayoutManager {
 
     private int mwidth = 0;

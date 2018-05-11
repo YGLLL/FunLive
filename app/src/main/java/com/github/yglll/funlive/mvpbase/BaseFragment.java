@@ -9,13 +9,7 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/01/19   23:24
- **/
+
 public abstract class BaseFragment<M extends BaseModel,P extends BasePresenter> extends Fragment {
 
     //定义Presenter

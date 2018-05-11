@@ -43,13 +43,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/20   23:24
- **/
+
 public class UserRoomListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
     @BindView(R.id.refresh_layout)

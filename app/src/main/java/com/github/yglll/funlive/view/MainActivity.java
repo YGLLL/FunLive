@@ -30,13 +30,7 @@ import java.util.TreeMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：入口
- * 备注消息：阅读README.md可能会对你有一些帮助
- * 创建时间：
- **/
+
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.view_pager)
     ViewPager viewPager;

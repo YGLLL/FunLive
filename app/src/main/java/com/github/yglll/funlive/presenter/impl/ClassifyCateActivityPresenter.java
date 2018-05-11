@@ -10,13 +10,7 @@ import com.github.yglll.funlive.utils.ParamsMapUtils;
 
 import java.util.List;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/08   9:34
- **/
+
 public class ClassifyCateActivityPresenter extends ClassifyCateActivityInterfaces.Presenter {
 
     private String cateId;

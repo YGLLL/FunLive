@@ -28,13 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/24   20:07
- **/
+
 public class UserRoomListAdapter extends RecyclerView.Adapter<UserRoomListAdapter.Holder> {
     private List<FunLiveRoom> funLiveRoomList;
     private Context mContxt;

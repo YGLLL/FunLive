@@ -18,13 +18,7 @@ import com.orhanobut.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2018/02/03   19:01
- **/
+
 public class ClassifyGridAdapter extends BaseAdapter {
 
     private List<CapiCategory> data;

@@ -2,13 +2,7 @@ package com.github.yglll.funlive.net.bean;
 
 import java.util.List;
 
-/**
- * 作者：YGL
- * 版本号：1.0
- * 类描述：
- * 备注消息：
- * 创建时间：2017/12/30   22:37
- **/
+
 public class HomeCarousel {
     /*
     {"id":1033935,
